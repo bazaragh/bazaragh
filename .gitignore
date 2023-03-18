@@ -2,3 +2,5 @@ __pycache__/
 .idea/
 instance/
 venv/
+
+config.local.py
