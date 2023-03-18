@@ -28,3 +28,11 @@ FLASK_ENV=development FLASK_DEBUG=1 flask run
 ```
 
 Your application is running on `http://127.0.0.1:5000`
+
+## Deployment
+
+Use `gunicorn`:
+
+```bash
+gunicorn wsgi -b 127.0.0.1:8080 --daemon
+```

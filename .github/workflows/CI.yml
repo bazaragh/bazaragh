@@ -1,0 +1,13 @@
+name: CI
+on: [ push ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fifsky/ssh-action@master
+        with:
+          # Must be one-liner to handle errors on server
+          command: cd ${{ secrets.PATH }} && git pull && git checkout ${{ vars.GITHUB_REF_NAME }} && pip install -r requirements.txt
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          key: ${{ secrets.KEY }}
