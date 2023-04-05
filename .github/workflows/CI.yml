@@ -12,6 +12,7 @@ jobs:
             git checkout ${{ vars.GITHUB_REF_NAME }}
             source ./venv/bin/activate
             pip install -r requirements.txt
+            pm2 restart pzio
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
