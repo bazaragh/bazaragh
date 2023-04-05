@@ -16,6 +16,7 @@ source venv/bin/activate
 ### Install requirements
 
 ```bash
+sudo apt install libmariadbclient-dev # not required on Windows
 pip install -r requirements.txt
 ```
 
