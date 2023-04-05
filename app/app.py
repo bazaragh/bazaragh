@@ -1,9 +1,14 @@
 import datetime
+import logging
 import os
+from pathlib import Path
+
 from flask import Flask, render_template
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
 from flask_security.models import fsqla
 from flask_sqlalchemy import SQLAlchemy
+
+from app.engine.exceptions import exception_handler
 
 db = SQLAlchemy()
 
@@ -24,17 +29,28 @@ def create_app():
                                              f"@{app.config['DB_HOST']}:{app.config['DB_PORT']}"
                                              f"/{app.config['DB_NAME']}")
 
+    # Collect nice logs for debugging
+    Path(f"{app.root_path}/{app.config['DEBUG_LOG']}").touch(exist_ok=True)
+    Path(f"{app.root_path}/{app.config['ERROR_LOG']}").touch(exist_ok=True)
+
+    logging.basicConfig(
+        filename=f"{app.root_path}/{app.config['DEBUG_LOG']}",
+        level=logging.DEBUG,
+        format=f'[%(asctime)s][%(levelname)s][%(name)s][%(threadName)s] %(message)s'
+    )
+
     # Ensure the instance folder exists - nothing interesting
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
 
-    # Setup custom "Not found" page
-    # https://flask.palletsprojects.com/en/2.2.x/errorhandling/#custom-error-pages
+    app.register_error_handler(Exception, exception_handler)
+
     @app.errorhandler(404)
-    def page_not_found(e: Exception):
-        return render_template("error.html.jinja", code=404, message=e), 404
+    @app.errorhandler(405)
+    def _handle_api_error(ex):
+        return exception_handler(ex)
 
     db.init_app(app)
 

@@ -1,6 +1,10 @@
 # KEEP ALL SECRETS IN ../config.local.py !!!
 SECRET_KEY = "CHANGE_ME"  # does not matter, remember to change it if app is working in the production environment!!!
 APP_NAME = "Bazar AGH"
+APP_DEBUG = False
+
+DEBUG_LOG = 'logs/debug.log'
+ERROR_LOG = 'logs/error.log'
 
 DB_HOST = "localhost"
 DB_NAME = "db_name"
