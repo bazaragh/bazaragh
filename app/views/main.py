@@ -8,4 +8,4 @@ bp = Blueprint("bp_main", __name__)
 # https://hackersandslackers.com/flask-routes/
 @bp.route('/')
 def main_get():
-    return render_template('main.html.jinja', message="Hello world!")
+    return render_template('main.jinja', message="Hello world!")
