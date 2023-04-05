@@ -78,9 +78,9 @@ def create_app():
     with app.app_context():
         if not user_datastore.find_role(role="Admin"):
             db.session.add(Role(name="Admin"))
-        if not user_datastore.find_role(role="Operator"):
+        if not user_datastore.find_role(role="Moderator"):
             db.session.add(Role(name="Moderator"))
-        if not user_datastore.find_role(role="Resident"):
+        if not user_datastore.find_role(role="User"):
             db.session.add(Role(name="User"))
         if not user_datastore.find_user(email="test@sokoloowski.pl"):
             user_datastore.create_user(
