@@ -4,8 +4,10 @@
     <h1>{{ message }}</h1>
     <h2>Loop example</h2>
     <ul>
-        {% for letter in message %}
-            <li>{{ letter }}</li>
+        {% for offer in offers %}
+            <li>
+                <a href="/offer/{{offer.id}}">{{ offer.name }}<a/>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
