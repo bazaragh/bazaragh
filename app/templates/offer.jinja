@@ -1,6 +1,41 @@
 {% extends "base.jinja" %}
 
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='offer.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ offer.name }}</h1>
-{# <p>{{categories[offer.category-1]}}</p> #}
+<main class="offer-container">
+    <section class="search-bar-wrapper">
+        <input type="text" class="search-bar" placeholder="Czego szukasz?">
+        <button>Szukaj</button>
+    </section>
+
+    <section class="main-containers-wrapper">
+        <div class="photos-container box">
+            <img src={{offer.image_links[0]}}>
+        </div>
+        <div class="main-details-container box">
+            <div class="offer-name-wrapper">
+                <h1>{{ offer.name }}</h1>
+            </div>
+
+            <p>data wystawienia: {{ offer.post_date.date() }}</p>
+            <p class="price">{{ offer.price}}zł</p>
+            <button>napisz do sprzedającego</button>
+        </div>
+        <div class="box description-container">
+            <h2>Opis</h2>
+            <p>{{offer.description}}</p>
+        </div>
+        <div class="box description-container salesman-container">
+            <div class="salesman-details">
+                <h2>Sprzedający</h2>
+                <p>Jadwiga Hymel, EAIiIB</p>
+            </div>
+            <button>napisz do sprzedającego</button>
+        </div>
+    </section>
+
+</main>
 {% endblock %}

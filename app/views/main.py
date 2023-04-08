@@ -15,9 +15,9 @@ class Category:
         self.icon = icon
 
 class Offer: # temporary, change to database later
-    def __init__(self, id, seller_id, name, post_date, category, price, description, image_links, is_new):
+    def __init__(self, id, salesman_id, name, post_date, category, price, description, image_links, is_new):
         self.id = id
-        self.seller_id = seller_id
+        self.salesman_id = salesman_id
         self.name = name
         self.post_date = post_date
         self.category_id = category
@@ -38,7 +38,7 @@ categories = [
 ]
 
 hardcoded_offers = [
-    Offer(1, 100, "Prolog - najlepszy język świata", datetime(2023, 4, 3, 16, 24, 43), 3, 13.99, "lorem ipsum aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaa", ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/RedCat_8727.jpg/1200px-RedCat_8727.jpg"], False),
+    Offer(1, 100, "Prolog - najlepszy język świata", datetime(2023, 4, 3, 16, 24, 43), 3, 13.99, "Sprzedam ciągnik rolniczy URSUS 4512. Stan bardzo dobry. Pierwszy właściciel, garażowany, niskie spalanie. Pracował przy lekkich pracach - siewnik do warzyw, brony, rozdrabniacz przyczepa, opryskiwacz sadowniczy.", ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/RedCat_8727.jpg/1200px-RedCat_8727.jpg"], False),
     Offer(2, 100, "Prolog - najlepszy język świata 2", datetime(2023, 4, 3, 16, 24, 43), 3, 15.99, "lorem ipsum bbbbbbbbbbbbbb bbbbbbbbbbbbb bbbbbbbbbbbb", ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/RedCat_8727.jpg/1200px-RedCat_8727.jpg"], False),
     Offer(3, 100, "Prolog - najlepszy język świata 3", datetime(2023, 4, 3, 16, 24, 43), 3, 17.99, "lorem ipsum cccccccccc cccccccccccccc ccccccccccc najlepsza część", ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/RedCat_8727.jpg/1200px-RedCat_8727.jpg"], False),
     Offer(4, 100, "Prolog - najlepszy język świata 4", datetime(2023, 4, 3, 16, 24, 43), 3, 7.99, "lorem ipsum dddddddddddd dddddddddddddd ddddddddddddd", ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/RedCat_8727.jpg/1200px-RedCat_8727.jpg"], False),
