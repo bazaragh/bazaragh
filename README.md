@@ -20,6 +20,14 @@ sudo apt install libmariadbclient-dev # not required on Windows
 pip install -r requirements.txt
 ```
 
+### Create local configuration
+
+```bash
+cp app/config.py config.local.py
+```
+
+Edit values in `config.local.py` to match Your environment.  
+
 ### Start application
 
 ```bash
