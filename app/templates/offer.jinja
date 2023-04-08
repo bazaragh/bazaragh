@@ -1,0 +1,11 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+    <h1>{{ offer.name }}</h1>
+    <h2>Loop example</h2>
+    <ul>
+        {% for letter in offer.category %}
+            <li>{{ letter }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
