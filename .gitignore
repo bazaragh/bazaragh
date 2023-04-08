@@ -2,6 +2,7 @@ __pycache__/
 .idea/
 instance/
 venv/
+.venv/
 *.log
 
 config.local.py
