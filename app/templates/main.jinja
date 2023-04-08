@@ -12,12 +12,12 @@
 <section class="categories-wrapper">
     <h2>Popularne kategorie</h2>
     <div class="categories-buttons-wrapper">
-        {%for name, img in categories.items()%}
+        {%for category in categories%}
         <div class="button-wrapper">
             <button>
-                <img alt={{name}} src={{ url_for('static', filename=img ) }}>
+                <img alt={{category.name}} src={{ url_for('static', filename=category.icon ) }}>
             </button>
-            <p>{{name}}</p>
+            <p>{{category.name}}</p>
         </div>
         {%endfor%}
     </div>
@@ -25,24 +25,22 @@
 <section class="publications-wrapper">
     <h2>Promowane ogłoszenia</h2>
     <div class="publications-container">
-        {%for item in publications%}
+        {%for offer in offers%}
         <div class="publication">
             <div class="img-container">
-                <img alt={{item[0]}} src={{ url_for('static', filename=item[3] ) }}>
+                <img alt={{offer.name}} src={{offer.image_links[0]}}>
             </div>
 
             <div class="publication-details">
                 <div class="name-container">
-                    <p class="publication-name">{{item[0]}}</p>
+                    <p class="publication-name">{{offer.name}}</p>
                 </div>
-                <p class="publication-date">{{item[1]}}</p>
-                <p class="publication-price">{{item[2]}}zł</p>
+                <p class="publication-date">{{offer.post_date.date()}}</p>
+                <p class="publication-price">{{offer.price}}zł</p>
             </div>
 
         </div>
         {%endfor%}
     </div>
-
 </section>
-
 {% endblock %}
