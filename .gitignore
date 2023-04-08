@@ -4,5 +4,8 @@ instance/
 venv/
 .venv/
 *.log
+.vscode
 
 config.local.py
+
+pzio.session.sql
