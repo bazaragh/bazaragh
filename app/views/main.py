@@ -26,6 +26,7 @@ def main_get():
                            categories=categories,
                            images=images)
 
+
 @bp.route('/offer/<int:offer_id>')
 def offer_get(offer_id):
     categories = db.session.query(Category).all()
