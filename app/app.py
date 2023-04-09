@@ -28,7 +28,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = (f"mariadb://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}"
                                              f"@{app.config['DB_HOST']}:{app.config['DB_PORT']}"
                                              f"/{app.config['DB_NAME']}?charset=utf8")
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
+
     # Collect nice logs for debugging
     Path(f"{app.root_path}/{app.config['DEBUG_LOG']}").touch(exist_ok=True)
     Path(f"{app.root_path}/{app.config['ERROR_LOG']}").touch(exist_ok=True)
