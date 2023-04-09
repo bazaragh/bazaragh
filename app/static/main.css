@@ -17,6 +17,7 @@ section {
     padding: 5px;
     width: 70%;
     min-width: 500px;
+    max-width: 900px;
 
     border: 2px solid var(--dark-green);
     border-radius: 18px;
@@ -49,6 +50,7 @@ input:focus {
     margin-block: 30px;
     margin-inline: auto;
     width: 70%;
+    max-width: 700px;
     display: flex;
     flex-flow: row wrap;
     column-gap: 30px;
@@ -174,4 +176,87 @@ input:focus {
 .publication-price {
     font-size: 20px;
     font-weight: 500;
+}
+
+@media screen and (max-width: 700px) {
+    section {
+        margin-block: 40px;
+        padding-top: 17px;
+    }
+
+    .search-bar-wrapper {
+        padding: 4px;
+        width: 70%;
+        min-width: 300px;
+    }
+
+    .search-bar {
+        font-size: 15px;
+        padding-block: 7px;
+        width: 70%;
+    }
+
+    .categories-wrapper h2 {
+        font-size: 20px;
+    }
+
+    .publications-wrapper h2 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    section {
+        margin-block: 30px;
+        padding-top: 10px;
+    }
+
+    .search-bar-wrapper {
+        min-width: 200px;
+        width: 80%;
+        margin-block: 20px;
+        border-width: 2px;
+    }
+
+    .search-bar {
+        font-size: 13px;
+        padding-block: 5px;
+        width: 70%;
+    }
+
+    .categories-wrapper h2 {
+        font-size: 17px;
+    }
+
+    .categories-buttons-wrapper {
+        width: 90%;
+    }
+
+    .publications-wrapper h2 {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .categories-buttons-wrapper {
+        width: 96%;
+    }
+
+    .button-wrapper {
+        width: 90px;
+    }
+
+    .button-wrapper button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .button-wrapper img {
+        width: 66px;
+        height: 66px;
+    }
+
+    .button-wrapper p {
+        font-size: 15px;
+    }
 }
