@@ -1,11 +1,41 @@
 {% extends "base.jinja" %}
 
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='offer.css') }}">
+{% endblock %}
+
 {% block content %}
-    <h1>{{ offer.name }}</h1>
-    <h2>Loop example</h2>
-    <ul>
-        {% for letter in offer.category %}
-            <li>{{ letter }}</li>
-        {% endfor %}
-    </ul>
+    <main class="offer-container">
+        <section class="search-bar-wrapper">
+            <input type="text" class="search-bar" placeholder="Czego szukasz?">
+            <button>Szukaj</button>
+        </section>
+
+        <section class="main-containers-wrapper">
+            <div class="photos-container box">
+                <img src="{{ url_for('static', filename=images[0]) }}">
+            </div>
+            <div class="main-details-container box">
+                <div class="offer-name-wrapper">
+                    <h1>{{ offer.name }}</h1>
+                </div>
+
+                <p>data wystawienia: {{ offer.created_at.date() }}</p>
+                <p class="price">{{ offer.price }}zł</p>
+                <button>napisz do sprzedającego</button>
+            </div>
+            <div class="box description-container">
+                <h2>Opis</h2>
+                <p>{{ offer.description }}</p>
+            </div>
+            <div class="box description-container salesman-container">
+                <div class="salesman-details">
+                    <h2>Sprzedający</h2>
+                    <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty }}</p>
+                </div>
+                <button>napisz do sprzedającego</button>
+            </div>
+        </section>
+
+    </main>
 {% endblock %}

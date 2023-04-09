@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <title>{% block title %}Bazar AGH{% endblock %}</title>
 
     {% block style %}{% endblock %}
 </head>
+
 <body>
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('bp_main.main_get') }}">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="d-inline-block align-text-center">
+<nav class="navbar">
+    <ul class="nav-ul">
+        <li class="nav-li logo" href="{{ url_for('bp_main.main_get') }}">
             Bazar AGH
-        </a>
-    </div>
+        </li>
+        <li class="nav-li" href="#">
+            Wiadomosci
+        </li>
+        <li class="nav-li" href="#">
+            Ulubione
+        </li>
+        <li class="nav-li" href="#">
+            Profil
+        </li>
+        <li class="nav-li button" href="#">
+            Dodaj ogloszenie
+        </li>
+    </ul>
+
 </nav>
-<main class="container mt-3">
+<main>
     {% block content %}{% endblock %}
 </main>
+<footer>
+    <h2> Bazar AGH</h2>
+    <p>BazarAGH.pl to darmowe ogłoszenia lokalne w kategoriach: Moda, Elektronika, Sport i Hobby, Muzyka i Edukacja.
+        Szybko znajdziesz tu ciekawe ogłoszenia i łatwo skontaktujesz się z ogłoszeniodawcą. Jeśli chcesz coś
+        sprzedać - w prosty sposób dodasz bezpłatne ogłoszenia.
+        Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
+        po sąsiedzku na BazarAGH.pl
+    </p>
+</footer>
 </body>
+
 </html>

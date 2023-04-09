@@ -1,13 +1,46 @@
 {% extends "base.jinja" %}
 
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% endblock %}
+
 {% block content %}
-    <h1>{{ message }}</h1>
-    <h2>Loop example</h2>
-    <ul>
-        {% for offer in offers %}
-            <li>
-                <a href="/offer/{{offer.id}}">{{ offer.name }}<a/>
-            </li>
-        {% endfor %}
-    </ul>
+    <section class="search-bar-wrapper">
+        <input type="text" class="search-bar" placeholder="Czego szukasz?">
+        <button>Szukaj</button>
+    </section>
+    <section class="categories-wrapper">
+        <h2>Popularne kategorie</h2>
+        <div class="categories-buttons-wrapper">
+            {% for category in categories %}
+                <div class="button-wrapper">
+                    <button>
+                        <img alt="{{ category.name }}" src="{{ url_for('static', filename=category.icon ) }}">
+                    </button>
+                    <p>{{ category.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="publications-wrapper">
+        <h2>Promowane ogłoszenia</h2>
+        <div class="publications-container">
+            {% for offer in offers %}
+                <div class="publication">
+                    <div class="img-container">
+                        <img alt="{{ offer.name }}" src="{{ url_for('static', filename=images[offer.id][0]) }}">
+                    </div>
+
+                    <div class="publication-details">
+                        <div class="name-container">
+                            <p class="publication-name">{{ offer.title }}</p>
+                        </div>
+                        <p class="publication-date">{{ offer.created_at.date() }}</p>
+                        <p class="publication-price">{{ offer.price }}zł</p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
