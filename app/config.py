@@ -12,6 +12,14 @@ DB_PORT = 3306
 DB_USER = "db_user"
 DB_PASSWORD = "db_password"
 
+MAIL_SERVER = "localhost"
+MAIL_PORT = 587
+MAIL_USERNAME = "mail_user"
+MAIL_PASSWORD = "mail_password"
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
+MAIL_DEFAULT_SENDER = "mail_sender"
+
 # Bcrypt is set as default SECURITY_PASSWORD_HASH, which requires a salt
 # Generate a good salt using: secrets.SystemRandom().getrandbits(128)
 SECURITY_PASSWORD_SALT = '123456789012345678901234567890123456789'

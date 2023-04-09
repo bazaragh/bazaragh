@@ -4,13 +4,16 @@ import os
 from pathlib import Path
 
 from flask import Flask, render_template
+from flask_mailman import Mail
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
 from flask_security.models import fsqla
 from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
 
+mail = Mail()
 db = SQLAlchemy()
+security = Security()
 
 
 # Flask quickstart:
@@ -52,6 +55,7 @@ def create_app():
     def _handle_api_error(ex):
         return exception_handler(ex)
 
+    mail.init_app(app)
     db.init_app(app)
 
     with app.app_context():
@@ -71,8 +75,10 @@ def create_app():
 
     # Setup Flask-Security
     from app.models import User, Role
+    from app.utils.mail_util import MailUtil
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    app.security = Security(app, user_datastore)
+    security.mail_util_cls = MailUtil
+    security.init_app(app, user_datastore)
 
     # Create roles and admin user
     with app.app_context():
@@ -82,10 +88,10 @@ def create_app():
             db.session.add(Role(name="Moderator"))
         if not user_datastore.find_role(role="User"):
             db.session.add(Role(name="User"))
-        if not user_datastore.find_user(email="test@sokoloowski.pl"):
+        if not user_datastore.find_user(email="admin@bazaragh.pl"):
             user_datastore.create_user(
-                email="test@sokoloowski.pl",
-                password=hash_password("test"),
+                email="admin@bazaragh.pl",
+                password=hash_password("changeme"),
                 confirmed_at=datetime.datetime.now(),
                 roles=["Admin"]
             )
