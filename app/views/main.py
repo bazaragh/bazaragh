@@ -17,7 +17,7 @@ bp = Blueprint("bp_main", __name__)
 @bp.route('/')
 def main_get():
     categories = db.session.query(Category).all()
-    offers = db.session.query(Offer).order_by(Offer.created_at).limit(8)
+    offers = db.session.query(Offer).order_by(Offer.created_at).limit(8).all()
     images = {}
     for o in offers:
         images[o.id] = json.loads(o.images)
