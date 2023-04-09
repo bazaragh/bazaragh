@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -14,38 +14,38 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <ul class="nav-ul">
-            <li class="nav-li logo" href="{{ url_for('bp_main.main_get') }}">
-                Bazar AGH
-            </li>
-            <li class="nav-li" href="#">
-                Wiadomosci
-            </li>
-            <li class="nav-li" href="#">
-                Ulubione
-            </li>
-            <li class="nav-li" href="#">
-                Profil
-            </li>
-            <li class="nav-li button" href="#">
-                Dodaj ogloszenie
-            </li>
-        </ul>
+<nav class="navbar">
+    <ul class="nav-ul">
+        <li class="nav-li logo" href="{{ url_for('bp_main.main_get') }}">
+            Bazar AGH
+        </li>
+        <li class="nav-li" href="#">
+            Wiadomosci
+        </li>
+        <li class="nav-li" href="#">
+            Ulubione
+        </li>
+        <li class="nav-li" href="#">
+            Profil
+        </li>
+        <li class="nav-li button" href="#">
+            Dodaj ogloszenie
+        </li>
+    </ul>
 
-    </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <footer>
-        <h2> Bazar AGH</h2>
-        <p>BazarAGH.pl to darmowe ogłoszenia lokalne w kategoriach: Moda, Elektronika, Sport i Hobby, Muzyka i Edukacja.
-            Szybko znajdziesz tu ciekawe ogłoszenia i łatwo skontaktujesz się z ogłoszeniodawcą. Jeśli chcesz coś
-            sprzedać - w prosty sposób dodasz bezpłatne ogłoszenia.
-            Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
-            po sąsiedzku na BazarAGH.pl
-        </p>
-    </footer>
+</nav>
+<main>
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <h2> Bazar AGH</h2>
+    <p>BazarAGH.pl to darmowe ogłoszenia lokalne w kategoriach: Moda, Elektronika, Sport i Hobby, Muzyka i Edukacja.
+        Szybko znajdziesz tu ciekawe ogłoszenia i łatwo skontaktujesz się z ogłoszeniodawcą. Jeśli chcesz coś
+        sprzedać - w prosty sposób dodasz bezpłatne ogłoszenia.
+        Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
+        po sąsiedzku na BazarAGH.pl
+    </p>
+</footer>
 </body>
 
 </html>
