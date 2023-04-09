@@ -10,6 +10,8 @@ jobs:
             cd ${{ secrets.PATH }}
             git pull
             git checkout ${{ github.ref_name }}
+            git fetch
+            git pull
             source ./venv/bin/activate
             pip install -r requirements.txt
             pm2 restart pzio
