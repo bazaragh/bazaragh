@@ -1,0 +1,83 @@
+{% extends "base.jinja" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login-register.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <form>
+        <div class="container">
+            <h1>Utwórz konto</h1>
+            <hr>
+            <div class="label-wrapper">
+                <label for="name"><b>Imię</b></label>
+                <input type="text" placeholder="" name="name" id="name">
+            </div>
+
+            <div class="label-wrapper">
+                <label for="surname"><b>Nazwisko</b></label>
+                <input type="text" placeholder="" name="surname" id="surname">
+            </div>
+
+            <div class="label-wrapper">
+                <label for="department"><b>Wydział</b></label>
+                <input type="text" placeholder="" name="department" id="department">
+            </div>
+
+            <div class="label-wrapper">
+                <label for="dormitory"><b>Akademik</b></label>
+                <select name="dormitory" id="dormitory">
+                    <option value="ds-alfa">Ds Alfa</option>
+                    <option value="ds-1">Ds1 Olimp</option>
+                    <option value="ds-2">Ds2 Babilon</option>
+                    <option value="ds-3">Ds3 Akropol</option>
+                    <option value="ds-4">Ds4 Filutek</option>
+                    <option value="ds-5">Ds5 Strumyk</option>
+                    <option value="ds-6">Ds6 Bratek</option>
+                    <option value="ds-7">Ds7 Zaścianek</option>
+                    <option value="ds-8">Ds8 Stokrotka</option>
+                    <option value="ds-9">Ds9 Omega</option>
+                    <option value="ds-10">Ds10 Hajduczek</option>
+                    <option value="ds-11">Ds11 Bonus</option>
+                    <option value="ds-12">Ds12 Pomyk</option>
+                    <option value="ds-13">Ds13 Straszny Dwór</option>
+                    <option value="ds-14">Ds14 Kapitol</option>
+                    <option value="ds-15">Ds15 Maraton</option>
+                    <option value="ds-16">Ds16 Itaka</option>
+                    <option value="ds-17">Ds17 Arkadia</option>
+                    <option value="ds-18">Ds18 Odyseja</option>
+                    <option value="ds-19">Ds19 Apollo</option>
+                    <option value="other">Poza MS AGH</option>
+                </select>
+            </div>
+
+            <hr>
+            <div class="label-wrapper">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="" name="email" id="email" required>
+            </div>
+
+
+            <div class="label-wrapper">
+                <label for="psw"><b>Hasło</b></label>
+                <input type="password" placeholder="" name="psw" id="psw" required>
+            </div>
+
+
+            <div class="label-wrapper">
+                <label for="psw-repeat"><b>Powtórz hasło</b></label>
+                <input type="password" placeholder="" name="psw-repeat" id="psw-repeat" required>
+            </div>
+
+            <hr>
+            <button type="submit" class="registerbtn">Zarejestruj się</button>
+        </div>
+
+        <div class="container signin">
+            <p>Masz już konto? <a href={{ url_for('bp_main.login_get') }}>Zaloguj się</a>.</p>
+        </div>
+    </form>
+
+</main>
+{% endblock %}

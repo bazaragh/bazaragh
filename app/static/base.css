@@ -76,6 +76,10 @@ footer h2 {
     margin-block: 20px;
 }
 
+a {
+    color: white;
+}
+
 @media screen and (max-width: 900px) {
     ul.nav-ul {
         gap: 30px;

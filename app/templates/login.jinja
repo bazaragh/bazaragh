@@ -1,0 +1,40 @@
+{% extends "base.jinja" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login-register.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <form>
+        <div class="container">
+            <h1>Zaloguj się</h1>
+            <hr>
+            <div class="label-wrapper">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="" name="email" id="email" required>
+            </div>
+
+
+            <div class="label-wrapper">
+                <label for="psw"><b>Hasło</b></label>
+                <input type="password" placeholder="" name="psw" id="psw" required>
+            </div>
+
+
+            <div class="label-wrapper">
+                <label for="psw-repeat"><b>Powtórz hasło</b></label>
+                <input type="password" placeholder="" name="psw-repeat" id="psw-repeat" required>
+            </div>
+
+            <hr>
+            <button type="submit" class="registerbtn">Zaloguj się</button>
+        </div>
+
+        <div class="container signin">
+            <p>Nie masz jeszcze konta? <a href={{ url_for('bp_main.register_get') }}>Zarejestruj się</a>.</p>
+        </div>
+    </form>
+
+</main>
+{% endblock %}
