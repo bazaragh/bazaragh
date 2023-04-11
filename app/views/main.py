@@ -40,3 +40,11 @@ def offer_get(offer_id):
                            categories=categories,
                            images=images,
                            author=author)
+
+@bp.route('/register')
+def register_get():
+    return render_template('register.jinja')
+
+@bp.route('/log-in')
+def login_get():
+    return render_template('login.jinja')
