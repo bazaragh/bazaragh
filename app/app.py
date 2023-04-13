@@ -3,7 +3,8 @@ import logging
 import os
 from pathlib import Path
 
-from flask import Flask, render_template
+from flask import Flask
+from flask_babel import Babel
 from flask_mailman import Mail
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
 from flask_security.models import fsqla
@@ -11,6 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
 
+babel = Babel()
 mail = Mail()
 db = SQLAlchemy()
 security = Security()
@@ -55,6 +57,7 @@ def create_app():
     def _handle_api_error(ex):
         return exception_handler(ex)
 
+    babel.init_app(app)
     mail.init_app(app)
     db.init_app(app)
 
