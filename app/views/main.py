@@ -43,8 +43,8 @@ def offer_get(offer_id):
 
 @bp.route('/register')
 def register_get():
-    return render_template('register.jinja')
+    return render_template('security/register_user.html')
 
-@bp.route('/log-in')
+@bp.route('/login')
 def login_get():
-    return render_template('login.jinja')
+    return render_template('security/login_user.html')
