@@ -9,6 +9,7 @@ from app.models import Category, Offer, User
 
 bp = Blueprint("bp_main", __name__)
 
+
 # Here you can read about routing:
 # https://flask.palletsprojects.com/en/2.2.x/api/#url-route-registrations
 # https://hackersandslackers.com/flask-routes/
@@ -40,11 +41,3 @@ def offer_get(offer_id):
                            categories=categories,
                            images=images,
                            author=author)
-
-@bp.route('/register')
-def register_get():
-    return render_template('security/register_user.html')
-
-@bp.route('/login')
-def login_get():
-    return render_template('security/login_user.html')
