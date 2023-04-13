@@ -11,6 +11,7 @@ from flask_security.models import fsqla
 from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
+from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm
 
 babel = Babel()
 mail = Mail()
@@ -81,7 +82,9 @@ def create_app():
     from app.utils.mail_util import MailUtil
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
     security.mail_util_cls = MailUtil
-    security.init_app(app, user_datastore)
+    security.init_app(app, user_datastore,
+                      register_form=ExtendedRegisterForm,
+                      confirm_register_form=ExtendedConfirmRegisterForm)
 
     # Create roles and admin user
     with app.app_context():
