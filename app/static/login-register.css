@@ -1,0 +1,117 @@
+:root {
+    --dark-green: #064635;
+    --light-green: #519259;
+    --cream: #FFFCF9;
+    --gray: #A6A6A6;
+    --light-orange: #F0BB62;
+}
+
+form {
+    background-color: var(--cream);
+    margin-inline: auto;
+    margin-block: 40px;
+
+    width: 60%;
+    max-width: 500px;
+
+    -webkit-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    -moz-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+
+    padding-inline: 30px;
+    padding-block: 40px;
+}
+
+.signin,
+.register {
+    margin-top: 30px;
+    color: var(--light-green);
+    font-weight: 400;
+}
+
+.signin a,
+.register a {
+    color: var(--light-green);
+    font-weight: 500;
+}
+
+.registerbtn,
+.loginbtn {
+    border: none;
+    border-radius: 10px;
+    padding-block: 7px;
+    padding-inline: 15px;
+    width: 100%;
+    background-color: var(--light-green);
+    color: white;
+    font-size: 18px;
+}
+
+.label-wrapper {
+    display: flex;
+    flex-direction: row wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-block: 10px;
+}
+
+input {
+    width: 60%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    -webkit-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    -moz-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+
+    padding-block: 4px;
+    padding-inline: 7px;
+
+    font-size: 15px;
+}
+
+select {
+    width: 60%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    -webkit-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    -moz-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+    box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
+
+    padding-block: 4px;
+    padding-inline: 7px;
+
+    font-size: 15px;
+}
+
+@media screen and (max-width: 700px) {
+    form {
+        width: 70%;
+        margin-block: 30px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    form {
+        width: 80%;
+        margin-block: 30px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    form {
+        width: 88%;
+        margin-block: 20px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+}

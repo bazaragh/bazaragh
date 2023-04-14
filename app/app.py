@@ -3,14 +3,17 @@ import logging
 import os
 from pathlib import Path
 
-from flask import Flask, render_template
+from flask import Flask
+from flask_babel import Babel
 from flask_mailman import Mail
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
 from flask_security.models import fsqla
 from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
+from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm
 
+babel = Babel()
 mail = Mail()
 db = SQLAlchemy()
 security = Security()
@@ -55,6 +58,7 @@ def create_app():
     def _handle_api_error(ex):
         return exception_handler(ex)
 
+    babel.init_app(app)
     mail.init_app(app)
     db.init_app(app)
 
@@ -78,7 +82,9 @@ def create_app():
     from app.utils.mail_util import MailUtil
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
     security.mail_util_cls = MailUtil
-    security.init_app(app, user_datastore)
+    security.init_app(app, user_datastore,
+                      register_form=ExtendedRegisterForm,
+                      confirm_register_form=ExtendedConfirmRegisterForm)
 
     # Create roles and admin user
     with app.app_context():

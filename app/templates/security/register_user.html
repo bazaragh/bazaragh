@@ -1,0 +1,46 @@
+{% extends "base.jinja" %}
+{% from "_macros.html" import render_field_with_errors, render_field_errors, render_field %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login-register.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+        <div class="container">
+            <h1>Utwórz konto</h1>
+            <hr>
+            {{ register_user_form.hidden_tag() }}
+            {{ render_field_errors(register_user_form.csrf_token) }}
+            {{ render_field_with_errors(register_user_form.first_name) }}
+            {{ render_field_with_errors(register_user_form.last_name) }}
+            {{ render_field_with_errors(register_user_form.faculty) }}
+            {{ render_field_with_errors(register_user_form.dorm) }}
+            <hr>
+            {{ render_field_with_errors(register_user_form.email) }}
+            {{ render_field_with_errors(register_user_form.password) }}
+            {% if register_user_form.password_confirm %}
+                {{ render_field_with_errors(register_user_form.password_confirm, class='form-control') }}
+            {% endif %}
+            <hr>
+            {{ render_field(register_user_form.submit, class='registerbtn') }}
+        </div>
+
+        <div class="container signin">
+            <p>Masz już konto? <a href={{ url_for('security.login') }}>Zaloguj się</a>.</p>
+        </div>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#dorm').select2();
+        });
+    </script>
+</main>
+{% endblock %}
