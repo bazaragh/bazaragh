@@ -6,6 +6,8 @@ APP_DEBUG = False
 DEBUG_LOG = 'logs/debug.log'
 ERROR_LOG = 'logs/error.log'
 
+BABEL_DEFAULT_LOCALE = 'pl'
+
 DB_HOST = "localhost"
 DB_NAME = "db_name"
 DB_PORT = 3306
@@ -23,3 +25,6 @@ MAIL_DEFAULT_SENDER = "mail_sender"
 # Bcrypt is set as default SECURITY_PASSWORD_HASH, which requires a salt
 # Generate a good salt using: secrets.SystemRandom().getrandbits(128)
 SECURITY_PASSWORD_SALT = '123456789012345678901234567890123456789'
+SECURITY_REGISTERABLE = True
+SECURITY_SEND_REGISTER_EMAIL = True
+SECURITY_POST_REGISTER_VIEW = 'security.register'
