@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 
 from flask import Flask
+from flask_admin import Admin
 from flask_babel import Babel
 from flask_mailman import Mail
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
@@ -13,6 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app.engine.exceptions import exception_handler
 from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm
 
+admin = Admin(name='BazarAGH.pl - Sprzedawaj po sąsiedzku na BazarAGH.pl', template_mode='bootstrap4')
 babel = Babel()
 mail = Mail()
 db = SQLAlchemy()
@@ -102,6 +104,11 @@ def create_app():
                 roles=["Admin"]
             )
         db.session.commit()
+
+    admin.init_app(app)
+
+    from app.admin import admin_panel_init
+    admin_panel_init(app, admin, db)
 
     # Register blueprints (views)
     # https://flask.palletsprojects.com/en/2.2.x/blueprints/
