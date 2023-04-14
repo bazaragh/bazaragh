@@ -77,7 +77,8 @@ footer h2 {
 }
 
 a {
-    color: white;
+    color: currentColor;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 900px) {
