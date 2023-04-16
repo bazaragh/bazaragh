@@ -4,6 +4,7 @@
     --cream: #FFFCF9;
     --gray: #A6A6A6;
     --light-orange: #F0BB62;
+    --dark-orange: #d76514;
 }
 
 form {
@@ -55,7 +56,9 @@ form {
     margin-block: 10px;
 }
 
-input {
+input[type="email"],
+input[type="password"],
+input[type="text"] {
     width: 60%;
     border-radius: 10px;
     border: 1px solid gray;
@@ -64,12 +67,11 @@ input {
     box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
 
     padding-block: 4px;
-    padding-inline: 7px;
-
+    padding-inline: 10px;
     font-size: 15px;
 }
 
-select {
+select#dorm {
     width: 60%;
     border-radius: 10px;
     border: 1px solid gray;
@@ -79,8 +81,53 @@ select {
 
     padding-block: 4px;
     padding-inline: 7px;
+}
 
+select#dorm+span {
     font-size: 15px;
+}
+
+
+.input-error {
+    float: right;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--dark-orange) !important;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    color: var(--dark-green);
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--dark-green);
+    border-radius: 0.15em;
+    margin-right: 5px;
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 17px;
+    height: 17px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--light-green);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+@media screen and (max-width: 750px) {
+    select#dorm+span {
+        font-size: 14px;
+        max-width: 60% !important;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -98,6 +145,10 @@ select {
 
     input {
         font-size: 14px;
+    }
+
+    select#dorm+span {
+        max-width: 200px !important;
     }
 }
 
