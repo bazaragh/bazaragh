@@ -1,6 +1,7 @@
 import json
 
 from flask import Blueprint, render_template
+from flask_login import current_user
 from werkzeug.exceptions import abort
 from datetime import datetime
 
@@ -36,8 +37,17 @@ def offer_get(offer_id):
         abort(404)
     images = json.loads(offer.images)
     author = db.session.query(User).filter_by(id=offer.author).one_or_none()
-    return render_template('offer.jinja',
+    return render_template('offer/offer.jinja',
                            offer=offer,
                            categories=categories,
                            images=images,
                            author=author)
+
+@bp.route('/user')
+def user_get():
+    return render_template('user/user.jinja')
+
+@bp.route('/user/offers')
+def user_offers_get():
+    offers = db.session.query(Offer).filter_by(author=current_user.id).all()
+    return render_template('user/user_offers.jinja', offers=offers)
