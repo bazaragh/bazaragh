@@ -36,11 +36,21 @@
                     </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
             {% if current_user.is_authenticated %}
-            <li class="nav-li hover-check">
+            <li class="nav-li hover-check dropdown">
                 <a href={{url_for('bp_main.user_profile_get')}}>
                     <img src="{{ url_for('static', filename='user_auth.png') }}" class="user-icon icon-default">
                     <img src="{{ url_for('static', filename='user_hover_auth.png') }}" class="user-icon on-hover">
                 </a>
+                <div class="dropdown-menu-custom">
+                    <div class="dropdown-item-hello">'Imie', dobrze Cię znowu widzieć!</div>
+                    <hr>
+                    <a class="dropdown-item-custom" href={{url_for('bp_main.user_profile_get')}}>Moje dane</a>
+                    <a class="dropdown-item-custom" href="#">Ustawienia</a>
+                    <a class="dropdown-item-custom" href="#">Moje ogłoszenia</a>
+                    <a class="dropdown-item-custom" href="#">Wiadomości</a>
+                    <a class="dropdown-item-custom" href="#">Polubione oferty</a>
+                    <a class="dropdown-item-custom" href={{ url_for('security.logout') }}>Wyloguj</a>
+                </div>
             </li>
             {% else %}
             <li class="nav-li hover-check">
@@ -48,7 +58,6 @@
                     <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
                     <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
                 </a>
-
                 <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
                     </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
