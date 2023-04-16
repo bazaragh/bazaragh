@@ -1,12 +1,21 @@
 {% extends "base.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='offer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='user-profile.css') }}">
 {% endblock %}
 
 {% block content %}
-<main class="offer-container">
-    <h1>Panel</h1>
-
+<main class="profile-container">
+    <section class="side-navbar-custom">
+        <div class="dropdown-item-hello">{{current_user.first_name}}, dobrze Cię znowu widzieć!</div>
+        <hr>
+        <a class="dropdown-item-custom" href="{{url_for('bp_main.user_profile_get')}}">Moje dane</a>
+        <a class="dropdown-item-custom" href="#">Ustawienia</a>
+        <a class="dropdown-item-custom" href="#">Moje ogłoszenia</a>
+        <a class="dropdown-item-custom" href="#">Wiadomości</a>
+        <a class="dropdown-item-custom" href="#">Polubione oferty</a>
+        <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
+    </section>
+    <section class="main-content"></section>
 </main>
 {% endblock %}
