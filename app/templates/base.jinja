@@ -37,12 +37,18 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-li hover-check">
-                <a href={{url_for('bp_main.user_profile_get')}}>Profil</a>
+                <a href={{url_for('bp_main.user_profile_get')}}>
+                    <img src="{{ url_for('static', filename='user_auth.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='user_hover_auth.png') }}" class="user-icon on-hover">
+                </a>
             </li>
             {% else %}
             <li class="nav-li hover-check">
-                <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
-                <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
+                <a href={{ url_for('security.login') }}>
+                    <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
+                </a>
+
                 <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
                     </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
@@ -64,7 +70,6 @@
             Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
             po sąsiedzku na BazarAGH.pl
         </p>
-
     </footer>
 </body>
 
