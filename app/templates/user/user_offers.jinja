@@ -1,21 +1,21 @@
-{% extends "base.jinja" %}
+{% extends "user/user_profile.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='offer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='user-profile.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block main_content %}
 <main class>
     <section>
-        <a href="/offer/add">Dodaj ogłoszenie</a>
+        <a href="{{url_for('bp_main.offer_add')}}">Dodaj ogłoszenie</a>
     </section>
     <section>
         {% for offer in offers %}
             <div>
                 <span>{{ offer.title }}</span>
-                <a href="/offer/{{ offer.id }}">Strona ogłoszenia</a>
-                <a href="/offer/{{ offer.id }}/edit">Edytuj</a>
-                <a href="/offer/{{ offer.id }}/delete">Usuń</a>
+                <a href="{{url_for('bp_main.offer_get', offer_id=offer.id)}}">Strona ogłoszenia</a>
+                <a href="{{url_for('bp_main.offer_edit', offer_id=offer.id)}}">Edytuj</a>
+                <a href="{{url_for('bp_main.offer_delete', offer_id=offer.id)}}">Usuń</a>
             </div>
         {% endfor %}
     </section>
