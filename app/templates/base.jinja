@@ -23,15 +23,30 @@
             <li class="nav-li logo">
                 <a href={{ url_for('bp_main.main_get') }}>Bazar AGH</a>
             </li>
-            <li class="nav-li" href="#">
-                Wiadomosci
+            <li class="nav-li hover-check" href="#">
+                <img src="{{ url_for('static', filename='messenger.png') }}" class="mess-icon icon-default">
+                <img src="{{ url_for('static', filename='messenger_hover.png') }}" class="mess-icon on-hover">
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
-            <li class="nav-li" href="#">
-                Ulubione
+            <li class="nav-li hover-check" href="#">
+                <img src="{{ url_for('static', filename='like.png') }}" class="user-icon icon-default">
+                <img src="{{ url_for('static', filename='like_hover.png') }}" class="user-icon on-hover">
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
-            <li class="nav-li">
-                <a href={{ url_for('security.login') }}>Profil</a>
+            {% if current_user.is_authenticated %}
+            <li class="nav-li hover-check">
+                <a href={{url_for('bp_main.user_profile_get')}}>Profil</a>
             </li>
+            {% else %}
+            <li class="nav-li hover-check">
+                <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
+                <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
+            </li>
+            {% endif %}
             <li class="nav-li button" href="#">
                 Dodaj ogloszenie
             </li>
@@ -49,6 +64,7 @@
             Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
             po sąsiedzku na BazarAGH.pl
         </p>
+
     </footer>
 </body>
 

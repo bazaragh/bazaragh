@@ -81,6 +81,28 @@ a {
     text-decoration: none;
 }
 
+.user-icon {
+    width: 33px;
+    height: 33px;
+}
+
+.mess-icon {
+    width: 28px;
+    height: 27px;
+}
+
+.hover-check:hover .on-hover {
+    display: block;
+}
+
+.hover-check:hover .icon-default {
+    display: none;
+}
+
+.on-hover {
+    display: none;
+}
+
 @media screen and (max-width: 900px) {
     ul.nav-ul {
         gap: 30px;
@@ -90,9 +112,8 @@ a {
 
 @media screen and (max-width: 750px) {
     ul.nav-ul {
-        gap: 20px;
-        padding-inline: 40px;
-        justify-content: space-between;
+        gap: 40px;
+        padding-inline: 60px;
     }
 }
 
@@ -121,8 +142,8 @@ a {
 
 @media screen and (max-width: 530px) {
     ul.nav-ul {
-        gap: 10px;
-        padding-inline: 20px;
+        /* padding-inline: 20px; */
+        justify-content: space-between;
     }
 
     li.nav-li {
@@ -144,8 +165,13 @@ a {
 }
 
 @media screen and (max-width: 400px) {
+
     ul.nav-ul {
         gap: 5px;
-        padding-inline: 10px;
+        padding-inline: 20px;
     }
+}
+
+.graphics-authors {
+    display: none;
 }
