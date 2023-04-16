@@ -23,15 +23,45 @@
             <li class="nav-li logo">
                 <a href={{ url_for('bp_main.main_get') }}>Bazar AGH</a>
             </li>
-            <li class="nav-li" href="#">
-                Wiadomosci
+            <li class="nav-li hover-check" href="#">
+                <img src="{{ url_for('static', filename='messenger.png') }}" class="mess-icon icon-default">
+                <img src="{{ url_for('static', filename='messenger_hover.png') }}" class="mess-icon on-hover">
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
-            <li class="nav-li" href="#">
-                Ulubione
+            <li class="nav-li hover-check" href="#">
+                <img src="{{ url_for('static', filename='like.png') }}" class="user-icon icon-default">
+                <img src="{{ url_for('static', filename='like_hover.png') }}" class="user-icon on-hover">
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
-            <li class="nav-li">
-                <a href={{ url_for('security.login') }}>Profil</a>
+            {% if current_user.is_authenticated %}
+            <li class="nav-li hover-check dropdown">
+                <a href={{url_for('bp_main.user_profile_get')}}>
+                    <img src="{{ url_for('static', filename='user_auth.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='user_hover_auth.png') }}" class="user-icon on-hover">
+                </a>
+                <div class="dropdown-menu-custom">
+                    <div class="dropdown-item-hello">{{current_user.first_name}}, dobrze Cię znowu widzieć!</div>
+                    <hr>
+                    <a class="dropdown-item-custom" href="{{url_for('bp_main.user_profile_get')}}">Moje dane</a>
+                    <a class="dropdown-item-custom" href="#">Ustawienia</a>
+                    <a class="dropdown-item-custom" href="#">Moje ogłoszenia</a>
+                    <a class="dropdown-item-custom" href="#">Wiadomości</a>
+                    <a class="dropdown-item-custom" href="#">Polubione oferty</a>
+                    <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
+                </div>
             </li>
+            {% else %}
+            <li class="nav-li hover-check">
+                <a href={{ url_for('security.login') }}>
+                    <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
+                </a>
+                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
+            </li>
+            {% endif %}
             <li class="nav-li button" href="#">
                 Dodaj ogloszenie
             </li>

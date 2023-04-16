@@ -7,6 +7,7 @@ from datetime import datetime
 
 from app.app import db
 from app.models import Category, Offer, User
+from flask_security import auth_required
 
 bp = Blueprint("bp_main", __name__)
 
@@ -51,3 +52,7 @@ def user_get():
 def user_offers_get():
     offers = db.session.query(Offer).filter_by(author=current_user.id).all()
     return render_template('user/user_offers.jinja', offers=offers)
+@bp.route('/user-profile')
+@auth_required()
+def user_profile_get():
+    return render_template('user_profile.jinja')
