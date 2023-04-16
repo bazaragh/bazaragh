@@ -29,6 +29,12 @@ ul.nav-ul {
     padding-inline: 80px;
 }
 
+li.nav-li,
+li.nav-li a {
+    overflow: visible;
+    height: 100%;
+}
+
 li.nav-li:hover {
     color: var(--light-green);
 }
@@ -81,6 +87,79 @@ a {
     text-decoration: none;
 }
 
+.user-icon {
+    width: 33px;
+    height: 33px;
+}
+
+.mess-icon {
+    width: 28px;
+    height: 27px;
+}
+
+.hover-check:hover .on-hover {
+    display: block;
+}
+
+.hover-check:hover .icon-default {
+    display: none;
+}
+
+.on-hover {
+    display: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu-custom {
+    position: absolute;
+    left: -25px;
+    top: calc(100% + .45rem);
+    color: white;
+    background-color: var(--dark-green);
+    border-radius: 10px;
+    min-width: 160px;
+    min-height: 20px;
+    padding-inline: 15px;
+    padding-block: 10px;
+    -webkit-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
+    -moz-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
+    box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
+
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.dropdown:hover .dropdown-menu-custom,
+.dropdown:focus .dropdown-menu-custom {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-item-custom:hover {
+    color: var(--light-green);
+}
+
+.dropdown-item-custom {
+    margin-block: 7px;
+    font-size: 15px;
+}
+
+.dropdown-item-hello {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+hr {
+    margin-block: 5px;
+}
+
 @media screen and (max-width: 900px) {
     ul.nav-ul {
         gap: 30px;
@@ -90,9 +169,8 @@ a {
 
 @media screen and (max-width: 750px) {
     ul.nav-ul {
-        gap: 20px;
-        padding-inline: 40px;
-        justify-content: space-between;
+        gap: 40px;
+        padding-inline: 60px;
     }
 }
 
@@ -121,8 +199,8 @@ a {
 
 @media screen and (max-width: 530px) {
     ul.nav-ul {
-        gap: 10px;
-        padding-inline: 20px;
+        /* padding-inline: 20px; */
+        justify-content: space-between;
     }
 
     li.nav-li {
@@ -144,8 +222,13 @@ a {
 }
 
 @media screen and (max-width: 400px) {
+
     ul.nav-ul {
         gap: 5px;
-        padding-inline: 10px;
+        padding-inline: 20px;
     }
+}
+
+.graphics-authors {
+    display: none;
 }
