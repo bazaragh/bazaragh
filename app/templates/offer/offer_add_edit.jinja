@@ -7,7 +7,7 @@
 
 {% block content %}
 <main class>
-   <form action="{{ url_for('bp_main.offer_edit_api', offer_id=offer_id) if offer_id else url_for('bp_main.offer_add_api') }}" method="{{ 'PUT' if offer_id else 'POST' }}" name="add_edit_offer_form">
+   <form action="{{ url_for('bp_main.offer_edit_api', offer_id=offer_id) if offer_id else url_for('bp_main.offer_add_api') }}" method="POST" name="add_edit_offer_form">
         <div class="container">
             <h1>{{ 'Edytuj' if offer_id else 'Dodaj' }} ogłoszenie</h1>
             <hr>

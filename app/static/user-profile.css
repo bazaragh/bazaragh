@@ -22,3 +22,7 @@ main.profile-container {
     display: flex;
     flex-flow: column wrap;
 }
+
+.form-singleton {
+    display: inline;
+}
