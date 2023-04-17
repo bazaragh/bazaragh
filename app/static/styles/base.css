@@ -160,6 +160,10 @@ hr {
     margin-block: 5px;
 }
 
+footer h2 {
+    font-size: 25px;
+}
+
 @media screen and (max-width: 900px) {
     ul.nav-ul {
         gap: 30px;
