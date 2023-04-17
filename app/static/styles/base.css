@@ -4,7 +4,7 @@
 }
 
 nav.navbar {
-    min-height: 60px;
+    min-height: 64px;
     margin-top: 0;
     background-color: var(--dark-green);
     color: white;
@@ -18,14 +18,13 @@ nav.navbar {
 ul.nav-ul {
     list-style-type: none;
     margin: auto;
-    padding: 0;
     width: 100%;
-
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     gap: 40px;
+    padding-block: 0;
     padding-inline: 80px;
 }
 
@@ -33,6 +32,8 @@ li.nav-li,
 li.nav-li a {
     overflow: visible;
     height: 100%;
+    padding-block: 0;
+    margin: 0;
 }
 
 li.nav-li:hover {
@@ -88,13 +89,15 @@ a {
 }
 
 .user-icon {
-    width: 33px;
-    height: 33px;
+    width: 39px;
+    height: 39px;
+    padding: 2px;
 }
 
 .mess-icon {
-    width: 28px;
-    height: 27px;
+    width: 36px;
+    height: 36px;
+    padding: 2px;
 }
 
 .hover-check:hover .on-hover {
@@ -116,7 +119,6 @@ a {
 .dropdown-menu-custom {
     position: absolute;
     left: -25px;
-    top: calc(100% + .45rem);
     color: white;
     background-color: var(--dark-green);
     border-radius: 10px;
@@ -129,17 +131,21 @@ a {
     box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
 
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+    transform: translateY(-100%) scaleY(0%);
+    transition: opacity 150ms ease-in-out, transform 350ms ease-in-out;
+    transition-delay: opacity 0.1s;
 
     display: flex;
     flex-flow: column wrap;
+
 }
 
-.dropdown:hover .dropdown-menu-custom,
-.dropdown:focus .dropdown-menu-custom {
+.dropdown-link:hover+.dropdown-menu-custom,
+.dropdown-link+.dropdown-menu-custom:hover,
+.dropdown-link:focus+.dropdown-menu-custom {
     opacity: 1;
-    transform: translateY(0);
+    visibility: visible;
+    transform: translateY(0%) scaleY(100%);
 }
 
 .dropdown-item-custom:hover {
