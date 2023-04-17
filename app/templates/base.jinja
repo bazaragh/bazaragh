@@ -33,7 +33,7 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-li hover-check dropdown">
-                <a href={{url_for('bp_main.user_profile_get')}}>
+                <a href={{url_for('bp_main.user_profile_get')}} class="dropdown-link">
                     <img src="{{ url_for('static', filename='nav-bar/user_auth.png') }}" class="user-icon icon-default">
                     <img src="{{ url_for('static', filename='nav-bar/user_hover_auth.png') }}"
                         class="user-icon on-hover">
