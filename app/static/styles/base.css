@@ -221,6 +221,14 @@ hr {
     }
 }
 
+@media screen and (max-width: 480px) {
+
+    ul.nav-ul {
+        gap: 5px;
+        padding-inline: 30px;
+    }
+}
+
 @media screen and (max-width: 400px) {
 
     ul.nav-ul {
