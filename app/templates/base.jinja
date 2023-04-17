@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
 
     <title>{% block title %}Bazar AGH{% endblock %}</title>
 
@@ -24,22 +24,19 @@
                 <a href={{ url_for('bp_main.main_get') }}>Bazar AGH</a>
             </li>
             <li class="nav-li hover-check" href="#">
-                <img src="{{ url_for('static', filename='messenger.png') }}" class="mess-icon icon-default">
-                <img src="{{ url_for('static', filename='messenger_hover.png') }}" class="mess-icon on-hover">
-                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
-                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
+                <img src="{{ url_for('static', filename='nav-bar/messenger.png') }}" class="mess-icon icon-default">
+                <img src="{{ url_for('static', filename='nav-bar/messenger_hover.png') }}" class="mess-icon on-hover">
             </li>
             <li class="nav-li hover-check" href="#">
-                <img src="{{ url_for('static', filename='like.png') }}" class="user-icon icon-default">
-                <img src="{{ url_for('static', filename='like_hover.png') }}" class="user-icon on-hover">
-                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
-                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
+                <img src="{{ url_for('static', filename='nav-bar/like.png') }}" class="user-icon icon-default">
+                <img src="{{ url_for('static', filename='nav-bar/like_hover.png') }}" class="user-icon on-hover">
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-li hover-check dropdown">
                 <a href={{url_for('bp_main.user_profile_get')}}>
-                    <img src="{{ url_for('static', filename='user_auth.png') }}" class="user-icon icon-default">
-                    <img src="{{ url_for('static', filename='user_hover_auth.png') }}" class="user-icon on-hover">
+                    <img src="{{ url_for('static', filename='nav-bar/user_auth.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='nav-bar/user_hover_auth.png') }}"
+                        class="user-icon on-hover">
                 </a>
                 <div class="dropdown-menu-custom">
                     <div class="dropdown-item-hello">{{current_user.first_name}}, dobrze Cię znowu widzieć!</div>
@@ -55,11 +52,9 @@
             {% else %}
             <li class="nav-li hover-check">
                 <a href={{ url_for('security.login') }}>
-                    <img src="{{ url_for('static', filename='user.png') }}" class="user-icon icon-default">
-                    <img src="{{ url_for('static', filename='user_hover.png') }}" class="user-icon on-hover">
+                    <img src="{{ url_for('static', filename='nav-bar/user.png') }}" class="user-icon icon-default">
+                    <img src="{{ url_for('static', filename='nav-bar/user_hover.png') }}" class="user-icon on-hover">
                 </a>
-                <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
-                    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
             </li>
             {% endif %}
             <li class="nav-li button" href="#">
@@ -79,6 +74,8 @@
             Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w sklepie. Sprzedawaj
             po sąsiedzku na BazarAGH.pl
         </p>
+        <div class="graphics-authors"> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik
+            </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
     </footer>
 </body>
 

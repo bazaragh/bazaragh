@@ -70,6 +70,7 @@ input:focus {
     overflow: hidden;
     object-fit: contain;
     margin-bottom: 5px;
+    background-color: white;
 }
 
 .button-wrapper button:hover {
@@ -79,10 +80,9 @@ input:focus {
 }
 
 .button-wrapper img {
-    width: 76px;
-    height: 76px;
+    width: 43px;
+    height: 43px;
     border: none;
-    border-radius: 50%;
     padding: 0;
     margin: 0;
     transition: transform 0.2s;
@@ -176,6 +176,23 @@ input:focus {
 .publication-price {
     font-size: 20px;
     font-weight: 500;
+}
+
+button.search-icon {
+    border: none;
+    background-color: white;
+    padding: 0;
+    padding-right: 10px;
+}
+
+button.search-icon img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.2s;
+}
+
+button.search-icon img:hover {
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 700px) {
