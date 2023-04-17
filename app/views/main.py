@@ -89,7 +89,14 @@ def offer_delete(offer_id):
 @bp.route('/user/profile')
 @auth_required()
 def user_profile_get():
-    return render_template('user/user_profile.jinja')
+    user_data = {
+        "Imię": current_user.first_name,
+        "Nazwisko": current_user.last_name,
+        "Wydział": current_user.faculty,
+        "Akademik": current_user.dorm,
+        "Email": current_user.email,
+    }
+    return render_template('user/user_profile.jinja', personal_data=user_data)
 
 @bp.route('/user/offers')
 @auth_required()

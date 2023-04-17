@@ -7,18 +7,113 @@
 }
 
 main.profile-container {
-    min-height: 43vh;
     display: flex;
-    flex-direction: row wrap;
+    flex-flow: row wrap;
 }
 
 .side-navbar-custom {
     background-color: var(--cream);
-    width: 300px;
+    max-width: 290px;
+    width: 40%;
     -webkit-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
     -moz-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
     box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
 
     display: flex;
     flex-flow: column wrap;
+    padding-inline: 30px;
+    padding-block: 23px;
+}
+
+.side-navbar-custom a {
+    font-weight: 480;
+}
+
+.side-navbar-custom a:hover {
+    font-weight: 500;
+    color: var(--dark-green);
+}
+
+section.main-content {
+    padding-inline: 60px;
+    padding-block: 30px;
+}
+
+.presonal-data-container {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 20px;
+    padding-inline: 10px;
+    padding-top: 10px;
+}
+
+.personal-data-record-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.personal-data-record-wrapper p {
+    margin-top: 8px;
+}
+
+.personal-data-record-wrapper h4 {
+    font-size: 17px;
+    min-width: 100px;
+}
+
+@media screen and (max-width: 700px) {
+    .side-navbar-custom {
+        width: 35%;
+    }
+
+    section.main-content {
+        padding-inline: 30px;
+        padding-block: 30px;
+    }
+
+    .personal-data-record-wrapper h4 {
+        font-size: 15px;
+        min-width: 80px;
+    }
+
+    .personal-data-record-wrapper p {
+        margin-top: 6px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .side-navbar-custom {
+        min-width: 100%;
+        flex-flow: row wrap;
+        padding-inline: 20px;
+        padding-block: 10px;
+        justify-content: space-between;
+    }
+
+    .dropdown-item-custom {
+        min-width: 110px;
+        font-size: 13px;
+    }
+
+    .dropdown-item-hello {
+        display: none;
+    }
+
+    .dropdown-item-hello+hr {
+        display: none;
+    }
+
+    main.profile-container {
+        flex-flow: column nowrap;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .side-navbar-custom {
+        justify-content: space-around;
+    }
 }
