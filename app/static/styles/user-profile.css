@@ -21,8 +21,8 @@ main.profile-container {
 
     display: flex;
     flex-flow: column wrap;
-    padding-inline: 30px;
-    padding-block: 23px;
+    padding-left: 40px;
+    padding-right: 20px;
 }
 
 .side-navbar-custom a {
@@ -36,7 +36,6 @@ main.profile-container {
 
 section.main-content {
     padding-inline: 60px;
-    padding-block: 30px;
 }
 
 .presonal-data-container {
@@ -62,6 +61,14 @@ section.main-content {
 .personal-data-record-wrapper h4 {
     font-size: 17px;
     min-width: 100px;
+}
+
+.main-content h1 {
+    font-size: 25px;
+}
+
+section {
+    padding-block: 60px;
 }
 
 @media screen and (max-width: 700px) {

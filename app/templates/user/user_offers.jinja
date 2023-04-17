@@ -2,18 +2,17 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-offers.css') }}">
 {% endblock %}
 
 {% block main_content %}
 <main class>
     <section>
-        <a href="{{url_for('bp_main.offer_add')}}">Dodaj ogłoszenie</a>
-    </section>
-    <section>
+        <h1 class="offers-wrapper">Moje ogłoszenia</h1>
         {% for offer in offers %}
-        <div>
-            <span>{{ offer.title }}</span>
-            <a href="{{url_for('bp_main.offer_get', offer_id=offer.id)}}">Strona ogłoszenia</a>
+        <div class="single-offer-wrapper">
+            <div class="offer-title">{{ offer.title }}</div>
+            <a href="{{url_for('bp_main.offer_get', offer_id=offer.id)}}">Zobacz ogłoszenie</a>
             <a href="{{url_for('bp_main.offer_edit', offer_id=offer.id)}}">Edytuj</a>
             <a href="{{url_for('bp_main.offer_delete', offer_id=offer.id)}}">Usuń</a>
         </div>
