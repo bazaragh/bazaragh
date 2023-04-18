@@ -2,23 +2,23 @@
 {% from "_macros.html" import render_field_with_errors, render_field_errors, render_field %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='offer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer-add-edit.css') }}">
 {% endblock %}
 
 {% block content %}
-<main class>
-   <form action="{{ url_for('bp_main.offer_edit_api', offer_id=offer_id) if offer_id else url_for('bp_main.offer_add_api') }}" method="{{ 'PUT' if offer_id else 'POST' }}" name="add_edit_offer_form">
-        <div class="container">
-            <h1>{{ 'Edytuj' if offer_id else 'Dodaj' }} ogłoszenie</h1>
-            <hr>
-            {{ form.hidden_tag() }}
-            {{ render_field_errors(form.csrf_token) }}
-            {{ render_field_with_errors(form.title) }}
-            {{ render_field_with_errors(form.description) }}
-            {{ render_field_with_errors(form.price) }}
-            <hr>
-            {{ render_field(form.submit) }}
-        </div>
+<main class="offer-main-container">
+    <form
+        action="{{ url_for('bp_main.offer_edit_api', offer_id=offer_id) if offer_id else url_for('bp_main.offer_add_api') }}"
+        method="{{ 'PUT' if offer_id else 'POST' }}" name="add_edit_offer_form">
+        <h1>{{ 'Edytuj' if offer_id else 'Dodaj' }} ogłoszenie</h1>
+        <hr>
+        {{ form.hidden_tag() }}
+        {{ render_field_errors(form.csrf_token) }}
+        {{ render_field_with_errors(form.title) }}
+        {{ render_field_with_errors(form.description) }}
+        {{ render_field_with_errors(form.price) }}
+        <hr>
+        {{ render_field(form.submit) }}
     </form>
 </main>
 {% endblock %}
