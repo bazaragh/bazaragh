@@ -1,7 +1,7 @@
 {% extends "base.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='user-profile.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,17 @@
         <a class="dropdown-item-custom" href="#">Polubione oferty</a>
         <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
     </section>
-    <section class="main-content">{% block main_content %}{% endblock %}</section>
+    <section class="main-content">{% block main_content %}
+        <h1>Dane osobowe</h1>
+        <div class="presonal-data-container">
+            {% for record_name, data_record in personal_data.items() %}
+            <div class="personal-data-record-wrapper">
+                <h4>{{record_name}}</h4>
+                <p>{{data_record}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+    </section>
 </main>
 {% endblock %}

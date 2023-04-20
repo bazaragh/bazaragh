@@ -65,23 +65,6 @@ def offer_edit(offer_id):
     form.price.data = offer.price
     return render_template('offer/offer_add_edit.jinja', form=form, offer_id=offer_id)
 
-@bp.route('/user/profile')
-@auth_required()
-def user_profile_get():
-    return render_template('user/user_profile.jinja')
-
-@bp.route('/user/offers')
-@auth_required()
-def user_offers_get():
-    offers = db.session.query(Offer).filter_by(author=current_user.id).all()
-    return render_template('user/user_offers.jinja', offers=offers)
-
-@bp.route('/user/settings')
-@auth_required()
-def user_settings_get():
-    return render_template('user/user_settings.jinja')
-
-
 @bp.route('/api/offer/<int:offer_id>/edit', methods=["PUT", "POST"])
 @auth_required()
 def offer_edit_api(offer_id):
@@ -122,5 +105,29 @@ def offer_delete(offer_id):
     db.session.delete(offer)
     db.session.commit()
     return redirect(url_for('bp_main.user_offers_get'))
+
+
+@bp.route('/user/profile')
+@auth_required()
+def user_profile_get():
+    user_data = {
+        "Imię": current_user.first_name,
+        "Nazwisko": current_user.last_name,
+        "Wydział": current_user.faculty,
+        "Akademik": current_user.dorm,
+        "Email": current_user.email,
+    }
+    return render_template('user/user_profile.jinja', personal_data=user_data)
+
+@bp.route('/user/offers')
+@auth_required()
+def user_offers_get():
+    offers = db.session.query(Offer).filter_by(author=current_user.id).all()
+    return render_template('user/user_offers.jinja', offers=offers)
+
+@bp.route('/user/settings')
+@auth_required()
+def user_settings_get():
+    return render_template('user/user_settings.jinja')
 
 # TODO settings PUT endpoint
