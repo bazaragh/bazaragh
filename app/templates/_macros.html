@@ -5,6 +5,9 @@
         {% endif %}
         {{ field(**{'aria-describedby': 'input-' ~ field.name ~ '-error'})|safe }}
     </div>
+    {% if field.description %}
+        <div id="input-{{ field.name }}-info" class="form-text text-shadow input-error">{{ field.description }}</div>
+    {% endif %}
     {% if field.errors %}
         {% if field.type == 'RecaptchaField' %}
             <div id="input-{{ field.name }}-error" class="form-text text-danger input-error">Wymagane poprawne uzupełnienie.
