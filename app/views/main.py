@@ -33,7 +33,6 @@ def offer_get(offer_id):
     offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
     if offer is None:
         abort(404)
-    print(offer.price)
     images = json.loads(offer.images)
     author = db.session.query(User).filter_by(id=offer.author).one_or_none()
     return render_template('offer/offer.jinja',
