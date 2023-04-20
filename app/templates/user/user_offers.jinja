@@ -7,6 +7,9 @@
 
 {% block main_content %}
 <main class>
+    <form class="form-singleton" action="{{url_for('bp_main.offer_add')}}", method="GET">
+        <input type="submit" value="Dodaj ogłoszenie" />
+    </form>  
     <section>
         <h1 class="offers-wrapper">Moje ogłoszenia</h1>
         {% for offer in offers %}
