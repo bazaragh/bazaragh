@@ -25,6 +25,22 @@ dorm_list = [("other", "Mieszkam poza MS AGH"),
              ("ds-18", "DS18 Odyseja"),
              ("ds-19", "DS19 Apollo")]
 
+faculty_list = [("other", "Studiuję poza AGH"),
+                ("wiligz", "WILiGZ"),
+                ("wimiip", "WIMiIP"),
+                ("weaiiib", "WEAIiIB"),
+                ("wieit", "WIEiT"),
+                ("wimir", "WIMiR"),
+                ("wggios", "WGGiOŚ"),
+                ("wggis", "WGGiIŚ"),
+                ("wimic", "WIMiC"),
+                ("wo", "WOdlewnictwa"),
+                ("wmn", "WMN"),
+                ("wwnig", "WWNiG"),
+                ("wz", "WZ"),
+                ("weip", "WEiP"),
+                ("wfiis", "WFiIS")]
+
 
 class Select2Field(SelectField):
     def pre_validate(self, form):
@@ -36,7 +52,7 @@ class ExtendedRegisterForm(RegisterForm):
                                                  Length(max=255)])
     last_name = StringField('Nazwisko', validators=[DataRequired(message='Your first name is required.'),
                                                     Length(max=255)])
-    faculty = StringField('Wydział')
+    faculty = Select2Field('Wydział', choices=faculty_list)
     dorm = Select2Field('Akademik', choices=dorm_list)
     password_confirm = PasswordField(
         get_form_field_label("retype_password"),
@@ -53,7 +69,7 @@ class ExtendedConfirmRegisterForm(ConfirmRegisterForm):
                                                  Length(max=255)])
     last_name = StringField('Nazwisko', validators=[DataRequired(message='Your first name is required.'),
                                                     Length(max=255)])
-    faculty = StringField('Wydział')
+    faculty = Select2Field('Wydział', choices=faculty_list)
     dorm = Select2Field('Akademik', choices=dorm_list)
     password = PasswordField(
         get_form_field_label("password"),
