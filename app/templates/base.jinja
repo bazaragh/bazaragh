@@ -74,7 +74,9 @@
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <h2> Bazar AGH</h2>
+        <a href="{{ url_for('bp_main.main_get') }}">
+            <h2> Bazar AGH</h2>
+        </a>
         <p>BazarAGH.pl to darmowe ogłoszenia lokalne w kategoriach: Moda, Elektronika, Sport i Hobby, Muzyka i Edukacja.
             Szybko znajdziesz tu ciekawe ogłoszenia i łatwo skontaktujesz się z ogłoszeniodawcą. Jeśli chcesz coś
             sprzedać - w prosty sposób dodasz bezpłatne ogłoszenia.
