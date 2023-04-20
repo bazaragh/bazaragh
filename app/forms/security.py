@@ -1,6 +1,7 @@
-from flask_security.forms import RegisterForm, ConfirmRegisterForm, get_form_field_label, EqualTo
-from wtforms import StringField, PasswordField, validators, SelectField
-from wtforms.validators import DataRequired, Length
+from flask_security.forms import RegisterForm, ConfirmRegisterForm, get_form_field_label, EqualTo, ChangePasswordForm
+from wtforms import StringField, PasswordField, validators, SelectField, SubmitField
+from wtforms.validators import DataRequired, Length, Email
+from flask_wtf import FlaskForm
 
 dorm_list = [("other", "Mieszkam poza MS AGH"),
              ("ds-alfa", "DS Alfa"),
@@ -62,3 +63,21 @@ class ExtendedConfirmRegisterForm(ConfirmRegisterForm):
             validators.Length(min=10)
         ],
     )
+
+class ExtendedChangePasswordForm(ChangePasswordForm):
+    new_password = PasswordField(
+        get_form_field_label("new_password"),
+        render_kw={"autocomplete": "new-password"},
+        validators=[            
+            validators.InputRequired(),
+            validators.Length(min=10)
+        ],
+    )
+
+class ChangeEmailForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email(), Length(min=5, max=255)])
+    submit = SubmitField("Potwierdź")
+
+class DeleteAccountForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email(), Length(min=5, max=255)])
+    submit = SubmitField("Usuń konto")

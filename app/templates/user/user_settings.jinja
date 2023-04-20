@@ -1,4 +1,5 @@
 {% extends "user/user_profile.jinja" %}
+{% from "_macros.html" import render_field_with_errors, render_field_errors, render_field %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
@@ -7,9 +8,39 @@
 
 {% block main_content %}
 <main class>
-    <section>
-        Ustawienia
-    </section>
+    <h1>Ustawienia</h1>
 
+    <section>
+        <form class="form-singleton" action="{{ url_for_security('change_password') }}", method="GET">
+            <input type="submit" value="Zmień hasło" />
+        </form>  
+    </section>
+    <section>
+        <h4>Obecny email: {{ current_user.email }}</h4>
+        <h4>Zmień email</h4>
+        <form action="{{ url_for('bp_main.change_email') }}" method="POST" name="change_email_form">
+            <div class="container">
+                {{ change_email_form.hidden_tag() }}
+                {{ render_field_errors(change_email_form.csrf_token) }} 
+                {{ render_field_with_errors(change_email_form.email) }}
+                <hr>
+                {{ render_field(change_email_form.submit) }}
+            </div>
+        </form>
+    </section>
+    <section>
+        <h4>Usuń konto</h4>
+        <form action="{{ url_for('bp_main.delete_account') }}" method="POST" name="delete_account_confirm_form">
+            <div class="container">
+                <p>Potwierdź usunięcie wpisując email</p>
+                <hr>
+                {{ delete_account_confirm_form.hidden_tag() }}
+                {{ render_field_errors(delete_account_confirm_form.csrf_token) }} 
+                {{ render_field_with_errors(delete_account_confirm_form.email) }}
+                <hr>
+                {{ render_field(delete_account_confirm_form.submit) }}
+            </div>
+        </form>
+    </section>
 </main>
 {% endblock %}
