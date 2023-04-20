@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from flask_login import current_user
 from werkzeug.exceptions import abort
 from datetime import datetime
@@ -45,13 +45,25 @@ def offer_get(offer_id):
                            images=images,
                            author=author)
 
-@bp.route('/offer/add')
+@bp.route('/offer/add', methods=["GET", "POST"])
 @auth_required()
 def offer_add():
     form = AddEditOfferForm()
-    return render_template('offer/offer_add_edit.jinja', form=form, offer_id=None)
+    if request.method == 'POST':
+        offer = Offer(author=current_user.id,
+                    description=form.description.data,
+                    category=1,
+                    title=form.title.data,
+                    price=form.price.data,
+                    is_used=False,
+                    images='["1200px-RedCat_8727.jpg", "cat.webp"]')
+        db.session.add(offer)   
+        db.session.commit()
+        return redirect(url_for('bp_main.user_offers_get'))
+    else:
+        return render_template('offer/offer_add_edit.jinja', form=form, offer_id=None)
 
-@bp.route('/offer/<int:offer_id>/edit')
+@bp.route('/offer/<int:offer_id>/edit', methods=["GET", "POST"])
 @auth_required()
 def offer_edit(offer_id):
     form = AddEditOfferForm()
@@ -60,41 +72,21 @@ def offer_edit(offer_id):
         abort(404)
     if offer.author != current_user.id:
         abort(401)
-    form.title.data = offer.title
-    form.description.data = offer.description
-    form.price.data = offer.price
-    return render_template('offer/offer_add_edit.jinja', form=form, offer_id=offer_id)
 
-@bp.route('/api/offer/<int:offer_id>/edit', methods=["PUT", "POST"])
-@auth_required()
-def offer_edit_api(offer_id):
-    form = AddEditOfferForm()
-    db.session.query(Offer).filter(Offer.id == offer_id, Offer.author == current_user.id).update(
-        {
-            'title': form.title.data,
-            'description': form.description.data,
-            'price': form.price.data
-        }
-    )
-    db.session.commit()
-    return redirect(url_for('bp_main.user_offers_get'))
+    if request.method == 'POST':
+        offer.title = form.title.data
+        offer.description = form.description.data
+        offer.price = form.price.data
+        db.session.commit()
+        return redirect(url_for('bp_main.user_offers_get'))
+    else:
+        form.title.data = offer.title
+        form.description.data = offer.description
+        form.price.data = offer.price
+        return render_template('offer/offer_add_edit.jinja', form=form, offer_id=offer_id)
 
-@bp.route('/api/offer/add', methods=["POST"])
-@auth_required()
-def offer_add_api():
-    form = AddEditOfferForm()
-    offer = Offer(author=current_user.id,
-                  description=form.description.data,
-                  category=1,
-                  title=form.title.data,
-                  price=form.price.data,
-                  is_used=False,
-                  images='["1200px-RedCat_8727.jpg", "cat.webp"]')
-    db.session.add(offer)   
-    db.session.commit()
-    return redirect(url_for('bp_main.user_offers_get'))
 
-@bp.route('/api/offer/<int:offer_id>/delete', methods=['DELETE', 'POST'])
+@bp.route('/offer/<int:offer_id>/delete', methods=['POST'])
 @auth_required()
 def offer_delete(offer_id):
     offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
