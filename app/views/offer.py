@@ -9,7 +9,7 @@ from app.models import Offer
 bp = Blueprint("bp_offer", __name__, url_prefix='/user/offer')
 
 
-@bp.route('/offer/add', methods=["GET", "POST"])
+@bp.route('/add', methods=["GET", "POST"])
 @auth_required()
 def add():
     form = AddEditOfferForm()
@@ -27,7 +27,7 @@ def add():
     return render_template('offer/offer_add_edit.jinja', form=form, offer_id=None)
 
 
-@bp.route('/offer/edit/<int:offer_id>', methods=["GET", "POST"])
+@bp.route('/edit/<int:offer_id>', methods=["GET", "POST"])
 @auth_required()
 def edit(offer_id):
     offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
@@ -46,7 +46,7 @@ def edit(offer_id):
     return render_template('offer/offer_add_edit.jinja', form=form, offer_id=offer_id)
 
 
-@bp.route('/offer/delete/<int:offer_id>', methods=['GET', 'POST'])
+@bp.route('/delete/<int:offer_id>', methods=['GET', 'POST'])
 @auth_required()
 def delete(offer_id):
     form = DeleteOfferForm()
