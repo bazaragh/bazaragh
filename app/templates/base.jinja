@@ -60,11 +60,9 @@
                 </a>
             </li>
             {% endif %}
-            {% if current_user.is_authenticated %}
             <li class="nav-li button">
-                <a href="{{url_for('bp_offer.add')}}">Dodaj ogłoszenie</a>
+                <a href="{{ url_for('bp_offer.add') }}">Dodaj ogłoszenie</a>
             </li>
-            {% endif %}
         </ul>
 
     </nav>
