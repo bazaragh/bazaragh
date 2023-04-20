@@ -23,6 +23,7 @@ section {
     padding: 5px;
     width: 70%;
     min-width: 500px;
+    max-width: 900px;
 
     border: 2px solid var(--dark-green);
     border-radius: 18px;
@@ -81,7 +82,7 @@ section.main-containers-wrapper {
 }
 
 .main-details-container p.price {
-    font-size: 27px;
+    font-size: 22px;
     color: black;
     font-weight: 500;
     margin-top: 40px;
@@ -100,9 +101,13 @@ section.main-containers-wrapper {
 
 .offer-name-wrapper {
     width: 100%;
-    height: 70px;
-    /* background-color: #F0BB62; */
+    height: 50px;
     overflow: hidden;
+    margin-top: 10px;
+}
+
+.offer-name-wrapper h1 {
+    font-size: 25px;
 }
 
 .box {
@@ -140,7 +145,7 @@ section.main-containers-wrapper {
 
 .salesman-container button {
     padding: 7px;
-    width: 230px;
+    width: 300px;
     height: 50px;
     border: none;
     border-radius: 25px;
@@ -148,6 +153,23 @@ section.main-containers-wrapper {
     font-weight: 400;
     color: white;
     margin-top: 10px;
+}
+
+button.search-icon {
+    border: none;
+    background-color: white;
+    padding: 0;
+    padding-right: 10px;
+}
+
+button.search-icon img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.2s;
+}
+
+button.search-icon img:hover {
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 1100px) {
@@ -192,6 +214,10 @@ section.main-containers-wrapper {
     .main-details-container {
         height: 280px;
     }
+
+    .salesman-container button {
+        max-width: 300px;
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -233,13 +259,32 @@ section.main-containers-wrapper {
     }
 
     .main-details-container p.price {
-        font-size: 24px;
+        font-size: 19px;
         margin-top: 20px;
         color: black;
     }
 
     main.offer-container {
         padding-block: 10px;
+    }
+
+    button.search-icon {
+        margin-right: 5px;
+    }
+
+    button.search-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .salesman-container {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: flex-start;
+    }
+
+    .offer-name-wrapper h1 {
+        font-size: 23px
     }
 }
 
@@ -257,7 +302,8 @@ section.main-containers-wrapper {
 
     .search-bar-wrapper {
         min-width: 200px;
-        margin-block: 10px;
+        width: 80%;
+        margin-block: 20px;
         border-width: 2px;
     }
 
@@ -280,11 +326,11 @@ section.main-containers-wrapper {
     }
 
     .offer-name-wrapper {
-        height: 20px;
+        height: 25px;
     }
 
     .main-details-container p.price {
-        font-size: 18px;
+        font-size: 16px;
         margin-top: 5px;
         color: black;
     }
@@ -315,10 +361,13 @@ section.main-containers-wrapper {
         font-size: 13px;
     }
 
-    .salesman-container {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-content: flex-start;
+    button.search-icon img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .offer-name-wrapper h1 {
+        font-size: 19px
     }
 }
 
