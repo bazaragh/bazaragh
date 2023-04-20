@@ -37,7 +37,7 @@
                     <p class="publication-name">{{ offer.title }}</p>
                 </div>
                 <p class="publication-date">{{ offer.created_at.date() }}</p>
-                <p class="publication-price">{{ "%.2f zł"|format(offer.price) }}</p>
+                <p class="publication-price">{{ "%.2f zł"|format(offer.price) if offer.price else "Za darmo" }}</p>
             </div>
         </a>
         {% endfor %}
