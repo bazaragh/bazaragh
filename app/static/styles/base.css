@@ -241,6 +241,10 @@ footer h2 {
         gap: 5px;
         padding-inline: 30px;
     }
+
+    .dropdown-menu-custom {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 400px) {

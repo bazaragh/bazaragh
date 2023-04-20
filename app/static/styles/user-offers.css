@@ -20,7 +20,7 @@
 }
 
 .offer-title {
-    width: 330px;
+    width: 50%;
     overflow: hiddden;
     padding-inline: 10px;
 }
@@ -33,6 +33,33 @@
     font-weight: 500;
 }
 
-.form-singleton{
+.form-singleton {
     display: inline;
+}
+
+.form-singleton input {
+    padding: 10px;
+    width: min(80%, 200px);
+    border: none;
+    border-radius: 20px;
+    background-color: var(--light-orange);
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1200px) {
+    .single-offer-wrapper {
+        min-width: 60%;
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .single-offer-wrapper {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .offer-title {
+        width: 100%;
+    }
 }
