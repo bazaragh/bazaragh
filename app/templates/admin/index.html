@@ -1,0 +1,29 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        {% if current_user.is_authenticated and (current_user.has_role('Moderator') or current_user.has_role('Admin')) %}
+          <div class="alert alert-primary" role="alert">
+            Zalogowano do panelu administratora jako {{ current_user.email }}.
+          </div>
+        {% elif current_user.is_authenticated %}
+          <div class="alert alert-danger" role="alert">
+            Nie posiadasz uprawnień Moderatora lub Administratora.
+          </div>
+          <a class="btn btn-primary" href="{{ url_for('security.logout') }}">
+            Wyloguj się
+          </a>
+        {% else %}
+          <div class="alert alert-danger" role="alert">
+            Panel administratora jest dostępny tylko dla Moderatorów i Administratorów.
+          </div>
+          <a class="btn btn-primary" href="{{ url_for('security.login', next=url_for('admin.index')) }}">
+            Przejdź do strony logowania
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

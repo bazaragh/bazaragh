@@ -1,0 +1,26 @@
+{% extends 'admin/model/details.html' %}
+
+{% block details_table %}
+    <table class="table table-hover table-bordered searchable">
+        {% for c, name in details_columns %}
+            <tr>
+                <td>
+                    <b>{{ name }}</b>
+                </td>
+                <td>
+                    {% if c == 'images' %}
+                        <div class="row">
+                            {% for i in get_value(model, c).split(',') %}
+                                <div class="col-3 d-flex align-items-center">
+                                    <img style="width: 100%" src="{{ url_for('static', filename=i.strip()) }}" alt="{{ i.strip() }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ get_value(model, c) }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
