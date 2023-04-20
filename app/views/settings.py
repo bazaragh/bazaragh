@@ -29,9 +29,7 @@ def change_email():
                 change_email_form.email.errors.append('Ten email jest używany!')
         except IntegrityError:
             change_email_form.email.errors.append('Ten email jest używany!')
-    return render_template('user/user_settings.jinja',
-                           change_email_form=change_email_form,
-                           delete_account_confirm_form=DeleteAccountForm())
+    return redirect(url_for('bp_user.settings_get'))
 
 
 @bp.route('/delete', methods=['POST'])
@@ -48,6 +46,4 @@ def delete_account():
                 delete_account_form.email.errors.append('Nieprawidlowy email!')
         except IntegrityError:
             delete_account_form.email.errors.append('Nieprawidlowy email!')
-    return render_template('user/user_settings.jinja',
-                           change_email_form=ChangeEmailForm(),
-                           delete_account_confirm_form=delete_account_form)
+    return redirect(url_for('bp_user.settings_get'))
