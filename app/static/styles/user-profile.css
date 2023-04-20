@@ -25,6 +25,10 @@ main.profile-container {
     padding-right: 20px;
 }
 
+section.main-content {
+    width: 60%;
+}
+
 .side-navbar-custom a {
     font-weight: 480;
 }
@@ -71,7 +75,7 @@ section {
     padding-block: 60px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
     .side-navbar-custom {
         width: 35%;
     }
@@ -79,6 +83,7 @@ section {
     section.main-content {
         padding-inline: 30px;
         padding-block: 30px;
+        width: 65%;
     }
 
     .personal-data-record-wrapper h4 {
@@ -92,18 +97,23 @@ section {
     }
 }
 
-@media screen and (max-width: 450px) {
+
+@media screen and (max-width: 624px) {
     .side-navbar-custom {
         min-width: 100%;
         flex-flow: row wrap;
-        padding-inline: 20px;
+        padding-inline: 60px;
         padding-block: 10px;
         justify-content: space-between;
     }
 
+    section.main-content {
+        width: 100%;
+    }
+
     .dropdown-item-custom {
-        min-width: 110px;
-        font-size: 13px;
+        min-width: 120px;
+        font-size: 14px;
     }
 
     .dropdown-item-hello {
@@ -116,6 +126,23 @@ section {
 
     main.profile-container {
         flex-flow: column nowrap;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .side-navbar-custom {
+        padding-inline: 40px;
+    }
+
+    .dropdown-item-custom {
+        min-width: 110px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .side-navbar-custom {
+        padding-inline: 20px;
     }
 }
 
