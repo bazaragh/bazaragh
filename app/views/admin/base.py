@@ -35,7 +35,6 @@ class ModeratorBaseModelView(ModeratorBaseView, ModelView):
     }
 
     column_type_formatters_detail = CUSTOM_DETAIL_FORMATTERS
-    edit_template = 'admin/model/edit_custom.jinja'
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('app')
