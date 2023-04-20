@@ -32,3 +32,7 @@
 .single-offer-wrapper a:hover {
     font-weight: 500;
 }
+
+.form-singleton{
+    display: inline;
+}
