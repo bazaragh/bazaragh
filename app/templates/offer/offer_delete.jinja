@@ -8,15 +8,13 @@
 {% block content %}
 <main class="offer-main-container">
     <form
-        action="{{ url_for('bp_offer.edit', offer_id=offer_id) if offer_id else url_for('bp_offer.add') }}"
+        action="{{ url_for('bp_offer.delete', offer_id=offer.id)}}"
         method="POST" name="add_edit_offer_form">
-        <h1>{{ 'Edytuj' if offer_id else 'Dodaj' }} ogłoszenie</h1>
+        <h1>Usuń ogłoszenie</h1>
         <hr>
         {{ form.hidden_tag() }}
         {{ render_field_errors(form.csrf_token) }}
-        {{ render_field_with_errors(form.title) }}
-        {{ render_field_with_errors(form.description) }}
-        {{ render_field_with_errors(form.price) }}
+        Chcesz usunąć ogłoszenie {{ offer.title }}. Tej operacji nie można cofnąć!
         <hr>
         {{ render_field(form.submit) }}
     </form>

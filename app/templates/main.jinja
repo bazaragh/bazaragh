@@ -28,7 +28,7 @@
     <h2>Promowane ogłoszenia</h2>
     <div class="publications-container">
         {% for offer in offers %}
-        <div class="publication">
+        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" class="publication">
             <div class="img-container">
                 <img alt="{{ offer.name }}" src="{{ url_for('static', filename=images[offer.id][0]) }}">
             </div>
@@ -37,10 +37,9 @@
                     <p class="publication-name">{{ offer.title }}</p>
                 </div>
                 <p class="publication-date">{{ offer.created_at.date() }}</p>
-                <p class="publication-price">{{ offer.price }}zł</p>
+                <p class="publication-price">{{ "%.2f zł"|format(offer.price) }}</p>
             </div>
-
-        </div>
+        </a>
         {% endfor %}
     </div>
 </section>

@@ -12,7 +12,7 @@ from flask_security.models import fsqla
 from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
-from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm, ExtendedChangePasswordForm
+from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm
 
 admin = Admin(name='BazarAGH.pl - Sprzedawaj po sąsiedzku na BazarAGH.pl', template_mode='bootstrap4')
 babel = Babel()
@@ -86,16 +86,18 @@ def create_app():
     security.mail_util_cls = MailUtil
     security.init_app(app, user_datastore,
                       register_form=ExtendedRegisterForm,
-                      confirm_register_form=ExtendedConfirmRegisterForm,
-                      change_password_form=ExtendedChangePasswordForm)
+                      confirm_register_form=ExtendedConfirmRegisterForm)
 
     # Create roles and admin user
     with app.app_context():
         if not user_datastore.find_role(role="Admin"):
+            # noinspection PyArgumentList
             db.session.add(Role(name="Admin"))
         if not user_datastore.find_role(role="Moderator"):
+            # noinspection PyArgumentList
             db.session.add(Role(name="Moderator"))
         if not user_datastore.find_role(role="User"):
+            # noinspection PyArgumentList
             db.session.add(Role(name="User"))
         if not user_datastore.find_user(email="admin@bazaragh.pl"):
             user_datastore.create_user(
@@ -115,6 +117,15 @@ def create_app():
     # https://flask.palletsprojects.com/en/2.2.x/blueprints/
     from app.views.main import bp as bp_main
     app.register_blueprint(bp_main)
+
+    from app.views.user import bp as bp_user
+    app.register_blueprint(bp_user)
+
+    from app.views.settings import bp as bp_settings
+    app.register_blueprint(bp_settings)
+
+    from app.views.offer import bp as bp_offer
+    app.register_blueprint(bp_offer)
 
     # Import and register blueprints here
 
