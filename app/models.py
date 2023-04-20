@@ -28,10 +28,16 @@ class Offer(db.Model):
     __tablename__ = 'offer'
     __table_args__ = {'extend_existing': True}
 
+    def __repr__(self):
+        return self.title
+
 
 class Category(db.Model):
     __tablename__ = 'category'
     __table_args__ = {'extend_existing': True}
+
+    def __repr__(self):
+        return self.name
 
 
 class Order(db.Model):
