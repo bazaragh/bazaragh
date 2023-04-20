@@ -21,9 +21,9 @@
             </div>
             <p>data wystawienia: {{ offer.created_at.date() }}</p>
             {% if offer.price is none %}
-            <p class="price">Za darmo</p>
+                <p class="price">Za darmo</p>
             {% else %}
-            <p class="price">{{ offer.price }} zł</p>
+                <p class="price">{{ "%.2f zł"|format(offer.price) }}</p>
             {% endif %}
             <button>napisz do sprzedającego</button>
         </div>

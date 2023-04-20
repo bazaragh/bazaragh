@@ -7,7 +7,7 @@
 
 {% block main_content %}
 <main class>
-    <form class="form-singleton" action="{{url_for('bp_main.offer_add')}}", method="GET">
+    <form class="form-singleton" action="{{url_for('bp_offer.add')}}", method="GET">
         <input type="submit" value="Dodaj ogłoszenie" />
     </form>  
     <section>
@@ -15,15 +15,9 @@
         {% for offer in offers %}
             <div class="single-offer-wrapper">
                 <div class="offer-title">{{ offer.title }}</div>
-                <form class="form-singleton" action="{{url_for('bp_main.offer_get', offer_id=offer.id)}}", method="GET">
-                    <input type="submit" value="Strona ogłoszenia" />
-                </form>                
-                <form class="form-singleton" action="{{url_for('bp_main.offer_edit', offer_id=offer.id)}}", method="GET">
-                    <input type="submit" value="Edytuj" />
-                </form>
-                <form class="form-singleton" action="{{url_for('bp_main.offer_delete', offer_id=offer.id)}}", method="POST">
-                    <input type="submit" value="Usuń" />
-                </form>
+                <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}">Strona ogłoszenia</a>
+                <a href="{{ url_for('bp_offer.edit', offer_id=offer.id) }}">Edytuj</a>
+                <a href="{{ url_for('bp_offer.delete', offer_id=offer.id) }}">Usuń</a>
             </div>
         {% endfor %}
     </section>
