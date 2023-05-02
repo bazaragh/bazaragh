@@ -1,11 +1,4 @@
-:root {
-    --dark-green: #064635;
-    --light-green: #519259;
-    --cream: #FFFCF9;
-    --gray: #A6A6A6;
-    --light-orange: #F0BB62;
-    --dark-orange: #d76514;
-}
+@import 'colors.css';
 
 form {
     background-color: var(--cream);
@@ -43,7 +36,7 @@ form {
     padding-block: 7px;
     padding-inline: 15px;
     width: 100%;
-    background-color: var(--light-green);
+    background-color: var(--dark-green);
     color: white;
     font-size: 18px;
 }

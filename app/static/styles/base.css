@@ -1,14 +1,11 @@
-:root {
-    --dark-green: #064635;
-    --light-green: #519259;
-}
+@import 'colors.css';
 
 nav.navbar {
     min-height: 64px;
     margin-top: 0;
-    background-color: var(--dark-green);
-    color: white;
-    padding: 5px;
+    background-color: var(--main);
+    color: var(--white);
+    padding: 8px;
     position: sticky;
     left: 0px;
     top: 0px;
@@ -37,7 +34,7 @@ li.nav-li a {
 }
 
 li.nav-li:hover {
-    color: var(--light-green);
+    color: var(--secondary);
 }
 
 li.logo {
@@ -48,9 +45,8 @@ li.logo {
 }
 
 li.button {
-    /* background-color: #04AA6D; */
-    border: 2px white solid;
-    color: white;
+    border: 2px var(--white) solid;
+    color: var(--white);
     padding-inline: 15px;
     padding-block: 5px;
     text-align: center;
@@ -62,7 +58,7 @@ li.button {
 }
 
 li.button:hover {
-    border-color: var(--light-green);
+    border-color: var(--secondary);
 }
 
 main {
@@ -70,9 +66,9 @@ main {
 }
 
 footer {
-    background-color: var(--dark-green);
+    background-color: var(--main);
     margin-bottom: 0;
-    color: white;
+    color: var(--white);
     padding-inline: 20%;
     padding-block: 40px;
     text-align: center;
@@ -119,16 +115,16 @@ a {
 .dropdown-menu-custom {
     position: absolute;
     left: -25px;
-    color: white;
-    background-color: var(--dark-green);
+    color: var(--white);
+    background-color: var(--main);
     border-radius: 10px;
     min-width: 160px;
     min-height: 20px;
     padding-inline: 15px;
     padding-block: 10px;
-    -webkit-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
-    -moz-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
-    box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
+    -webkit-box-shadow: 8px 8px 20px -15px var(--main);
+    -moz-box-shadow: 8px 8px 20px -15px var(--main);
+    box-shadow: 8px 8px 20px -15px var(--main);
 
     opacity: 0;
     transform: translateY(-100%) scaleY(0%);
@@ -137,7 +133,6 @@ a {
 
     display: flex;
     flex-flow: column wrap;
-
 }
 
 .dropdown-link:hover+.dropdown-menu-custom,
@@ -149,7 +144,7 @@ a {
 }
 
 .dropdown-item-custom:hover {
-    color: var(--light-green);
+    color: var(--secondary);
 }
 
 .dropdown-item-custom {
