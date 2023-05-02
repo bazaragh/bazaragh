@@ -7,9 +7,9 @@
 
 {% block content %}
 <main>
-    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="shadow">
         <div class="container">
-            <h1>Zaloguj się</h1>
+            <h2>Zaloguj się</h2>
             <hr>
             {{ login_user_form.hidden_tag() }}
             {{ render_field_errors(login_user_form.csrf_token) }}
@@ -17,7 +17,7 @@
             {{ render_field_with_errors(login_user_form.password) }}
             {{ render_field_with_errors(login_user_form.remember) }}
             <hr>
-            {{ render_field(login_user_form.submit, class='registerbtn') }}
+            {{ render_field(login_user_form.submit, class='registerbtn custom-button') }}
         </div>
 
         <div class="container signin">
