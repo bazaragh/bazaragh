@@ -1,0 +1,15 @@
+@import 'colors.css';
+
+.shadow-on-hover:hover{
+    -webkit-box-shadow: 8px 8px 32px -16px var(--main);
+    -moz-box-shadow: 8px 8px 32px -16px var(--main);
+    box-shadow: 8px 8px 32px -16px var(--main);
+    border: 2px solid var(--secondary);
+}
+
+.shadow{
+    box-shadow: var(--main);
+    -webkit-box-shadow: 8px 8px 24px -21px var(--main);
+    -moz-box-shadow: 8px 8px 24px -21px var(--main);
+    box-shadow: 8px 8px 24px -21px var(--main);
+}

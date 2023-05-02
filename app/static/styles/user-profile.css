@@ -1,10 +1,4 @@
-:root {
-    --dark-green: #064635;
-    --light-green: #519259;
-    --cream: #FFFCF9;
-    --gray: #A6A6A6;
-    --light-orange: #F0BB62;
-}
+@import 'colors.css';
 
 main.profile-container {
     display: flex;
