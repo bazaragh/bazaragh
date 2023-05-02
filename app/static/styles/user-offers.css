@@ -1,28 +1,28 @@
-.offers-wrapper {
-    display: flex;
-    flex-flow: column wrap;
-}
-
 .single-offer-wrapper {
     border: 1px solid black;
     border-radius: 10px;
-    -webkit-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
-    -moz-box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
-    box-shadow: 8px 8px 20px -15px rgba(66, 90, 67, 1);
 
     padding: 10px;
-    min-width: 630px;
+    min-width: 560px;
     margin-block: 20px;
 
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    background-color: white;
 }
 
 .offer-title {
     width: 50%;
     overflow: hiddden;
     padding-inline: 10px;
+    display: flex;
+    align-content: center;
+}
+
+.offer-title p {
+    margin-block: auto;
+    font-weight: 450;
 }
 
 .single-offer-wrapper a {
@@ -46,20 +46,26 @@
     font-weight: 400;
 }
 
-@media screen and (max-width: 1200px) {
+.icon:hover{
+    color: var(--secondary);
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 1000px) {
     .single-offer-wrapper {
-        min-width: 60%;
-        width: 85%;
+        min-width: 400px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .single-offer-wrapper {
+        min-width: 320px;
     }
 }
 
 @media screen and (max-width: 670px) {
     .single-offer-wrapper {
         min-width: 100%;
-        width: 100%;
-    }
-
-    .offer-title {
         width: 100%;
     }
 }

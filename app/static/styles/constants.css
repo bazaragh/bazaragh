@@ -25,24 +25,30 @@
 
 h1 {
   font-size: var(--fs-h1);
+  color: var(--black);
 }
 
 h2 {
   font-size: var(--fs-h2);
+  color: var(--black);
 }
 
 h3 {
   font-size: var(--fs-h3);
+  color: var(--black);
 }
 
 h4 {
   font-size: var(--fs-h4);
+  color: var(--black);
 }
 
 p,
 a,
 input,
-button {
+textarea,
+button,
+b {
   font-size: var(--fs-p);
 }
 
