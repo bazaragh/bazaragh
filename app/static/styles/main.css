@@ -18,7 +18,8 @@ section {
     max-width: 896px;
 
     border: 2px solid var(--black);
-    border-radius: 18px;
+    border-radius: 32px;
+    background-color: var(--cream);
 }
 
 .search-bar {
@@ -33,6 +34,26 @@ section {
 textarea:focus,
 input:focus {
     outline: none;
+}
+
+button.search-icon {
+    border: none;
+    background-color: var(--cream);
+    padding: 0;
+    margin-right: 8px;
+}
+
+button.search-icon span {
+    margin-top: 8px;
+    font-size: var(--fs-h2);
+}
+
+button.search-icon{
+    transition: transform 0.2s;
+}
+
+button.search-icon:hover {
+    transform: scale(1.1);
 }
 /* *** */
 
@@ -64,12 +85,12 @@ input:focus {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 2px solid var(--main);
+    border: 2px solid var(--black);
     padding: 0;
     overflow: hidden;
     object-fit: contain;
     margin-bottom: 8px;
-    background-color: white;
+    background-color: var(--cream);
 }
 
 .category-button-wrapper img {
@@ -88,7 +109,6 @@ input:focus {
 
 
 .publications-wrapper {
-    background-color: #245e4c3a;
     text-align: center;
     padding-block: 40px;
     margin-bottom: 0px;
@@ -105,9 +125,9 @@ input:focus {
 }
 
 .publication {
-    border: 2px solid var(--main);
+    border: 2px solid var(--black);
     border-radius: 7%;
-    background-color: var(--white);
+    background-color: var(--cream);
 
     width: 180px;
     height: 260px;
@@ -157,23 +177,6 @@ input:focus {
     margin: 0;
 }
 
-button.search-icon {
-    border: none;
-    background-color: white;
-    padding: 0;
-    padding-right: 8px;
-}
-
-button.search-icon img {
-    width: 32px;
-    height: 32px;
-    transition: transform 0.2s;
-}
-
-button.search-icon img:hover {
-    transform: scale(1.1);
-}
-
 @media screen and (max-width: 700px) {
     section {
         margin-block: 40px;
@@ -192,7 +195,7 @@ button.search-icon img:hover {
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 560px) {
     section {
         margin-block: 32px;
         padding-top: 16px;
@@ -227,10 +230,5 @@ button.search-icon img:hover {
     .category-button-wrapper button {
         width: 72px;
         height: 72px;
-    }
-
-    .category-button-wrapper img {
-        width: 64px;
-        height: 64px;
     }
 }
