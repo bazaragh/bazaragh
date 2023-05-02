@@ -58,6 +58,10 @@ section {
     padding-block: 64px;
 }
 
+section.settings-field{
+    padding-block: 32px;
+}
+
 .personal-data-field-name{
     font-weight: 500;
     min-width: 100px;
@@ -129,6 +133,10 @@ section {
 
     section.main-content {
         padding-inline: 32px;
+    }
+
+    section.settings-field{
+        padding-block: 24px;
     }
 }
 

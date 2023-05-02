@@ -17,7 +17,7 @@
         <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
     </section>
     <section class="main-content">{% block main_content %}
-        <h2>Dane osobowe</h2>
+        <h1>Dane osobowe</h1>
         <div class="presonal-data-container">
             {% for record_name, data_record in personal_data.items() %}
             <div class="personal-data-record-wrapper">
