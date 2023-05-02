@@ -1,48 +1,54 @@
-@import 'constants.css';
+@import "utilities.css";
 
-main.offer-main-container {
-    padding-inline: 10%;
-    padding-block: 40px;
-}
-
-main.offer-main-container h1 {
-    font-size: 25px;
-}
-
-main.offer-main-container hr {
-    margin-block: 10px;
+form {
+  width: 75%;
+  max-width: 600px;
 }
 
 .label-wrapper b {
-    min-width: 200px;
+  min-width: 160px;
 }
 
 .label-wrapper {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    margin-block: 12px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin-block: 16px;
 }
 
 .label-wrapper input,
 .label-wrapper textarea {
-    padding: 7px;
-    font-size: 13px;
+  padding: 8px;
+  width: calc(100% - 160px);
 }
 
-@media screen and (max-width: 700px) {
-    main.offer-main-container h1 {
-        font-size: 20px;
-    }
-
-    .label-wrapper b {
-        min-width: 150px;
-        font-size: 14px;
-    }
+hr {
+  margin-block: 16px;
 }
 
-@media screen and (max-width: 400px) {
-    .label-wrapper b {
-        min-width: 100px;
-    }
+textarea#description{
+    min-height: 160px; 
+}
+
+@media screen and (max-width: 640px) {
+  .label-wrapper b {
+    min-width: 150px;
+  }
+
+  .label-wrapper input,
+  .label-wrapper textarea {
+    width: calc(100% - 150px);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .label-wrapper input,
+  .label-wrapper textarea {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  form {
+    width: 80%;
+  }
 }
