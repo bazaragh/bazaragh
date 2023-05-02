@@ -23,6 +23,10 @@
   --fs-p: 1rem;
 }
 
+body{
+  font-family: 'Ubuntu', sans-serif;
+}
+
 h1 {
   font-size: var(--fs-h1);
   color: var(--black);
