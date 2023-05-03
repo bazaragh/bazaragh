@@ -50,7 +50,7 @@ class UserScore(db.Model):
     __table_args__ = {'extend_existing': True}
 
 
-class Dormitory:
+class Dormitory(db.Model):
     __tablename__ = 'dormitory'
     __table_args__ = {'extend_existing': True}
 
@@ -58,7 +58,7 @@ class Dormitory:
         return self.name
 
 
-class Faculty:
+class Faculty(db.Model):
     __tablename__ = 'faculty'
     __table_args__ = {'extend_existing': True}
 
