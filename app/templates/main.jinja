@@ -1,23 +1,27 @@
 {% extends "base.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')
+    }}">
 {% endblock %}
 
 {% block content %}
 <section class="search-bar-wrapper">
     <input type="text" class="search-bar" placeholder="Czego szukasz?">
     <button class="search-icon">
-        <img src="{{ url_for('static', filename='loupe.png' ) }}">
+        <span class="material-symbols-outlined">
+            search
+        </span>
     </button>
 </section>
 <section class="categories-wrapper">
     <h2>Popularne kategorie</h2>
     <div class="categories-buttons-wrapper">
         {% for category in categories %}
-        <div class="button-wrapper">
-            <button>
-                <img alt="{{ category.name }}" src="{{ url_for('static', filename=category.icon ) }}">
+        <div class="category-button-wrapper">
+            <button class="shadow-on-hover">
+                <img alt="{{ category.name }}" src="{{ url_for('static',
+                    filename=category.icon ) }}">
             </button>
             <p>{{ category.name }}</p>
         </div>
@@ -28,16 +32,19 @@
     <h2>Promowane ogłoszenia</h2>
     <div class="publications-container">
         {% for offer in offers %}
-        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" class="publication">
+        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}"
+            class="publication shadow-on-hover shadow">
             <div class="img-container">
-                <img alt="{{ offer.name }}" src="{{ url_for('static', filename=images[offer.id][0]) }}">
+                <img alt="{{ offer.name }}" src="{{ url_for('static',
+                    filename=images[offer.id][0]) }}">
             </div>
             <div class="publication-details">
                 <div class="name-container">
                     <p class="publication-name">{{ offer.title }}</p>
                 </div>
                 <p class="publication-date">{{ offer.created_at.date() }}</p>
-                <p class="publication-price">{{ "%.2f zł"|format(offer.price) if offer.price else "Za darmo" }}</p>
+                <p class="publication-price">{{ "%.2f zł"|format(offer.price) if
+                    offer.price else "Za darmo" }}</p>
             </div>
         </a>
         {% endfor %}

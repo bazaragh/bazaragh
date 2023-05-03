@@ -9,52 +9,52 @@
 {% block main_content %}
     <main class>
         <h1>Ustawienia</h1>
-        <section>
+        <section class="settings-field">
             <form action="{{ url_for('security.change_password') }}" method="POST" name="change_password_form">
                 {{ change_password_form.hidden_tag() }}
-                <div class="mb-3">
+                <p class="mb-3">
                     {{ change_password_form.password.label }}:
                     {{ change_password_form.password(class='form-control') }}
-                </div>
-                <div class="mb-3">
+                </p>
+                <p class="mb-3">
                     {{ change_password_form.new_password.label }}:
                     {{ change_password_form.new_password(class='form-control') }}
-                </div>
-                <div class="mb-3">
+                </p>
+                <p class="mb-3">
                     {{ change_password_form.new_password_confirm.label }}:
                     {{ change_password_form.new_password_confirm(class='form-control') }}
-                </div>
+                </p>
                 <div>
-                    {{ change_password_form.submit(class='btn btn-success') }}
+                    {{ change_password_form.submit(class='custom-button') }}
                 </div>
             </form>
         </section>
         <hr>
-        <section>
-            <h4>Obecny email: {{ current_user.email }}</h4>
+        <section class="settings-field">
             <h4>Zmień email</h4>
+            <p>Obecny email: {{ current_user.email }}</p>
             <form action="{{ url_for('bp_settings.change_email') }}" method="POST" name="change_email_form">
                 {{ change_email_form.hidden_tag() }}
-                <div class="mb-3">
+                <p class="mb-3">
                     {{ change_email_form.email.label }}:
                     {{ change_email_form.email(class='form-control') }}
-                </div>
+                </p>
                 <div>
-                    <button type="submit" class="btn btn-success">Wyślij link aktywacyjny</button>
+                    <button type="submit" class="custom-button">Wyślij link aktywacyjny</button>
                 </div>
             </form>
         </section>
         <hr>
-        <section>
+        <section class="settings-field">
             <h4>Usuń konto</h4>
             <form action="{{ url_for('bp_settings.delete_account') }}" method="POST" name="delete_account_confirm_form">
                 {{ delete_account_confirm_form.hidden_tag() }}
-                <div class="mb-3">
+                <p class="mb-3">
                     {{ delete_account_confirm_form.email.label }}:
                     {{ delete_account_confirm_form.email(class='form-control') }}
-                </div>
+                </p>
                 <div>
-                    <button type="submit" class="btn btn-danger">Usuń konto</button>
+                    <button type="submit" class="custom-button">Usuń konto</button>
                 </div>
             </form>
         </section>
