@@ -1,24 +1,39 @@
 {% extends "user/user_profile.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-offers.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/user-profile.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/user-offers.css') }}">
 {% endblock %}
 
 {% block main_content %}
 <main class>
-    <a class="btn btn-success" href="{{url_for('bp_offer.add')}}">
+    <a class="custom-button" href="{{url_for('bp_offer.add')}}">
         Dodaj ogłoszenie
     </a>
     <section>
-        <h1 class="offers-wrapper">Moje ogłoszenia</h1>
+        <h1>Moje ogłoszenia</h1>
         {% for offer in offers %}
-            <div class="single-offer-wrapper">
-                <div class="offer-title">{{ offer.title }}</div>
-                <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}">Strona ogłoszenia</a>
-                <a href="{{ url_for('bp_offer.edit', offer_id=offer.id) }}">Edytuj</a>
-                <a href="{{ url_for('bp_offer.delete', offer_id=offer.id) }}">Usuń</a>
+        <div class="single-offer-wrapper shadow">
+            <div class="offer-title">
+                <p>
+                    {{ offer.title }}
+                </p>
             </div>
+            <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}"><span
+                    class="material-symbols-outlined icon">
+                    expand_circle_down
+                </span></a>
+            <a href="{{ url_for('bp_offer.edit', offer_id=offer.id) }}"><span
+                    class="material-symbols-outlined icon">
+                    edit
+                </span></a>
+            <a href="{{ url_for('bp_offer.delete', offer_id=offer.id) }}"><span
+                    class="material-symbols-outlined icon">
+                    delete
+                </span></a>
+        </div>
         {% endfor %}
     </section>
 </main>
