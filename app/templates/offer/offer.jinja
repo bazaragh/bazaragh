@@ -1,42 +1,42 @@
 {% extends "base.jinja" %}
+{% from "_macros.html" import search_bar %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')
+    }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/search_bar.css')
+    }}">
 {% endblock %}
 
 {% block content %}
-<main class="offer-container">
-    <section class="search-bar-wrapper">
-        <input type="text" class="search-bar" placeholder="Czego szukasz?">
-        <button class="search-icon">
-            <img src="{{ url_for('static', filename='loupe.png' ) }}">
-        </button>
-    </section>
 
-    <section class="main-containers-wrapper">
-        <div class="photos-container box">
-            <img src="{{ url_for('static', filename=images[0]) }}">
-        </div>
-        <div class="main-details-container box">
-            <div class="offer-name-wrapper">
-                <h1>{{ offer.title }}</h1>
-            </div>
-            <p>data wystawienia: {{ offer.created_at.date() }}</p>
-            <p class="price">{{ "%.2f zł"|format(offer.price) if offer.price else "Za darmo" }}</p>
-            <button>napisz do sprzedającego</button>
-        </div>
-        <div class="box description-container">
-            <h2>Opis</h2>
-            <p>{{ offer.description or "Brak opisu" }}</p>
-        </div>
-        <div class="box description-container salesman-container">
-            <div class="salesman-details">
-                <h2>Sprzedający</h2>
-                <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty }}</p>
-            </div>
-            <button>napisz do sprzedającego</button>
-        </div>
-    </section>
+{{ search_bar() }}
 
-</main>
+<section class="main-containers-wrapper">
+    <div class="photos-container box">
+        <img src="{{ url_for('static', filename=images[0]) }}">
+    </div>
+    <div class="main-details-container box">
+        <div class="offer-name-wrapper">
+            <h1>{{ offer.title }}</h1>
+        </div>
+        <p>data wystawienia: {{ offer.created_at.date() }}</p>
+        <p class="price">{{ "%.2f zł"|format(offer.price) if offer.price else
+            "Za darmo" }}</p>
+        <button>napisz do sprzedającego</button>
+    </div>
+    <div class="box description-container">
+        <h2>Opis</h2>
+        <p>{{ offer.description or "Brak opisu" }}</p>
+    </div>
+    <div class="box description-container salesman-container">
+        <div class="salesman-details">
+            <h2>Sprzedający</h2>
+            <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty
+                }}</p>
+        </div>
+        <button>napisz do sprzedającego</button>
+    </div>
+</section>
 {% endblock %}

@@ -35,3 +35,14 @@
         {% endif %}
     </p>
 {% endmacro %}
+
+{% macro search_bar() %}
+    <section class="search-bar-wrapper">
+        <input type="text" class="search-bar" placeholder="Czego szukasz?">
+        <button class="search-icon">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+        </button>
+    </section>
+{%- endmacro %}
