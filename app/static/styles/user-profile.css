@@ -68,12 +68,16 @@ section.settings-field{
 }
 
 @media screen and (max-width: 900px) {
+    section.main-content {
+        padding-inline: 32px;
+    }
+
     .side-navbar-custom {
-        width: 35%;
+        width: 33%;
     }
 
     section.main-content {
-        width: 65%;
+        width: 67%;
     }
 
     .personal-data-field-name {

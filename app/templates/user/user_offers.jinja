@@ -9,11 +9,11 @@
 
 {% block main_content %}
 <main class>
-    <a class="custom-button" href="{{url_for('bp_offer.add')}}">
+    <!-- <a class="custom-button" href="{{url_for('bp_offer.add')}}">
         Dodaj ogłoszenie
-    </a>
-    <section>
-        <h1>Moje ogłoszenia</h1>
+    </a> -->
+    <h1>Moje ogłoszenia</h1>
+    <div class="user-offers-wrapper">
         {% for offer in offers %}
         <div class="single-offer-wrapper shadow">
             <div class="offer-title">
@@ -35,6 +35,6 @@
                 </span></a>
         </div>
         {% endfor %}
-    </section>
+    </div>
 </main>
 {% endblock %}
