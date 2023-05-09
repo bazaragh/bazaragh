@@ -46,11 +46,18 @@ button.search-icon:hover {
     transform: scale(1.1);
 }
 
+@media screen and (max-width: 900px) {
+
+    .search-bar-wrapper {
+        width: 80%;
+    }
+}
+
 
 @media screen and (max-width: 700px) {
     .search-bar-wrapper {
         padding: 4px;
-        width: 70%;
+        width: 80%;
         min-width: 300px;
     }
 
