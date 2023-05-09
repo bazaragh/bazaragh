@@ -14,31 +14,14 @@
         </span>
     </button>
 </section>
-<section class="categories-wrapper">
-    <h2>Popularne kategorie</h2>
-    <div class="categories-buttons-wrapper">
-        {% for category in categories %}
-        <div class="category-button-wrapper">
-            <a href="{{ url_for('bp_main.category_offers', category_name=category.name) }}">
-                <button class="shadow-on-hover">
-                    <img alt="{{ category.name }}" src="{{ url_for('static',
-                        filename=category.icon ) }}">
-                </button>
-                <p>{{ category.name }}</p>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-</section>
 <section class="publications-wrapper">
-    <h2>Promowane ogłoszenia</h2>
+    <h2>{{ category_name }}</h2>
     <div class="publications-container">
-        {% for offer in offers %}
-        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}"
+        {% for offer in pagination.items %}
+        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" 
             class="publication shadow-on-hover shadow">
             <div class="img-container">
-                <img alt="{{ offer.title }}" src="{{ url_for('static',
-                    filename=images[offer.id][0]) }}">
+                <img alt="{{ offer.title }}" src="{{ url_for('static', filename=offer.images[0]) }}">
             </div>
             <div class="publication-details">
                 <div class="name-container">
@@ -49,6 +32,24 @@
                     offer.price else "Za darmo" }}</p>
             </div>
         </a>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <div class=page-items>
+        {{ pagination.first }} - {{ pagination.last }} of {{ pagination.total }}
+    </div>
+    <div class=pagination>
+        {% for page in pagination.iter_pages() %}
+            {% if page %}
+                {% if page != pagination.page %}
+                    <a href="{{ url_for('bp_main.category_offers', category_name=category_name, page=page) }}">{{ page }}</a>
+                {% else %}
+                    <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
         {% endfor %}
     </div>
 </section>
