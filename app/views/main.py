@@ -7,7 +7,7 @@ from app.app import db
 from app.models import Category, Offer, User
 
 bp = Blueprint("bp_main", __name__)
-OFFERS_PER_PAGE = 2
+OFFERS_PER_PAGE = 8
 
 
 # Here you can read about routing:
