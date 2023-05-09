@@ -20,6 +20,15 @@
         {{ render_field_with_errors(form.category) }}
         {{ render_field_with_errors(form.is_used) }}
         {{ render_field_with_errors(form.images) }}
+        {% for offer_image_delete_form in form.existing_images %}
+            {{ offer_image_delete_form.hidden_tag() }}
+            {{ render_field_errors(offer_image_delete_form.csrf_token) }}
+            {# Flask-WTF needs `hidden_tag()` so CSRF works for each form #}
+            {{ render_field_with_errors(offer_image_delete_form.should_delete) }}
+            <div class="photos-container box">
+                <img src="{{ url_for('static', filename=offer_image_delete_form.image_href_path.data) }}">
+            </div>
+        {% endfor %}
         <hr>
         {{ render_field(form.submit, class='custom-button') }}
     </form>

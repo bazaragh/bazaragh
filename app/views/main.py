@@ -32,22 +32,18 @@ def main_get():
 
 @bp.route('/offer/<int:offer_id>', methods=['GET'])
 def offer_get(offer_id):
-    try:
-        categories = db.session.query(Category).all()
-        offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
-        if offer is None:
-            abort(404)
-        images = json.loads(offer.images)
-        images = get_offer_images_src_paths(offer.id, images)
-        print(images)
-        author = db.session.query(User).filter_by(id=offer.author).one_or_none()
-        return render_template('offer/offer.jinja',
-                            offer=offer,
-                            categories=categories,
-                            images=images,
-                            author=author)
-    except Exception as e:
-        print(e)
+    categories = db.session.query(Category).all()
+    offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
+    if offer is None:
+        abort(404)
+    images = json.loads(offer.images)
+    images = get_offer_images_src_paths(offer.id, images)
+    author = db.session.query(User).filter_by(id=offer.author).one_or_none()
+    return render_template('offer/offer.jinja',
+                        offer=offer,
+                        categories=categories,
+                        images=images,
+                        author=author)
 
 
 @bp.route('/category/<string:category_name>', methods=['GET'], defaults={'page': 1})
