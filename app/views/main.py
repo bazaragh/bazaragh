@@ -23,7 +23,7 @@ def main_get():
     images = {}
     for offer in offers:
         offer_images = json.loads(offer.images)
-        images[offer.id] = get_offer_images_src_paths(offer_images)
+        images[offer.id] = get_offer_images_src_paths(offer.id, offer_images)
     return render_template('main.jinja',
                            offers=offers,
                            categories=categories,
@@ -38,7 +38,7 @@ def offer_get(offer_id):
         if offer is None:
             abort(404)
         images = json.loads(offer.images)
-        images = get_offer_images_src_paths(images)
+        images = get_offer_images_src_paths(offer.id, images)
         print(images)
         author = db.session.query(User).filter_by(id=offer.author).one_or_none()
         return render_template('offer/offer.jinja',

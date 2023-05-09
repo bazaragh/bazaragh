@@ -13,7 +13,7 @@ class AddEditOfferForm(FlaskForm):
                          description="Zostaw puste, by wystawić darmową ofertę", places=2, rounding=decimal.ROUND_UP)
     category = SelectField("Kategoria", validators=[DataRequired(message='Kategoria ogłoszenia jest wymagana')])
     is_used = BooleanField("Przedmiot używany")
-    images = MultipleFileField("Zdjęcia", validators=[FileAllowed(['jpg', 'png', 'jpeg'], "Dozwolone są pliki w formacie jpg, jpeg lub png")])
+    images = MultipleFileField("Dodaj zdjęcia", validators=[FileAllowed(['jpg', 'png', 'jpeg'], "Dozwolone są pliki w formacie jpg, jpeg lub png")])
     submit = SubmitField("Potwierdź")
 
 
