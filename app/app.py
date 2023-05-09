@@ -20,9 +20,9 @@ mail = Mail()
 db = SQLAlchemy()
 security = Security()
 
-IMAGES_UPLOAD_PATH = os.path.join('static', 'uploads')
-ABSOLUTE_IMAGES_UPLOAD_PATH =  os.path.join(os.path.dirname(os.path.abspath(__file__)), IMAGES_UPLOAD_PATH)
-Path(ABSOLUTE_IMAGES_UPLOAD_PATH).mkdir(exist_ok=True)
+OFFERS_IMAGES_DIR = 'offers'
+ABSOLUTE_OFFERS_IMAGES_PATH =  os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', OFFERS_IMAGES_DIR)
+Path(ABSOLUTE_OFFERS_IMAGES_PATH).mkdir(exist_ok=True)
 
 
 # Flask quickstart:

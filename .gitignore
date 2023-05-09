@@ -7,5 +7,6 @@ venv/
 .vscode
 
 config.local.py
+app/static/offers/**/*
 
 pzio.session.sql
