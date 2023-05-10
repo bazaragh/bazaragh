@@ -37,7 +37,7 @@ def add():
         db.session.refresh(offer)
         db.session.commit()
 
-        os.mkdir(get_offer_images_dir_path(offer.id))
+        create_offer_images_dir(offer.id)
         save_offer_images(offer.id, form.images.data)
         return redirect(url_for('bp_user.offers_get'))
     return render_template('offer/offer_add_edit.jinja', form=form, offer_id=None)
@@ -71,6 +71,7 @@ def edit(offer_id):
 
         offer.images = json.dumps(files_to_stay + [f.filename for f in added_files])
         db.session.commit()
+        create_offer_images_dir(offer.id)
         save_offer_images(offer.id, added_files)
         delete_offers_images(offer.id, files_to_delete)
         return redirect(url_for('bp_user.offers_get'))
@@ -92,8 +93,11 @@ def delete(offer_id):
         db.session.commit()
 
         images = json.loads(offer.images)
-        delete_offers_images(offer.id, images)
-        os.rmdir(get_offer_images_dir_path(offer.id))
+        
+        offer_images_dir_path = get_offer_images_dir_path(id)
+        if os.path.exists(offer_images_dir_path):
+            delete_offers_images(offer.id, images)
+            os.rmdir(offer_images_dir_path)
         return redirect(url_for('bp_user.offers_get'))
     
     return render_template('offer/offer_delete.jinja', form=form, offer=offer)
@@ -105,6 +109,11 @@ def get_allowed_categories():
 
 def get_offer_images_dir_path(id):
     return os.path.join(ABSOLUTE_OFFERS_IMAGES_PATH, str(id))
+
+def create_offer_images_dir(id):
+    dir_path = get_offer_images_dir_path(id)
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
 
 def save_offer_images(id, images):
     offer_images_path = get_offer_images_dir_path(id)
