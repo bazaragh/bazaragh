@@ -1,8 +1,4 @@
-@import 'constants.css';
-
-main.offer-container {
-    padding-block: 30px;
-}
+@import 'utilities.css';
 
 section {
     margin-block: 50px;
@@ -10,44 +6,17 @@ section {
     max-width: 900px;
 }
 
-.search-bar-wrapper {
-    display: flex;
-    flex-direction: row;
-    margin-inline: auto;
-    padding: 5px;
-    width: 70%;
-    min-width: 500px;
-    max-width: 900px;
-
-    border: 2px solid var(--dark-green);
-    border-radius: 18px;
-}
-
-.search-bar {
-    padding-block: 10px;
-    padding-inline: 20px;
-    width: 90%;
-    margin-inline: auto;
-    display: inline-block;
-    border: none;
-}
-
-textarea:focus,
-input:focus {
-    outline: none;
-}
-
 section.main-containers-wrapper {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
 
-    margin: auto;
+    margin-inline: auto;
     width: 70%;
 }
 
 .photos-container {
-    width: 55%;
+    width: 50%;
     height: 300px;
     display: flex;
     flex-flow: row wrap;
@@ -57,40 +26,33 @@ section.main-containers-wrapper {
 }
 
 .photos-container img {
-    width: 70%;
+    width: 80%;
 }
 
 .main-details-container {
-    width: 42%;
+    width: 48%;
     height: 300px;
-    padding: 30px;
+    padding: 32px;
 }
 
-.main-details-container h1 {
-    font-size: 26px;
+#title, #price{
+    font-size: 25px;
 }
 
-.main-details-container p {
-    font-size: 13px;
-    color: var(--gray);
+#title{
+    font-size: 25px;
+    font-weight: 600;
 }
 
-.main-details-container p.price {
-    font-size: 22px;
-    color: black;
-    font-weight: 500;
+.main-details-container h3#price {
     margin-top: 40px;
 }
 
 .main-details-container button {
-    margin-inline: 10%;
+    margin-inline: 5%;
     margin-top: 10px;
     padding: 10px;
-    width: 80%;
-    border: none;
-    border-radius: 20px;
-    background-color: var(--light-orange);
-    font-weight: 400;
+    width: 90%;
 }
 
 .offer-name-wrapper {
@@ -100,17 +62,10 @@ section.main-containers-wrapper {
     margin-top: 10px;
 }
 
-.offer-name-wrapper h1 {
-    font-size: 25px;
-}
-
 .box {
-    border: 1px solid var(--gray);
-    border-radius: 13px;
+    border: 2px solid var(--black);
+    border-radius: 32px;
     background-color: var(--cream);
-    -webkit-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
-    -moz-box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
-    box-shadow: 8px 8px 24px -25px rgba(66, 90, 67, 1);
 }
 
 .description-container {
@@ -118,11 +73,6 @@ section.main-containers-wrapper {
     margin-top: 20px;
     padding-block: 40px;
     padding-inline: 60px;
-}
-
-.description-container h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .salesman-container {
@@ -138,52 +88,18 @@ section.main-containers-wrapper {
 }
 
 .salesman-container button {
-    padding: 7px;
-    width: 300px;
     height: 50px;
-    border: none;
-    border-radius: 25px;
-    background-color: var(--dark-green);
-    font-weight: 400;
-    color: white;
     margin-top: 10px;
 }
 
-button.search-icon {
-    border: none;
-    background-color: white;
-    padding: 0;
-    padding-right: 10px;
-}
-
-button.search-icon img {
-    width: 35px;
-    height: 35px;
-    transition: transform 0.2s;
-}
-
-button.search-icon img:hover {
-    transform: scale(1.1);
-}
-
-@media screen and (max-width: 1100px) {
-    .search-bar-wrapper {
-        width: 80%;
-    }
+@media screen and (max-width: 900px) {
 
     section.main-containers-wrapper {
         width: 80%;
     }
-}
-
-@media screen and (max-width: 930px) {
 
     .main-details-container {
         padding: 20px;
-    }
-
-    .main-details-container h1 {
-        font-size: 22px;
     }
 
     .main-details-container button {
@@ -191,14 +107,13 @@ button.search-icon img:hover {
         margin-top: 10px;
         padding: 10px;
         width: 100%;
-        font-size: 15px;
     }
 
     .salesman-container button {
         margin-inline: 0;
         padding: 10px;
         width: 100%;
-        font-size: 15px;
+        max-width: 300px;
     }
 
     .photos-container {
@@ -207,10 +122,6 @@ button.search-icon img:hover {
 
     .main-details-container {
         height: 280px;
-    }
-
-    .salesman-container button {
-        max-width: 300px;
     }
 }
 
@@ -221,25 +132,6 @@ button.search-icon img:hover {
         padding-top: 17px;
     }
 
-    .search-bar-wrapper {
-        padding: 4px;
-        min-width: 300px;
-    }
-
-    .search-bar {
-        font-size: 15px;
-        padding-block: 7px;
-        width: 70%;
-    }
-
-    .main-details-container h1 {
-        font-size: 19px;
-    }
-
-    .main-details-container button {
-        font-size: 13px;
-    }
-
     .photos-container {
         height: 260px;
     }
@@ -248,27 +140,12 @@ button.search-icon img:hover {
         height: 260px;
     }
 
-    .main-details-container p {
-        font-size: 11px;
-    }
-
-    .main-details-container p.price {
-        font-size: 19px;
+    .main-details-container h3#price {
         margin-top: 20px;
-        color: black;
     }
 
     main.offer-container {
         padding-block: 10px;
-    }
-
-    button.search-icon {
-        margin-right: 5px;
-    }
-
-    button.search-icon img {
-        width: 30px;
-        height: 30px;
     }
 
     .salesman-container {
@@ -277,8 +154,8 @@ button.search-icon img:hover {
         align-content: flex-start;
     }
 
-    .offer-name-wrapper h1 {
-        font-size: 23px
+    #title, #price{
+        font-size: 22px;
     }
 }
 
@@ -294,74 +171,39 @@ button.search-icon img:hover {
         width: 80%;
     }
 
-    .search-bar-wrapper {
-        min-width: 200px;
-        width: 80%;
-        margin-block: 20px;
-        border-width: 2px;
-    }
-
-    .search-bar {
-        font-size: 13px;
-        padding-block: 5px;
-        width: 70%;
-    }
-
     .main-details-container {
-        height: 180px;
+        min-height: 200px;
+        height: 100%;
     }
 
     .main-details-container button {
-        margin-top: 0px;
-    }
-
-    .main-details-container h1 {
-        font-size: 14px;
+        margin-top: 16px;
+        margin-bottom: 16px;
     }
 
     .offer-name-wrapper {
         height: 25px;
     }
 
-    .main-details-container p.price {
-        font-size: 16px;
-        margin-top: 5px;
-        color: black;
-    }
-
     .box {
         width: 100%;
-        padding-inline: 30px;
+        padding-inline: 32px;
     }
 
     .photos-container {
         min-width: 100%;
         width: 100%;
-        height: 210px;
-        margin-bottom: 20px;
-    }
-
-    .description-container p {
-        font-size: 13px;
-    }
-
-    .description-container h2 {
-        font-size: 15px;
+        height: 216px;
+        margin-bottom: 24px;
     }
 
     .salesman-container button {
         margin: 0;
         padding: 5px;
-        font-size: 13px;
     }
 
-    button.search-icon img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .offer-name-wrapper h1 {
-        font-size: 19px
+    h2#title{
+        margin-bottom: 16px;
     }
 }
 

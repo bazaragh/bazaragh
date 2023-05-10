@@ -1,0 +1,25 @@
+.pagination-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.pagination-pages{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.pagination-current-page{
+    font-weight: 700;
+}
+
+.navigation{
+    cursor: pointer;
+}
+
+.navigation:hover{
+    font-weight: 700;
+}
