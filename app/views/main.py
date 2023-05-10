@@ -56,5 +56,5 @@ def category_offers(category_name, page: int = 1):
     pagination = db.session.query(Offer).filter_by(category=category.id).order_by(Offer.created_at).paginate(
         per_page=OFFERS_PER_PAGE, page=page)
     for offer in pagination.items:
-        offer.images = json.loads(offer.images)
+        offer.images = get_offer_images_src_paths(offer.id, json.loads(offer.images))
     return render_template("category_view.jinja", category_name=category_name, pagination=pagination)
