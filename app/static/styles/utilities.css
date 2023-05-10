@@ -25,6 +25,13 @@
     align-content: center;
 }
 
+.custom-button:hover{
+    transform: translateY(1px);
+    -webkit-box-shadow: 8px 8px 32px -16px var(--main);
+    -moz-box-shadow: 8px 8px 32px -16px var(--main);
+    box-shadow: 8px 8px 32px -16px var(--main);
+}
+
 .custom-form{
     background-color: white;
     margin-inline: auto;

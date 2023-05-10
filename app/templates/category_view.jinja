@@ -1,19 +1,21 @@
 {% extends "base.jinja" %}
+{% from "_macros.html" import search_bar %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')
     }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/search_bar.css')
+    }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/pagination.css')
+}}">
 {% endblock %}
 
 {% block content %}
-<section class="search-bar-wrapper">
-    <input type="text" class="search-bar" placeholder="Czego szukasz?">
-    <button class="search-icon">
-        <span class="material-symbols-outlined">
-            search
-        </span>
-    </button>
-</section>
+
+{{ search_bar() }}
+
 <section class="publications-wrapper">
     <h2>{{ category_name }}</h2>
     <div class="publications-container">
@@ -35,22 +37,34 @@
         {% endfor %}
     </div>
 </section>
-<section>
-    <div class=page-items>
-        {{ pagination.first }} - {{ pagination.last }} of {{ pagination.total }}
-    </div>
-    <div class=pagination>
+<section class="pagination-wrapper">
+    <div class="pagination-pages">
+        {% if pagination.has_prev %}
+            <span class="material-symbols-outlined navigation">
+                navigate_before
+            </span>
+        {% endif %}
         {% for page in pagination.iter_pages() %}
             {% if page %}
                 {% if page != pagination.page %}
-                    <a href="{{ url_for('bp_main.category_offers', category_name=category_name, page=page) }}">{{ page }}</a>
+                    <a href="{{ url_for('bp_main.category_offers', category_name=category_name, page=page) }}"><p>{{ page }}</p>
+                        </a>
                 {% else %}
-                    <strong>{{ page }}</strong>
+                    <p class="pagination-current-page"><strong>{{ page }}</strong></p>
                 {% endif %}
             {% else %}
-                <span class=ellipsis>…</span>
+                <p class=ellipsis>…</p>
             {% endif %}
         {% endfor %}
+        {% if pagination.has_next %}
+            <span class="material-symbols-outlined navigation">
+                navigate_next
+            </span>
+        {% endif %}
     </div>
+
+    <p>
+        produkty {{ pagination.first }} - {{ pagination.last }} z {{ pagination.total }}
+    </p>
 </section>
 {% endblock %}
