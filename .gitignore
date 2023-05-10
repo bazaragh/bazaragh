@@ -8,5 +8,6 @@ venv/
 
 config.local.py
 app/static/offers/**/*
+!**/.gitkeep
 
 pzio.session.sql
