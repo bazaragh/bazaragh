@@ -66,6 +66,7 @@ section {
 
 .publications-container {
     width: 80%;
+    max-width: 800px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
