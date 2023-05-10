@@ -20,6 +20,10 @@ mail = Mail()
 db = SQLAlchemy()
 security = Security()
 
+OFFERS_IMAGES_DIR = 'offers'
+ABSOLUTE_OFFERS_IMAGES_PATH =  os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', OFFERS_IMAGES_DIR)
+Path(ABSOLUTE_OFFERS_IMAGES_PATH).mkdir(exist_ok=True)
+
 
 # Flask quickstart:
 # https://flask.palletsprojects.com/en/2.2.x/quickstart/
