@@ -1,0 +1,137 @@
+{# This template receives the following context:
+confirmation_link - the link that should be fetched (GET) to confirm
+confirmation_token - this token is part of confirmation link - but can be used
+to
+construct arbitrary URLs for redirecting.
+user - the entire user model object
+security - the Flask-Security configuration
+#}
+<style>
+  :root {
+    --dark-green: #064635;
+    --light-green: #9bd7c09e;
+    --cream: #fffcf9;
+    --gray: #a6a6a6;
+  
+    --violet: #83a3ff;
+  
+    --main: var(--dark-green);
+    --secondary: var(--violet);
+    --accent: var(--light-green);
+    --bg-white: var(--white);
+  
+    --white: #e8f3f5;
+    --black: #151616;
+  
+    --fs-h1: 2.3rem;
+    --fs-h2: 2.1rem;
+    --fs-h3: 1.8rem;
+    --fs-h4: 1.5rem;
+    --fs-p: 1rem;
+  }
+
+  body{
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    padding-inline: 10%;
+  }
+  
+  footer {
+    background-color: var(--main);
+    margin-bottom: 0;
+    color: var(--white) !important;
+    padding-inline: 20%;
+    padding-block: 40px;
+    text-align: center;
+    margin-inline: center;
+  }
+
+  h3, h4{
+    font-weight: 600;
+  }
+  
+  footer h3 {
+    color: white;
+  }
+
+  main{
+    padding-inline: 10%;
+    padding-top: 24px;
+    padding-bottom: 32px;
+    background-color: white;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  header section{
+    width: 100%;
+  }
+
+  .logo-section{
+    max-height: 100px;
+    padding-block: 24px;
+    background-color: var(--main);
+    margin-bottom: 0;
+    color: var(--white) !important;
+  }
+
+  .logo-section h2{
+    padding-left: 10%;
+  }
+
+  .img-section{
+    height: 300px;
+  }
+
+  section img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 0%;
+    z-index: -1;
+  }
+</style>
+
+<body>
+  <header>
+    <section class="logo-section">
+      <h2>BazarAGH</h2>
+    </section>
+    <section class="img-section">
+      <img
+        src="https://image.cnbcfm.com/api/v1/image/106922887-1628206615260-gettyimages-887132600-as1700__08.jpeg?v=1628206641"
+        alt="students">
+    </section>
+
+  </header>
+  <main>
+    <h1>{{ _fsdomain('Witaj %(name)s!!!', name=user.name) }}</h1>
+    <p>Cieszymy się, że wybrałeś/aś naszą stronę!</p>
+    <p>Mamy nadzięję że zostaniesz z nami na dłużej 💚</p>
+    <br>
+    <h4>Pozdrawiamy</h4>
+    <h3>Zespół BazarAGH.pl</h3>
+  </main>
+  <footer>
+    <a href="https://bazaragh.pl/"><h3>Bazar AGH</h3></a>
+    <p>BazarAGH.pl to darmowe ogłoszenia lokalne w kategoriach: Moda,
+      Elektronika, Sport i Hobby, Muzyka i Edukacja.
+      Szybko znajdziesz tu ciekawe ogłoszenia i łatwo skontaktujesz
+      się z ogłoszeniodawcą. Jeśli chcesz coś
+      sprzedać - w prosty sposób dodasz bezpłatne ogłoszenia.
+      Chcesz coś kupić - tutaj znajdziesz ciekawe okazje, taniej niż w
+      sklepie. Sprzedawaj
+      po sąsiedzku na BazarAGH.pl
+    </p>
+    {% if security.confirmable %}
+    <p>{{ _fsdomain('You can confirm your email through the link below:') }}</p>
+    <p>
+      <a href="{{ confirmation_link }}">{{ _fsdomain('Confirm my account') }}</a>
+    </p>
+    {% endif %}
+  </footer>
+</body>
