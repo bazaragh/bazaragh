@@ -48,3 +48,19 @@ class Order(db.Model):
 class UserScore(db.Model):
     __tablename__ = 'user_score'
     __table_args__ = {'extend_existing': True}
+
+
+class Dormitory(db.Model):
+    __tablename__ = 'dormitory'
+    __table_args__ = {'extend_existing': True}
+
+    def __repr__(self):
+        return self.name
+
+
+class Faculty(db.Model):
+    __tablename__ = 'faculty'
+    __table_args__ = {'extend_existing': True}
+
+    def __repr__(self):
+        return f"Wydział {self.name}"
