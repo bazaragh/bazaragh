@@ -40,9 +40,17 @@
     <script>
         $(document).ready(function() {
             $('#faculty').select2({
+                ajax: {
+                    url: '{{ url_for('bp_api.faculties') }}',
+                    dataType: 'json'
+                },
                 width: '60%',
             });
             $('#dorm').select2({
+                ajax: {
+                    url: '{{ url_for('bp_api.dormitories') }}',
+                    dataType: 'json'
+                },
                 width: '60%',
             });
         });

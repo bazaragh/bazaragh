@@ -122,6 +122,9 @@ def create_app():
     from app.views.main import bp as bp_main
     app.register_blueprint(bp_main)
 
+    from app.views.api import bp as bp_api
+    app.register_blueprint(bp_api)
+
     from app.views.user import bp as bp_user
     app.register_blueprint(bp_user)
 
