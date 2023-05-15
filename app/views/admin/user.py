@@ -1,7 +1,13 @@
 from flask_login import current_user
 from wtforms import ValidationError
 
+from app.app import db
+from app.models import Dormitory, Faculty
 from app.views.admin.base import AdminBaseModelView
+
+
+def query_table(model: db.Model, elem_id: str):
+    return db.session.query(model).filter_by(id=elem_id).one_or_none()
 
 
 class UserModelView(AdminBaseModelView):
@@ -16,10 +22,10 @@ class UserModelView(AdminBaseModelView):
         'email', 'active', 'create_datetime', 'confirmed_at', 'current_login_at'
     ]
     column_details_list = [
-        'email', 'active', 'current_login_at', 'current_login_ip', 'create_datetime', 'confirmed_at'
+        'email', 'active', 'current_login_at', 'current_login_ip', 'create_datetime', 'confirmed_at', 'dorm', 'faculty'
     ]
     form_columns = [
-        'email', 'roles', 'active'
+        'email', 'roles', 'active', 'dorm', 'faculty'
     ]
     column_labels = {
         'active': 'Aktywny',
@@ -27,7 +33,15 @@ class UserModelView(AdminBaseModelView):
         'current_login_ip': 'Ostatni adres IP',
         'create_datetime': 'Rejestracja',
         'confirmed_at': 'Aktywacja linkiem',
-        'roles': 'Role'
+        'roles': 'Role',
+        'dorm': 'Akademik',
+        'faculty': 'Wydział'
+    }
+    column_formatters = {
+        'dorm': lambda v, c, m, p: f"{m.dorm} {query_table(Dormitory, m.dorm)}"
+        if query_table(Dormitory, m.dorm) is not None else "Brak",
+        'faculty': lambda v, c, m, p: f"({m.faculty}) {query_table(Faculty, m.faculty)}"
+        if query_table(Faculty, m.faculty) is not None else "Brak"
     }
 
     def on_model_change(self, form, model, is_created):
