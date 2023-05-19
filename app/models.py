@@ -50,6 +50,11 @@ class UserScore(db.Model):
     __table_args__ = {'extend_existing': True}
 
 
+class Message(db.Model):
+    __tablename__ = 'message'
+    __table_args__ = {'extend_existing': True}
+
+
 class Dormitory(db.Model):
     __tablename__ = 'dormitory'
     __table_args__ = {'extend_existing': True}
