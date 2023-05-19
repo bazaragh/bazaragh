@@ -20,3 +20,9 @@ def api_faculties():
     faculties = db.session.query(Faculty).all()
     results = [{"id": f.id, "text": f"W{f.id}"} for f in faculties]
     return jsonify({"results": results})
+
+
+@bp.route("/message", methods=["GET", "POST"])
+@auth_required()
+def api_message():
+    return jsonify({"result": "success"})
