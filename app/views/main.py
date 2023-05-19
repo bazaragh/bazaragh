@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from app.app import db
 from app.models import Category, Offer, User
 
-from app.views.utils import get_offer_images_src_paths
+from app.utils.offer import get_offer_images_src_paths
 
 bp = Blueprint("bp_main", __name__)
 OFFERS_PER_PAGE = 8
