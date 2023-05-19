@@ -41,14 +41,14 @@
         $(document).ready(function() {
             $('#faculty').select2({
                 ajax: {
-                    url: '{{ url_for('bp_api.faculties') }}',
+                    url: '{{ url_for('bp_api.api_faculties') }}',
                     dataType: 'json'
                 },
                 width: '60%',
             });
             $('#dorm').select2({
                 ajax: {
-                    url: '{{ url_for('bp_api.dormitories') }}',
+                    url: '{{ url_for('bp_api.api_dormitories') }}',
                     dataType: 'json'
                 },
                 width: '60%',
