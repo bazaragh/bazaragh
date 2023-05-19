@@ -32,16 +32,19 @@
                 <li class="nav-li logo">
                     <a href="{{ url_for('bp_main.main_get') }}">Bazar AGH</a>
                 </li>
-                <li class="nav-li" href="#">
-                    <span class="material-symbols-outlined icon">favorite</span>
+                <li class="nav-li">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon">favorite</span>
+                    </a>
                 </li>
-                <li class="nav-li" href="#">
-                    <span class="material-symbols-outlined icon">forum</span>
+                <li class="nav-li">
+                    <a href="{{ url_for('bp_chat.chat_list') }}">
+                        <span class="material-symbols-outlined icon">forum</span>
+                    </a>
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-li hover-check dropdown">
-                    <a href={{url_for('bp_user.profile_get')}}
-                        class="dropdown-link">
+                    <a href="{{ url_for('bp_user.profile_get') }}" class="dropdown-link">
                         <span class="material-symbols-outlined icon">
                             person
                         </span>
