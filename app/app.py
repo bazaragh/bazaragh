@@ -9,6 +9,7 @@ from flask_babel import Babel
 from flask_mailman import Mail
 from flask_security import SQLAlchemyUserDatastore, Security, hash_password
 from flask_security.models import fsqla
+from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 
 from app.engine.exceptions import exception_handler
@@ -19,9 +20,10 @@ babel = Babel()
 mail = Mail()
 db = SQLAlchemy()
 security = Security()
+socketio = SocketIO()
 
 OFFERS_IMAGES_DIR = 'offers'
-ABSOLUTE_OFFERS_IMAGES_PATH =  os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', OFFERS_IMAGES_DIR)
+ABSOLUTE_OFFERS_IMAGES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', OFFERS_IMAGES_DIR)
 Path(ABSOLUTE_OFFERS_IMAGES_PATH).mkdir(exist_ok=True)
 
 
@@ -134,6 +136,11 @@ def create_app():
     from app.views.offer import bp as bp_offer
     app.register_blueprint(bp_offer)
 
+    from app.views.chat import bp as bp_chat
+    app.register_blueprint(bp_chat)
+
     # Import and register blueprints here
+
+    socketio.init_app(app)
 
     return app

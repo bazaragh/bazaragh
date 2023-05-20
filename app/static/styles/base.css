@@ -1,5 +1,11 @@
 @import 'constants.css';
 
+.material-symbols-outlined {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
 nav.navbar {
     min-height: 64px;
     margin-top: 0;

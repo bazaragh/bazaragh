@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 from app.app import db, ABSOLUTE_OFFERS_IMAGES_PATH
 from app.forms.offer import AddEditOfferForm, DeleteOfferForm
 from app.models import Offer, Category
-from app.views.utils import get_offer_images_src_paths, get_image_name_from_href_path
+from app.utils.offer import get_offer_images_src_paths, get_image_name_from_href_path
 
 bp = Blueprint("bp_offer", __name__, url_prefix='/user/offer')
 
