@@ -22,8 +22,36 @@
         <title>{% block title %}Bazar AGH{% endblock %}</title>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
         {% block style %}{% endblock %}
         {% block script %}{% endblock %}
+
+        {% if current_user.is_authenticated %}
+            <script defer>
+                fetch('{{ url_for('bp_api.api_unread_messages') }}')
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res.unread > 0) {
+                            $('#msg-counter').text(res.unread);
+                        } else {
+                            $('#msg-counter').text('');
+                        }
+                    })
+
+                let socket = io();
+                socket.on('{{ current_user.fs_uniquifier }}', () => {
+                    fetch('{{ url_for('bp_api.api_unread_messages') }}')
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.unread > 0) {
+                                $('#msg-counter').text(res.unread);
+                            } else {
+                                $('#msg-counter').text('');
+                            }
+                        })
+                })
+            </script>
+        {% endif %}
     </head>
 
     <body>
@@ -40,6 +68,7 @@
                 <li class="nav-li">
                     <a href="{{ url_for('bp_chat.chat_list') }}">
                         <span class="material-symbols-outlined icon">forum</span>
+                        <span id="msg-counter" class="badge" style="background: #f55;"></span>
                     </a>
                 </li>
                 {% if current_user.is_authenticated %}

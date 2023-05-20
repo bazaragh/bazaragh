@@ -64,6 +64,11 @@
             margin-left: 5px;
             cursor: pointer;
         }
+
+        #messages {
+            max-height: 40vh;
+            overflow-y: scroll;
+        }
     </style>
 {% endblock %}
 
@@ -71,7 +76,8 @@
     <main class="profile-container">
         <section class="side-navbar-custom shadow">
             {% for t in threads %}
-                <a href="{{ url_for('bp_chat.user_chat_list', user_id=t['user_id']) }}" class="dropdown-item-custom">
+                <a id="thread-{{ t['user_id'] }}" href="{{ url_for('bp_chat.user_chat_list', user_id=t['user_id']) }}"
+                   class="dropdown-item-custom">
                     <b>{{ t['user'] }}</b><br>
                     <small class="preview">{{ t['preview'] }}</small>
                 </a>
@@ -79,20 +85,78 @@
         </section>
         <section class="main-content">
             {% if messages is not none %}
-                {% for m in messages %}
-                    <div class="{{ 'msg my-msg' if m['author'] == current_user.id else 'msg' }}">
-                        <div>
-                            {{ m['content'] }}
+                <div id="messages">
+                    {% for m in messages %}
+                        <div class="{{ 'msg my-msg' if m['author'] == current_user.id else 'msg' }}">
+                            <div>
+                                {{ m['content'] }}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
                 <div class="input-panel">
                     <!--suppress HtmlFormInputWithoutLabel -->
                     <input id="message-box" placeholder="Wpisz wiadomość">
-                    <div class="send">
+                    <div class="send" onclick="sendMessage()">
                         <span class="material-symbols-outlined">send</span>
                     </div>
                 </div>
+
+                <script>
+                    function showLatest() {
+                        let messages = $('#messages');
+                        messages.scrollTop(messages[0].scrollHeight);
+                    }
+
+                    function sendMessage() {
+                        fetch('{{ url_for('bp_api.api_message') }}', {
+                            'method': 'POST',
+                            'headers': {
+                                'Content-Type': 'application/json'
+                            },
+                            'body': JSON.stringify({
+                                'recipient': '{{ recipient }}',
+                                'content': $('#message-box').val()
+                            })
+                        }).then((data) => {
+                            let input = $('#message-box');
+                            let content = input.val();
+                            $('#messages').append(`<div class="msg my-msg"><div>${content}</div></div>`);
+                            input.val('');
+                            showLatest(content);
+
+                            let thread = $('#thread-{{ recipient_id }}');
+                            let threadList = thread.parent();
+                            thread.remove();
+                            thread.children('small').text(content.substring(0, 32));
+                            threadList.prepend(thread);
+                        }).catch((e) => {
+                            console.error(e.statusText);
+                        })
+                    }
+
+                    function subscribe() {
+                        let socket = io()
+                        socket.on('{{ current_user.fs_uniquifier }}', (data) => {
+                            if (`${data.from}` === '{{ recipient_id }}') {
+                                $('#messages').append(`<div class="msg"><div>${data.content}</div></div>`);
+                                showLatest();
+                            }
+
+                            let thread = $(`#thread-${data.from}`);
+                            let threadList = thread.parent();
+                            thread.remove();
+                            thread.children('small').text(data.content.substring(0, 32));
+                            threadList.prepend(thread);
+                        })
+                    }
+
+                    subscribe();
+                    showLatest();
+                    $('#message-box').on('keydown', (e) => {
+                        if (e.key === 'Enter') sendMessage();
+                    })
+                </script>
             {% endif %}
         </section>
     </main>
