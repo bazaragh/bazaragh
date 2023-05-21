@@ -16,7 +16,20 @@
         <a class="dropdown-item-custom" href="#">Polubione oferty</a>
         <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
     </section>
-    <section class="main-content">{% block main_content %}
+    <section class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-wrapper">
+                    <div class="alert alert-{{ 'primary' if category == 'message' else category }} alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block main_content %}
         <h1>Dane osobowe</h1>
         <div class="presonal-data-container">
             {% for record_name, data_record in personal_data.items() %}
