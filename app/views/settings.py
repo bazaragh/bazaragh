@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from MySQLdb import IntegrityError
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, redirect, url_for, flash
 from flask_login import current_user
 from flask_security import auth_required
 
@@ -27,6 +27,7 @@ def change_email():
                 db.session.commit()
             else:
                 change_email_form.email.errors.append('Ten email jest używany!')
+                flash('Ten email jest używany!', 'danger')
         except IntegrityError:
             change_email_form.email.errors.append('Ten email jest używany!')
     return redirect(url_for('bp_user.settings_get'))
@@ -46,4 +47,5 @@ def delete_account():
                 delete_account_form.email.errors.append('Nieprawidlowy email!')
         except IntegrityError:
             delete_account_form.email.errors.append('Nieprawidlowy email!')
+            flash('Nieprawidlowy email!', 'danger')
     return redirect(url_for('bp_user.settings_get'))
