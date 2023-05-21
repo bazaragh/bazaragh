@@ -63,7 +63,7 @@
                     <a href="{{ url_for('bp_main.main_get') }}">Bazar AGH</a>
                 </li>
                 <li class="nav-li">
-                    <a href="#">
+                    <a href="{{url_for('bp_user.favs_get')}}">
                         <span class="material-symbols-outlined icon">favorite</span>
                     </a>
                 </li>
@@ -95,9 +95,9 @@
                         <a class="dropdown-item-custom main-navbar-item"
                             href="{{ url_for('bp_chat.chat_list') }}">Wiadomości</a>
                         <a class="dropdown-item-custom main-navbar-item"
-                            href="#">Polubione oferty</a>
+                            href="{{url_for('bp_user.favs_get')}}">Polubione oferty</a>
                         <a class="dropdown-item-custom main-navbar-item"
-                            href="#">Oceń nas</a>
+                            href="{{url_for('bp_user.opinion_get')}}">Oceń nas</a>
                         <a class="dropdown-item-custom main-navbar-item"
                             href="{{ url_for('security.logout') }}">Wyloguj</a>
                     </div>
