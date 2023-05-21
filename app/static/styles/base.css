@@ -168,6 +168,16 @@ footer h2{
     color: var(--white);
 }
 
+.alert-wrapper{
+    position: fixed;
+    top: 70px;
+    left: 15%;
+    z-index: 10;
+    margin-bottom: 0px !important;
+    width: 70%;
+    margin-inline: auto;
+}
+
 
 @media screen and (max-width: 900px) {
     ul.nav-ul {
