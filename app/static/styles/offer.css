@@ -23,10 +23,12 @@ section.main-containers-wrapper {
     justify-content: center;
     align-content: center;
     overflow: hidden;
+    
 }
 
 .photos-container img {
     width: 80%;
+    background-color: rgb(118, 118, 71);
 }
 
 .main-details-container {

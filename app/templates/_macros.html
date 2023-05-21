@@ -46,3 +46,28 @@
         </button>
     </section>
 {%- endmacro %}
+
+{% macro carousel(images) %}
+    <div id="carouselExampleIndicators" class="photos-container box shadow carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for image in images %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if  loop.index0==0 %} class="active" {% endif %}></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for image in images %}
+            <<div {% if  loop.index0==0 %} class="active carousel-item"{% else %} class="carousel-item" {% endif %}>
+                <img class="d-block w-100" src="{{image}}" alt="slide">
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+{%- endmacro %}
