@@ -84,6 +84,14 @@ hr{
     z-index: -1;
 }
 
+a.dropdown-item-custom {
+    color: var(--black) !important;
+}
+
+a.dropdown-item-custom:hover {
+    color: var(--secondary) !important;
+}
+
 
 @media screen and (max-width: 900px) {
     section.main-content {
