@@ -10,7 +10,7 @@ jobs:
           python-version: '3.x'
       - name: Execute tests
         run: |
-          pip install -r requirements
+          pip install -r requirements.txt
           pytest
   deploy:
     runs-on: ubuntu-latest
