@@ -25,6 +25,7 @@
 
 body{
   font-family: 'Ubuntu', sans-serif;
+  background-color: var(--white);
 }
 
 h1 {
