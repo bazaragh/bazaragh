@@ -16,7 +16,7 @@
         {{ render_field_errors(form.csrf_token) }}
         Chcesz usunąć ogłoszenie <b>{{ offer.title }}</b>. Tej operacji nie można cofnąć!
         <hr>
-        {{ render_field(form.submit) }}
+        {{ render_field(form.submit, class='custom-button') }}
     </form>
 </main>
 {% endblock %}
