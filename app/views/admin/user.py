@@ -1,6 +1,8 @@
 from flask_login import current_user
+from sqlalchemy import null
 from wtforms import ValidationError
 from wtforms.fields import SelectField
+from wtforms.validators import Optional
 
 from app.models import Dormitory, Faculty
 from app.views.admin.base import AdminBaseModelView
@@ -27,11 +29,11 @@ class UserModelView(AdminBaseModelView):
     column_default_sort = ('id', True)
 
     column_list = [
-        'email', 'active', 'create_datetime', 'confirmed_at', 'current_login_at'
+        'email', 'active', 'dorm', 'faculty', 'current_login_at'
     ]
 
     column_details_list = [
-        'email', 'active', 'current_login_at', 'current_login_ip', 'create_datetime', 'confirmed_at', 'dorm', 'faculty'
+        'email', 'active', 'create_datetime', 'confirmed_at', 'dorm', 'faculty', 'current_login_at'
     ]
 
     form_columns = [
@@ -54,15 +56,14 @@ class UserModelView(AdminBaseModelView):
         'faculty': SelectField
     }
 
-    # FIXME: save null to db
     def __init__(self, *args, **kwargs):
         self.form_args = {
             'dorm': {
-                'choices': [('null', 'Mieszka poza Miasteczkiem Studenckim AGH'),
+                'choices': [(None, 'Mieszka poza Miasteczkiem Studenckim AGH'),
                             *get_dorms(kwargs.get('app'), kwargs.get('db'))]
             },
             'faculty': {
-                'choices': [('null', 'Studiuje poza AGH'),
+                'choices': [(None, 'Studiuje poza AGH'),
                             *get_faculties(kwargs.get('app'), kwargs.get('db'))]
             }
         }
@@ -71,3 +72,9 @@ class UserModelView(AdminBaseModelView):
     def on_model_change(self, form, model, is_created):
         if not current_user.has_role('Admin'):
             raise ValidationError('Nie możesz pozbawić się roli Admin, poproś innego administratora o zmianę.')
+
+        if model.dorm == 'None':
+            model.dorm = null()
+
+        if model.faculty == 'None':
+            model.faculty = null()
