@@ -9,12 +9,12 @@
 <main class="offer-main-container">
     <form
         action="{{ url_for('bp_offer.delete', offer_id=offer.id)}}"
-        method="POST" name="add_edit_offer_form">
+        method="POST" name="add_edit_offer_form" class="custom-form">
         <h1>Usuń ogłoszenie</h1>
         <hr>
         {{ form.hidden_tag() }}
         {{ render_field_errors(form.csrf_token) }}
-        Chcesz usunąć ogłoszenie {{ offer.title }}. Tej operacji nie można cofnąć!
+        Chcesz usunąć ogłoszenie <b>{{ offer.title }}</b>. Tej operacji nie można cofnąć!
         <hr>
         {{ render_field(form.submit) }}
     </form>

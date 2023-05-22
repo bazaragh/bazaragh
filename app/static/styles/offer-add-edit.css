@@ -39,6 +39,10 @@ textarea#description {
   width: 80%;
 }
 
+.offer-main-container{
+  min-height: 55vh;
+}
+
 @media screen and (max-width: 640px) {
   .label-wrapper b {
     min-width: 150px;
