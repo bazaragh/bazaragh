@@ -58,3 +58,11 @@ def category_offers(category_name, page: int = 1):
     for offer in pagination.items:
         offer.images = get_offer_images_src_paths(offer.id, json.loads(offer.images))
     return render_template("category_view.jinja", category_name=category_name, pagination=pagination)
+
+@bp.route('/user/<int:user_id>', methods=['GET'])
+def user_get(user_id):
+    user = db.session.query(User).filter_by(id=user_id).one_or_none()
+    if user is None:
+        abort(404)
+    return render_template('user_view.jinja',
+                        user=user)

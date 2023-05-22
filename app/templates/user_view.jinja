@@ -1,0 +1,22 @@
+{% extends "base.jinja" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')
+    }}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div>{{ user.email }}</div>
+    <div>{{ user.username }}</div>
+    <div>{{ user.first_name }} {{ user.last_name }}</div>
+    <div> <!-- przyszłe profilowe -->
+        <img src="{{ url_for('static', filename='1200px-RedCat_8727.jpg') }}"> 
+    </div>
+    <div>{{ user.dorm }}</div>
+    <div>{{ user.faculty }}</div>
+    <div>{{ user.active }}</div>
+    <div>{{ user.create_datetime }}</div>
+</section>
+{% endblock %}
