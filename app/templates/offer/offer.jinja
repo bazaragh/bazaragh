@@ -1,6 +1,8 @@
 {% extends "base.jinja" %}
 {% from "_macros.html" import search_bar, carousel, rating_tool%}
 
+{% set offerRatingName, authorRatingName = 'offer', 'author' %}
+
 {% block style %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,6 +26,51 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+<script defer>
+
+    function fetchRatingAndSetInputs(url, name) {
+        fetch(url)
+            .then((response) => {
+                return response.json()
+            }).then((data) => {
+                const stars = data['rating'];
+                for(let i = 1; i <= 5; i ++) {
+                    const selector = `#star-${ i }-${ name }`;
+                    const input = document.querySelector(selector);
+                    input.checked = i <= stars;
+                }
+            });
+    }
+
+    fetchRatingAndSetInputs('{{url_for('bp_api.get_user_offer_rating', offer_id=offer.id)}}', '{{ offerRatingName }}');
+    fetchRatingAndSetInputs('{{url_for('bp_api.get_user_author_rating', offer_id=offer.id)}}', '{{ authorRatingName }}');
+
+    function updateRating(url, rating) {
+        fetch(url, {
+                        'method': 'POST',
+                        'headers': {
+                            'Content-Type': 'application/json'
+                        },
+                        'body': JSON.stringify({
+                            'rating': rating,
+                        })
+                    })
+            .catch((e) => {})
+    }
+
+    const updateAuthorRatingUrl = '{{ url_for('bp_api.set_user_author_rating', offer_id=offer.id) }}';
+    const updateOfferRatingUrl = '{{ url_for('bp_api.set_user_offer_rating', offer_id=offer.id) }}';
+
+    function updateOfferRating(star_id) {
+        updateRating(updateOfferRatingUrl, star_id)
+
+    }
+    function updateAuthorRating(star_id) {
+        updateRating(updateAuthorRatingUrl, star_id)
+    }
+
+</script>
 {% endblock %}
 {% block content %}
 
@@ -60,11 +107,11 @@
         <br>
         <div class="rating-wrapper">
             <h4>Oceń produkt</h4>
-            {{ rating_tool('product') }}
+            {{ rating_tool(offerRatingName, 'updateOfferRating') }}
         </div>
         <div class="rating-wrapper">
             <h4>Oceń sprzedającego</h4>
-            {{ rating_tool('saleman') }}
+            {{ rating_tool(authorRatingName, 'updateAuthorRating') }}
         </div>
         <button class="custom-button">prześlij ocenę</button>
     </div>

@@ -49,3 +49,26 @@ def api_unread_messages():
     messages = db.session.query(Message).filter_by(recipient=current_user.id,
                                                    read_date=None).all()
     return jsonify({"unread": len(messages)})
+
+
+@bp.route('/offer/<int:offer_id>/rating', methods=['POST'])
+@auth_required()
+def set_user_offer_rating(offer_id):
+    rating = request.get_json()['rating']
+    print('offer', rating)
+    return jsonify({"result": "success"})
+
+@bp.route('/offer/<int:offer_id>/rating', methods=['GET'])
+def get_user_offer_rating(offer_id):
+    return jsonify({"rating": 3})
+
+@bp.route('/offer/<int:offer_id>/authorRating', methods=['POST'])
+@auth_required()
+def set_user_author_rating(offer_id):
+    rating = request.get_json()['rating']
+    print('author', rating)
+    return jsonify({"result": "success"})
+
+@bp.route('/offer/<int:offer_id>/authorRating', methods=['GET'])
+def get_user_author_rating(offer_id):
+    return jsonify({"rating": 4})
