@@ -13,5 +13,5 @@ class DormitoryModelView(ModeratorBaseModelView):
     }
 
     column_formatters = {
-        'address': lambda v, c, m, p: "Brak informacji" if m.address is "" else m.address
+        'address': lambda v, c, m, p: "Brak informacji" if m.address == "" else m.address
     }
