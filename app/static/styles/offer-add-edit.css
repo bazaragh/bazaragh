@@ -26,8 +26,21 @@ hr {
   margin-block: 16px;
 }
 
-textarea#description{
-    min-height: 160px; 
+textarea#description {
+  min-height: 160px;
+}
+
+.photo-container-edit {
+  width: 80%;
+  max-width: 500px;
+}
+
+.photo-container-edit img {
+  width: 80%;
+}
+
+.offer-main-container{
+  min-height: 55vh;
 }
 
 @media screen and (max-width: 640px) {
@@ -42,10 +55,17 @@ textarea#description{
 }
 
 @media screen and (max-width: 560px) {
+
   .label-wrapper input,
   .label-wrapper textarea {
     margin-top: 8px;
     width: 100%;
+  }
+
+  .label-wrapper input[type="checkbox"],
+  .label-wrapper textarea {
+    margin-top: 0px;
+    width: unset;
   }
 
   form {

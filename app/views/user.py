@@ -36,3 +36,13 @@ def settings_get():
 def offers_get():
     offers = db.session.query(Offer).filter_by(author=current_user.id).all()
     return render_template('user/user_offers.jinja', offers=offers)
+
+@bp.route('/opinion')
+@auth_required()
+def opinion_get():
+    return render_template('user/user_opinion.jinja')
+
+@bp.route('/favourites')
+@auth_required()
+def favs_get():
+    return render_template('user/user_favs.jinja')

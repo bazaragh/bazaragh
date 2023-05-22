@@ -9,14 +9,16 @@
     <section class="side-navbar-custom shadow">
         <div class="dropdown-item-hello">{{current_user.first_name}}, dobrze Cię znowu widzieć!</div>
         <hr>
-        <a class="dropdown-item-custom" href="{{url_for('bp_user.profile_get')}}">Moje dane</a>
-        <a class="dropdown-item-custom" href="{{url_for('bp_user.settings_get')}}">Ustawienia</a>
-        <a class="dropdown-item-custom" href="{{url_for('bp_user.offers_get')}}">Moje ogłoszenia</a>
-        <a class="dropdown-item-custom" href="#">Wiadomości</a>
-        <a class="dropdown-item-custom" href="#">Polubione oferty</a>
-        <a class="dropdown-item-custom" href="{{ url_for('security.logout') }}">Wyloguj</a>
+        <a class="dropdown-item-custom-user" href="{{url_for('bp_user.profile_get')}}">Moje dane</a>
+        <a class="dropdown-item-custom-user" href="{{url_for('bp_user.settings_get')}}">Ustawienia</a>
+        <a class="dropdown-item-custom-user" href="{{url_for('bp_user.offers_get')}}">Moje ogłoszenia</a>
+        <a class="dropdown-item-custom-user" href="{{url_for('bp_user.favs_get')}}">Polubione oferty</a>
+        <a class="dropdown-item-custom-user main-navbar-item"
+                            href="{{url_for('bp_user.opinion_get')}}">Oceń nas</a>
+        <a class="dropdown-item-custom-user" href="{{ url_for('security.logout') }}">Wyloguj</a>
     </section>
-    <section class="main-content">{% block main_content %}
+    <section class="main-content">
+        {% block main_content %}
         <h1>Dane osobowe</h1>
         <div class="presonal-data-container">
             {% for record_name, data_record in personal_data.items() %}
