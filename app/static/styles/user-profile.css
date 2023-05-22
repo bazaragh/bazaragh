@@ -84,6 +84,18 @@ hr{
     z-index: -1;
 }
 
+.dropdown-item-custom-user{
+    margin-block: 8px;
+}
+
+a.dropdown-item-custom-user {
+    color: var(--black) !important;
+}
+
+a.dropdown-item-custom-user:hover {
+    color: var(--secondary) !important;
+}
+
 
 @media screen and (max-width: 900px) {
     section.main-content {
@@ -131,7 +143,7 @@ hr{
         padding-inline: 40px;
     }
 
-    .dropdown-item-custom {
+    .dropdown-item-custom-user {
         width: 128px;
     }
 
@@ -166,7 +178,7 @@ hr{
         max-height: 130px;
     }
 
-    .dropdown-item-custom {
+    .dropdown-item-custom-user {
         min-width: 112px;
     }
 
