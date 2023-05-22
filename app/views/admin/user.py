@@ -1,13 +1,15 @@
 from flask_login import current_user
 from wtforms import ValidationError
+from wtforms.fields import SelectField
 
 from app.app import db
-from app.models import Dormitory, Faculty
 from app.views.admin.base import AdminBaseModelView
 
 
 def query_table(model: db.Model, elem_id: str):
-    return db.session.query(model).filter_by(id=elem_id).one_or_none()
+    result = db.session.query(model).filter_by(id=elem_id).one_or_none()
+    print(result)
+    return result
 
 
 class UserModelView(AdminBaseModelView):
@@ -15,6 +17,8 @@ class UserModelView(AdminBaseModelView):
     can_create = False
     can_edit = True
     can_delete = True
+
+    edit_template = 'admin/model/user_edit.html'
 
     column_default_sort = ('id', True)
 
@@ -37,12 +41,11 @@ class UserModelView(AdminBaseModelView):
         'dorm': 'Akademik',
         'faculty': 'Wydział'
     }
-    column_formatters = {
-        'dorm': lambda v, c, m, p: f"{m.dorm} {query_table(Dormitory, m.dorm)}"
-        if query_table(Dormitory, m.dorm) is not None else "Brak",
-        'faculty': lambda v, c, m, p: f"({m.faculty}) {query_table(Faculty, m.faculty)}"
-        if query_table(Faculty, m.faculty) is not None else "Brak"
-    }
+
+    form_overrides = dict(
+        dorm=SelectField,
+        faculty=SelectField
+    )
 
     def on_model_change(self, form, model, is_created):
         if not current_user.has_role('Admin'):

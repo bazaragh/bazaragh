@@ -1,0 +1,26 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block edit_form %}
+    {{ super() }}
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            fetch('{{ url_for('bp_api.dormitories', default=model['dorm']) }}')
+                .then(res => res.json())
+                .then(res => {
+                    $('#dorm').select2({
+                        data: res.results,
+                    });
+                });
+
+            fetch('{{ url_for('bp_api.faculties', default=model['faculty']) }}')
+                .then(res => res.json())
+                .then(res => {
+                    $('#faculty').select2({
+                        data: res.results
+                    });
+                });
+        })
+    </script>
+{% endblock %}
