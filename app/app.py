@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import shutil
 from pathlib import Path
 
 from flask import Flask
@@ -23,9 +24,16 @@ security = Security()
 socketio = SocketIO()
 
 OFFERS_IMAGES_DIR = 'offers'
+PROFILE_IMAGES_DIR = 'profile-pictures'
 ABSOLUTE_OFFERS_IMAGES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', OFFERS_IMAGES_DIR)
+ABSOLUTE_PROFILE_IMAGES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', PROFILE_IMAGES_DIR)
 Path(ABSOLUTE_OFFERS_IMAGES_PATH).mkdir(exist_ok=True)
+Path(ABSOLUTE_PROFILE_IMAGES_PATH).mkdir(exist_ok=True)
 
+ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+DEFAULT_PROFILE_PICTURE_FILENAME = '1200px-RedCat_8727.jpg'
+shutil.copy2(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', DEFAULT_PROFILE_PICTURE_FILENAME), 
+             os.path.join(ABSOLUTE_PROFILE_IMAGES_PATH, DEFAULT_PROFILE_PICTURE_FILENAME))  
 
 # Flask quickstart:
 # https://flask.palletsprojects.com/en/2.2.x/quickstart/

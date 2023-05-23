@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from app.app import db
 from app.models import Category, Offer, User
 
-from app.utils.offer import get_offer_images_src_paths
+from app.utils.offer import get_offer_images_href_paths
 
 bp = Blueprint("bp_main", __name__)
 OFFERS_PER_PAGE = 8
@@ -23,7 +23,7 @@ def main_get():
     images = {}
     for offer in offers:
         offer_images = json.loads(offer.images)
-        images[offer.id] = get_offer_images_src_paths(offer.id, offer_images)
+        images[offer.id] = get_offer_images_href_paths(offer.id, offer_images)
     return render_template('main.jinja',
                            offers=offers,
                            categories=categories,
@@ -37,7 +37,7 @@ def offer_get(offer_id):
     if offer is None:
         abort(404)
     images = json.loads(offer.images)
-    images = get_offer_images_src_paths(offer.id, images)
+    images = get_offer_images_href_paths(offer.id, images)
     author = db.session.query(User).filter_by(id=offer.author).one_or_none()
     return render_template('offer/offer.jinja',
                         offer=offer,
@@ -56,5 +56,5 @@ def category_offers(category_name, page: int = 1):
     pagination = db.session.query(Offer).filter_by(category=category.id).order_by(Offer.created_at).paginate(
         per_page=OFFERS_PER_PAGE, page=page)
     for offer in pagination.items:
-        offer.images = get_offer_images_src_paths(offer.id, json.loads(offer.images))
+        offer.images = get_offer_images_href_paths(offer.id, json.loads(offer.images))
     return render_template("category_view.jinja", category_name=category_name, pagination=pagination)
