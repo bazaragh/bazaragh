@@ -27,6 +27,6 @@
         <p>{{ user.faculty }}</p>
     </div>
     <button class="custom-button">napisz do sprzedającego</button>
-    <button class="custom-button">pokaż oferty sprzedającego</button>
+    <button class="custom-button" onclick=window.location.href="{{url_for('bp_main.user_get_offers', user_id=user.id)}}">pokaż oferty sprzedającego</button>
 </section>
 {% endblock %}

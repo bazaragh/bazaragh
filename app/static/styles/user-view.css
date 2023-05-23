@@ -42,6 +42,33 @@ button.custom-button{
     margin-right: 8px;
 }
 
+.offer-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.offer-container h3{
+    padding-block: 16px;
+    padding-left: 16px;
+}
+
+.offer-container img{
+    max-width: 150px;
+}
+
+.offers-wraper{
+    margin-bottom: 16px;
+}
+
+.single-offer-wrapper{
+    border: 2px solid var(--black);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
 @media (max-width: 700px) {
     section.profile-container {
         width: 70%;
