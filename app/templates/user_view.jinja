@@ -1,22 +1,30 @@
 {% extends "base.jinja" %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')
-    }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-view.css') }}">
 {% endblock %}
 
 {% block content %}
 
-<section>
-    <div>{{ user.email }}</div>
-    <div>{{ user.username }}</div>
-    <div>{{ user.first_name }} {{ user.last_name }}</div>
-    <div> <!-- przyszłe profilowe -->
-        <img src="{{ url_for('static', filename='1200px-RedCat_8727.jpg') }}"> 
+<section class="profile-container">
+    <div class="name-photo-container">
+        <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
+        <div class="profile-photo"> <!-- przyszłe profilowe -->
+            <img src="{{ url_for('static', filename='1200px-RedCat_8727.jpg') }}">
+        </div>
     </div>
-    <div>{{ user.dorm }}</div>
-    <div>{{ user.faculty }}</div>
-    <div>{{ user.active }}</div>
-    <div>{{ user.create_datetime }}</div>
+
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Email:</p>
+        <p>{{ user.email }}</p>
+    </div>
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Akademik:</p>
+        <p>{{ user.dorm }}</p>
+    </div>
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Wydział:</p>
+        <p>{{ user.faculty }}</p>
+    </div>
 </section>
 {% endblock %}
