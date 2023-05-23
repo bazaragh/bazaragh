@@ -19,7 +19,8 @@ def profile_get():
         "Akademik": current_user.dorm,
         "Email": current_user.email,
     }
-    return render_template('user/user_profile.jinja', personal_data=user_data)
+    photo = '1200px-RedCat_8727.jpg'
+    return render_template('user/user_profile.jinja', personal_data=user_data, profile_photo=photo)
 
 
 @bp.route('/settings')
