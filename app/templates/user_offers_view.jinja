@@ -8,9 +8,10 @@
 
 <section class="profile-container">
     <h1 class="profile-name">Oferty użytkownika {{ user.first_name }} {{ user.last_name }}</h1>
-    <button class="custom-button"
-                onclick=window.location.href="{{url_for('bp_main.user_get', user_id=user.id)}}">pokaż profil
-                sprzedającego</button>
+    <a href="{{url_for('bp_main.user_get', user_id=user.id)}}">
+        <button class="custom-button">pokaż profil sprzedającego</button>
+    </a>
+    
     <button class="custom-button">napisz do sprzedającego</button>
     <div class="offers-wraper">
         {% for offer in offers %}

@@ -68,6 +68,7 @@ button.custom-button{
     border-radius: 16px;
     overflow: hidden;
     margin-block: 8px;
+    background-color: white;
 }
 
 @media (max-width: 700px) {
