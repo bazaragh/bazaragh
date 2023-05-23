@@ -38,6 +38,7 @@ def add():
         create_offer_images_dir(offer.id)
         save_offer_images(offer.id, form.images.data)
         return redirect(url_for('bp_user.offers_get'))
+
     return render_template('offer/offer_add_edit.jinja', form=form, offer_id=None)
 
 
@@ -96,7 +97,8 @@ def delete(offer_id):
 
         images = json.loads(offer.images)
 
-        offer_images_dir_path = get_offer_images_dir_path(id)
+        offer_images_dir_path = get_offer_images_dir_path(offer.id)
+
         if os.path.exists(offer_images_dir_path):
             delete_offers_images(offer.id, images)
             os.rmdir(offer_images_dir_path)
