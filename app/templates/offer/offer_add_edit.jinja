@@ -25,7 +25,7 @@
             {{ render_field_errors(offer_image_delete_form.csrf_token) }}
             {# Flask-WTF needs `hidden_tag()` so CSRF works for each form #}
             {{ render_field_with_errors(offer_image_delete_form.should_delete) }}
-            <div class="photos-container box">
+            <div class="photo-container-edit">
                 <img src="{{ url_for('static', filename=offer_image_delete_form.image_href_path.data) }}">
             </div>
         {% endfor %}

@@ -14,10 +14,17 @@ main.profile-container {
     flex-flow: column wrap;
     padding-left: 40px;
     padding-right: 24px;
+
+    position: sticky;
+    top: 64px;
+    left: 0px;
+    min-height: 480px;
+    max-height: 94vh;
 }
 
 section.main-content {
     width: 60%;
+    min-height: calc(100vh - 64px - 210px);
 }
 
 .side-navbar-custom a {
@@ -67,6 +74,29 @@ section.settings-field{
     min-width: 100px;
 }
 
+.alert-wrapper{
+    position: fixed;
+    left: 320px;
+    width: 60%;
+}
+
+hr{
+    z-index: -1;
+}
+
+.dropdown-item-custom-user{
+    margin-block: 8px;
+}
+
+a.dropdown-item-custom-user {
+    color: var(--black) !important;
+}
+
+a.dropdown-item-custom-user:hover {
+    color: var(--secondary) !important;
+}
+
+
 @media screen and (max-width: 900px) {
     section.main-content {
         padding-inline: 32px;
@@ -87,8 +117,13 @@ section.settings-field{
     .personal-data-record-wrapper p {
         margin-top: 8px;
     }
-}
 
+    .alert-wrapper{
+        position: fixed;
+        left: 40%;
+        width: 55%;
+    }
+}
 
 @media screen and (max-width: 640px) {
     .side-navbar-custom {
@@ -97,6 +132,9 @@ section.settings-field{
         padding-inline: 64px;
         padding-block: 10px;
         justify-content: space-between;
+
+        min-height: 100px;
+        max-height: 150px;
     }
 
     section.main-content {
@@ -105,7 +143,7 @@ section.settings-field{
         padding-inline: 40px;
     }
 
-    .dropdown-item-custom {
+    .dropdown-item-custom-user {
         width: 128px;
     }
 
@@ -124,14 +162,23 @@ section.settings-field{
     .presonal-data-container {
         margin-top: 0px;
     }
+
+    .alert-wrapper{
+        position: fixed;
+        left: 5%;
+        width: 90%;
+    }
 }
 
 @media screen and (max-width: 560px) {
     .side-navbar-custom {
         padding-inline: 40px;
+
+        min-height: 90px;
+        max-height: 130px;
     }
 
-    .dropdown-item-custom {
+    .dropdown-item-custom-user {
         min-width: 112px;
     }
 
