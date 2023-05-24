@@ -7,6 +7,7 @@ from app.app import db
 from app.models import Category, Offer, User
 
 from app.utils.offer import get_offer_images_href_paths
+from app.utils.user import get_user_profile_picture_filename_or_default, get_user_profile_picture_href_path
 
 bp = Blueprint("bp_main", __name__)
 OFFERS_PER_PAGE = 8
@@ -64,15 +65,17 @@ def user_get(user_id):
     user = db.session.query(User).filter_by(id=user_id).one_or_none()
     if user is None:
         abort(404)
+    profile_picture_filename = get_user_profile_picture_filename_or_default(user.id)
+    profile_picture = get_user_profile_picture_href_path(profile_picture_filename)
     return render_template('user_view.jinja',
-                        user=user)
+                        user=user, profile_picture=profile_picture)
 
 @bp.route('/user/<int:user_id>/offers', methods=['GET'])
 def user_get_offers(user_id):
     user = db.session.query(User).filter_by(id=user_id).one_or_none()
     offers = db.session.query(Offer).filter_by(author=user.id).all()
     for offer in offers:
-        offer.images = get_offer_images_src_paths(offer.id, json.loads(offer.images))
+        offer.images = get_offer_images_href_paths(offer.id, json.loads(offer.images))
     if user is None:
         abort(404)
     return render_template('user_offers_view.jinja',

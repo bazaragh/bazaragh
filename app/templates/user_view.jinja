@@ -9,8 +9,8 @@
 <section class="profile-container">
     <div class="name-photo-container">
         <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
-        <div class="profile-photo"> <!-- przyszłe profilowe -->
-            <img src="{{ url_for('static', filename='1200px-RedCat_8727.jpg') }}">
+        <div class="profile-photo">
+            <img src="{{ url_for('static', filename=profile_picture) }}">
         </div>
     </div>
 
