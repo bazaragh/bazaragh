@@ -11,8 +11,9 @@
     <a href="{{url_for('bp_main.user_get', user_id=user.id)}}">
         <button class="custom-button">pokaż profil sprzedającego</button>
     </a>
-    
-    <button class="custom-button">napisz do sprzedającego</button>
+    <a href="{{url_for('bp_chat.user_chat_list', user_id=user.id)}}" >
+        <button class="custom-button">napisz do sprzedającego</button>
+    </a>
     <div class="offers-wraper">
         {% for offer in offers %}
         <div class="single-offer-wrapper shadow shadow-on-hover">
