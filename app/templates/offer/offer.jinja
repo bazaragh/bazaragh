@@ -2,21 +2,18 @@
 {% from "_macros.html" import search_bar,  carousel%}
 
 {% block style %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')
-    }}">
-<link rel="stylesheet" href="{{ url_for('static',
-    filename='styles/search_bar.css')
-    }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/search_bar.css')}}">
 {% endblock %}
 
 {% block script %}
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 {% endblock %}
+
 {% block content %}
 
 {{ search_bar() }}
@@ -30,7 +27,13 @@
         <p>data wystawienia: {{ offer.created_at.date() }}</p>
         <h3 id="price">{{ "%.2f zł"|format(offer.price) if offer.price else
             "Za darmo" }}</h3>
-        <button class="custom-button">napisz do sprzedającego</button>
+        {% if not current_user.is_authenticated or current_user.id != author.id%}
+        <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" >
+            <button class="custom-button">
+                napisz do sprzedającego
+            </button>
+        </a>
+        {% endif %}
     </div>
 
     <div class="box shadow description-container">
@@ -39,12 +42,27 @@
     </div>
 
     <div class="box shadow description-container salesman-container">
+        
+        {% if not current_user.is_authenticated or current_user.id != author.id%}
         <div class="salesman-details">
             <h3>Sprzedający</h3>
-            <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty
-                }}</p>
+            <br>
+            <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty}}</p>
         </div>
-        <button class="custom-button">napisz do sprzedającego</button>
+        <div class="button-wrapper">
+            <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" class="custom-button">
+                napisz do sprzedającego
+            </a>
+            <a class="custom-button" href="{{url_for('bp_main.user_get', user_id=author.id)}}">
+                pokaż profil sprzedającego
+            </a>
+        </div>
+        {% else %}
+        <div class="salesman-details">
+            <h3>Sprzedajesz Ty!</h3>
+        </div>
+        <div class="button-wrapper">
+        {% endif %}
     </div>
 </section>
 {% endblock %}

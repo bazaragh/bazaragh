@@ -52,15 +52,9 @@ section.main-containers-wrapper {
     font-weight: 600;
 }
 
-.main-details-container h3#price {
+h3#price {
     margin-top: 40px;
-}
-
-.main-details-container button {
-    margin-inline: 5%;
-    margin-top: 10px;
-    padding: 10px;
-    width: 90%;
+    margin-bottom: 16px;
 }
 
 .offer-name-wrapper {
@@ -95,9 +89,30 @@ section.main-containers-wrapper {
     font-weight: 450;
 }
 
-.salesman-container button {
-    height: 50px;
+.button-wrapper>.custom-button {
     margin-top: 10px;
+}
+
+.main-details-container>.custom-button{
+    color: white;
+}
+
+.main-details-container>a.custom-button:hover{
+    transform: translateY(1px);
+    -webkit-box-shadow: 8px 8px 32px -16px var(--main);
+    -moz-box-shadow: 8px 8px 32px -16px var(--main);
+    box-shadow: 8px 8px 32px -16px var(--main);
+}
+
+a.custom-button:hover{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 900px) {
@@ -166,6 +181,15 @@ section.main-containers-wrapper {
     #price {
         font-size: 22px;
     }
+
+    .salesman-details{
+        margin-bottom: 16px;
+    }
+
+    .button-wrapper{
+        flex-flow: row wrap;
+        gap: 16px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -220,6 +244,10 @@ section.main-containers-wrapper {
 
     section {
         margin-block: 10px;
+    }
+
+    h3#price{
+        margin-bottom: 16px;
     }
 }
 

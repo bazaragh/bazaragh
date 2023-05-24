@@ -1,0 +1,39 @@
+{% extends "base.jinja" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/user-view.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-container">
+    <div class="name-photo-container">
+        <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
+        <div class="profile-photo">
+            <img src="{{ url_for('static', filename=profile_picture) }}">
+        </div>
+    </div>
+
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Email:</p>
+        <p>{{ user.email }}</p>
+    </div>
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Akademik:</p>
+        <p>{{ user.dorm }}</p>
+    </div>
+    <div class="personal-data-record-wrapper">
+        <p class="personal-data-field-name">Wydział:</p>
+        <p>{{ user.faculty }}</p>
+    </div>
+    <a href="{{url_for('bp_chat.user_chat_list', user_id=user.id)}}" >
+        <button class="custom-button">napisz do sprzedającego</button>
+    </a>
+    <a href="{{url_for('bp_main.user_get_offers', user_id=user.id)}}">
+        <button class="custom-button">
+            pokaż oferty sprzedającego
+        </button>
+    </a>
+
+</section>
+{% endblock %}
