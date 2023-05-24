@@ -98,11 +98,16 @@ a.dropdown-item-custom-user:hover {
 
 .profile-photo {
     width: 150px;
+    height: 150px;
     float: right;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profile-photo img {
     width: 100%;
+    height: 100%;
 }
 
 @media screen and (max-width: 900px) {

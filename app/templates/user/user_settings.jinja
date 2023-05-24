@@ -10,6 +10,19 @@
     <main>
         <h1>Ustawienia</h1>
         <section class="settings-field">
+            <h3>Ustaw zdjęcie profilowe</h3>
+            <form enctype="multipart/form-data" action="{{ url_for('bp_settings.set_profile_picture') }}" method="POST" name="add_user_profile_picture">
+                {{ change_password_form.hidden_tag() }}
+                <p class="mb-3">
+                    {{ add_user_profile_picture.image.label }}:
+                    {{ add_user_profile_picture.image(class='form-control') }}
+                </p>
+                <div>
+                    {{ add_user_profile_picture.submit(class='custom-button') }}
+                </div>
+            </form>
+        </section>
+        <section class="settings-field">
             <h3>Zmień hasło</h3>
             <form action="{{ url_for('security.change_password') }}" method="POST" name="change_password_form">
                 {{ change_password_form.hidden_tag() }}

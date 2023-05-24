@@ -20,8 +20,8 @@
     <section class="main-content">
         {% block main_content %}
         <h1>Dane osobowe</h1>
-        <div class="profile-photo"> <!-- przyszłe profilowe -->
-            <img src="{{ url_for('static', filename=profile_photo) }}"> 
+        <div class="profile-photo">
+            <img src="{{ url_for('static', filename=profile_picture) }}"> 
         </div>
         <div class="presonal-data-container">
             {% for record_name, data_record in personal_data.items() %}

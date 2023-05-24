@@ -4,10 +4,11 @@ from flask_security import auth_required, ChangePasswordForm
 
 from app.app import db
 from app.forms.security import DeleteAccountForm, ChangeEmailForm
+from app.forms.user import AddUserProfilePicture
 from app.models import Offer
+from app.utils.user import get_user_profile_picture_filename_or_default, get_user_profile_picture_href_path
 
 bp = Blueprint("bp_user", __name__, url_prefix='/user')
-
 
 @bp.route('/profile')
 @auth_required()
@@ -19,8 +20,9 @@ def profile_get():
         "Akademik": current_user.dorm,
         "Email": current_user.email,
     }
-    photo = '1200px-RedCat_8727.jpg'
-    return render_template('user/user_profile.jinja', personal_data=user_data, profile_photo=photo)
+    profile_picture_filename = get_user_profile_picture_filename_or_default(current_user.id)
+    profile_picture = get_user_profile_picture_href_path(profile_picture_filename)
+    return render_template('user/user_profile.jinja', personal_data=user_data, profile_picture=profile_picture)
 
 
 @bp.route('/settings')
@@ -29,7 +31,8 @@ def settings_get():
     return render_template('user/user_settings.jinja',
                            change_password_form=ChangePasswordForm(),
                            change_email_form=ChangeEmailForm(),
-                           delete_account_confirm_form=DeleteAccountForm())
+                           delete_account_confirm_form=DeleteAccountForm(),
+                           add_user_profile_picture=AddUserProfilePicture())
 
 
 @bp.route('/offers')
