@@ -65,26 +65,26 @@ section {
     padding-block: 64px;
 }
 
-section.settings-field{
+section.settings-field {
     padding-block: 32px;
 }
 
-.personal-data-field-name{
+.personal-data-field-name {
     font-weight: 500;
     min-width: 100px;
 }
 
-.alert-wrapper{
+.alert-wrapper {
     position: fixed;
     left: 320px;
     width: 60%;
 }
 
-hr{
+hr {
     z-index: -1;
 }
 
-.dropdown-item-custom-user{
+.dropdown-item-custom-user {
     margin-block: 8px;
 }
 
@@ -96,6 +96,19 @@ a.dropdown-item-custom-user:hover {
     color: var(--secondary) !important;
 }
 
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    float: right;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+}
 
 @media screen and (max-width: 900px) {
     section.main-content {
@@ -118,7 +131,7 @@ a.dropdown-item-custom-user:hover {
         margin-top: 8px;
     }
 
-    .alert-wrapper{
+    .alert-wrapper {
         position: fixed;
         left: 40%;
         width: 55%;
@@ -163,7 +176,7 @@ a.dropdown-item-custom-user:hover {
         margin-top: 0px;
     }
 
-    .alert-wrapper{
+    .alert-wrapper {
         position: fixed;
         left: 5%;
         width: 90%;
@@ -186,7 +199,7 @@ a.dropdown-item-custom-user:hover {
         padding-inline: 32px;
     }
 
-    section.settings-field{
+    section.settings-field {
         padding-block: 24px;
     }
 }
@@ -195,5 +208,10 @@ a.dropdown-item-custom-user:hover {
     .side-navbar-custom {
         padding-inline: 16px;
         justify-content: space-around;
+    }
+
+    .profile-photo {
+        float: none;
+        margin-top: 16px;
     }
 }
