@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, current_app, flash, redirect, url_for
 from flask_login import current_user
+from flask_mailman import EmailMessage
 from flask_security import auth_required, ChangePasswordForm
 
 from app.app import db
+from app.forms.opinion import OpinionForm
 from app.forms.security import DeleteAccountForm, ChangeEmailForm
 from app.forms.user import AddUserProfilePicture
 from app.models import Offer
@@ -43,10 +45,34 @@ def offers_get():
     return render_template('user/user_offers.jinja', offers=offers)
 
 
-@bp.route('/opinion')
+@bp.route('/opinion', methods=["GET", "POST"])
 @auth_required()
 def opinion_get():
-    return render_template('user/user_opinion.jinja')
+    form = OpinionForm()
+    logged_in = 'gość'
+
+    if current_user.is_authenticated:
+        form.email.data = current_user.email
+        form.email.render_kw['readonly'] = True
+        logged_in = 'użytkownik zalogowany'
+    else:
+        form.email.render_kw['readonly'] = False
+
+    if form.validate_on_submit():
+        content = f"Wiadomość od {form.email.data} ({logged_in})\n" \
+                  f"Treść zgłoszenia:\n" \
+                  f"{form.contents.data}"
+        message = EmailMessage(subject="Wiadomość z formularza kontaktowego",
+                               body=content,
+                               from_email=current_app.config['MAIL_DEFAULT_SENDER'],
+                               to=[current_app.config['MAIL_USERNAME']],
+                               reply_to=[form.email.data])
+        message.send()
+        flash("Wiadomość została wysłana", "success")
+
+        return redirect(url_for('bp_user.opinion_get'))
+
+    return render_template('user/user_opinion.jinja', form=form)
 
 
 @bp.route('/favourites')
