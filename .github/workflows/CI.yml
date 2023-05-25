@@ -12,6 +12,11 @@ jobs:
         run: |
           pip install -r requirements.txt
           touch config.local.py
+          echo 'DB_HOST = "${{ secrets.DB_HOST }}"' >> config.local.py
+          echo 'DB_NAME = "${{ secrets.DB_NAME }}"' >> config.local.py
+          echo 'DB_PORT = ${{ secrets.DB_PORT }}' >> config.local.py
+          echo 'DB_USER = "${{ secrets.DB_USER }}"' >> config.local.py
+          echo 'DB_PASSWORD = "${{ secrets.DB_PASSWORD }}"' >> config.local.py
           pytest
   deploy:
     runs-on: ubuntu-latest
