@@ -10,6 +10,7 @@ from app.utils.user import get_user_profile_picture_filename_or_default, get_use
 
 bp = Blueprint("bp_user", __name__, url_prefix='/user')
 
+
 @bp.route('/profile')
 @auth_required()
 def profile_get():
@@ -41,10 +42,12 @@ def offers_get():
     offers = db.session.query(Offer).filter_by(author=current_user.id).all()
     return render_template('user/user_offers.jinja', offers=offers)
 
+
 @bp.route('/opinion')
 @auth_required()
 def opinion_get():
     return render_template('user/user_opinion.jinja')
+
 
 @bp.route('/favourites')
 @auth_required()
