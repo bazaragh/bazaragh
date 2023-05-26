@@ -77,6 +77,8 @@ class UserModelView(AdminBaseModelView):
     def on_model_delete(self, model):
         if current_user.id == model.id:
             raise ValidationError('Nie możesz usunąć swojego konta.')
+
+    def after_model_delete(self, model):
         content = "Administrator usunął twoje konto"
         message = EmailMessage(subject="Twoje konto zostało usunięte",
                                body=content,
