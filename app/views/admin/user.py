@@ -1,4 +1,6 @@
+from flask import current_app
 from flask_login import current_user
+from flask_mailman import EmailMessage
 from sqlalchemy import null
 from wtforms import ValidationError
 from wtforms.fields import SelectField
@@ -10,8 +12,9 @@ from app.views.admin.base import AdminBaseModelView
 
 def get_dorms(app, db):
     with app.app_context():
-        dorms = [(dorm.id, f"{dorm.id} {dorm.name}") for dorm in db.session.query(Dormitory).all()]
-        dorms.sort(key=lambda x: int(x[0][2:].replace("DS", "0").strip()))
+        dorms = [(dorm.id, f"{dorm.id} {dorm.name}" if not dorm.id == "None" else dorm.name)
+                 for dorm in db.session.query(Dormitory).all()]
+        dorms.sort(key=lambda x: int(x[0][2:].replace("DS", "0").replace("ne", "-1").strip()))
         return dorms
 
 
@@ -59,12 +62,10 @@ class UserModelView(AdminBaseModelView):
     def __init__(self, *args, **kwargs):
         self.form_args = {
             'dorm': {
-                'choices': [(None, 'Mieszka poza Miasteczkiem Studenckim AGH'),
-                            *get_dorms(kwargs.get('app'), kwargs.get('db'))]
+                'choices': get_dorms(kwargs.get('app'), kwargs.get('db'))
             },
             'faculty': {
-                'choices': [(None, 'Studiuje poza AGH'),
-                            *get_faculties(kwargs.get('app'), kwargs.get('db'))]
+                'choices': get_faculties(kwargs.get('app'), kwargs.get('db'))
             }
         }
         super().__init__(*args, **kwargs)
@@ -73,8 +74,13 @@ class UserModelView(AdminBaseModelView):
         if not current_user.has_role('Admin'):
             raise ValidationError('Nie możesz pozbawić się roli Admin, poproś innego administratora o zmianę.')
 
-        if model.dorm == 'None':
-            model.dorm = null()
-
-        if model.faculty == 'None':
-            model.faculty = null()
+    def on_model_delete(self, model):
+        if current_user.id == model.id:
+            raise ValidationError('Nie możesz usunąć swojego konta.')
+        content = "Administrator usunął twoje konto"
+        message = EmailMessage(subject="Twoje konto zostało usunięte",
+                               body=content,
+                               from_email=current_app.config['MAIL_DEFAULT_SENDER'],
+                               to=[model.email],
+                               bcc=[current_app.config['MAIL_USERNAME']])
+        message.send()

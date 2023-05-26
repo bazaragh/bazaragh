@@ -14,9 +14,9 @@ bp = Blueprint("bp_api", __name__, url_prefix="/api")
 @bp.route("/dormitories/<string:default>")
 def api_dormitories(default: str = None):
     dorms = db.session.query(Dormitory).all()
-    dorms.sort(key=lambda x: int(x.id[2:].replace("DS", "0").strip()))
+    dorms.sort(key=lambda x: int(x.id[2:].replace("DS", "0").replace("ne", "-1").strip()))
     results = [{"id": d.id,
-                "text": f"{d.id} {d.name}",
+                "text": f"{d.id} {d.name}" if not d.id == 'None' else d.name,
                 "selected": True if default == d.id else False} for d in dorms]
     return jsonify({"results": results})
 
@@ -26,7 +26,7 @@ def api_dormitories(default: str = None):
 def api_faculties(default: str = None):
     faculties = db.session.query(Faculty).all()
     results = [{"id": f.id,
-                "text": f"W{f.id}",
+                "text": f"W{f.id}" if not f.id == 'None' else f.name,
                 "selected": True if default == f.id else False} for f in faculties]
     return jsonify({"results": results})
 
