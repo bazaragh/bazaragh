@@ -1,6 +1,7 @@
 import json
 
 from flask import Blueprint, render_template
+from sqlalchemy import text
 from werkzeug.exceptions import abort
 
 from app.app import db
@@ -20,7 +21,13 @@ OFFERS_PER_PAGE = 8
 @bp.route('/', methods=['GET'])
 def main_get():
     categories = db.session.query(Category).all()
-    offers = db.session.query(Offer).order_by(Offer.created_at).limit(8).all()
+    offers = db.session.execute(text("""
+        SELECT *
+        FROM offer
+        ORDER BY created_at DESC
+        LIMIT 8
+    """))
+    offers = [o for o in offers]
     images = {}
     for offer in offers:
         offer_images = json.loads(offer.images)
