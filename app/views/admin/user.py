@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, render_template
 from flask_login import current_user
 from flask_mailman import EmailMessage
 from sqlalchemy import null
@@ -81,8 +81,9 @@ class UserModelView(AdminBaseModelView):
     def after_model_delete(self, model):
         content = "Administrator usunął twoje konto"
         message = EmailMessage(subject="Twoje konto zostało usunięte",
-                               body=content,
+                               body=render_template('admin/email/delete_user.html', user=model),
                                from_email=current_app.config['MAIL_DEFAULT_SENDER'],
                                to=[model.email],
                                bcc=[current_app.config['MAIL_USERNAME']])
+        message.content_subtype = "html"
         message.send()
