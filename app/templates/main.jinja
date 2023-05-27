@@ -30,7 +30,7 @@
     </div>
 </section>
 <section class="publications-wrapper">
-    <h2>Promowane ogłoszenia</h2>
+    <h2>Najnowsze ogłoszenia</h2>
     <div class="publications-container">
         {% for offer in offers %}
         <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}"

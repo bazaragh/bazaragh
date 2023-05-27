@@ -1,45 +1,7 @@
 from flask_security.forms import RegisterForm, ConfirmRegisterForm, get_form_field_label, EqualTo
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, validators, SelectField, SubmitField
-from wtforms.validators import DataRequired, Length, Email
-
-dorm_list = [("other", "Mieszkam poza MS AGH"),
-             ("ds-alfa", "DS Alfa"),
-             ("ds-1", "DS1 Olimp"),
-             ("ds-2", "DS2 Babilon"),
-             ("ds-3", "DS3 Akropol"),
-             ("ds-4", "DS4 Filutek"),
-             ("ds-5", "DS5 Strumyk"),
-             ("ds-6", "DS6 Bratek"),
-             ("ds-7", "DS7 Zaścianek"),
-             ("ds-8", "DS8 Stokrotka"),
-             ("ds-9", "DS9 Omega"),
-             ("ds-10", "DS10 Hajduczek"),
-             ("ds-11", "DS11 Bonus"),
-             ("ds-12", "DS12 Pomyk"),
-             ("ds-13", "DS13 Straszny Dwór"),
-             ("ds-14", "DS14 Kapitol"),
-             ("ds-15", "DS15 Maraton"),
-             ("ds-16", "DS16 Itaka"),
-             ("ds-17", "DS17 Arkadia"),
-             ("ds-18", "DS18 Odyseja"),
-             ("ds-19", "DS19 Apollo")]
-
-faculty_list = [("other", "Studiuję poza AGH"),
-                ("wiligz", "WILiGZ"),
-                ("wimiip", "WIMiIP"),
-                ("weaiiib", "WEAIiIB"),
-                ("wieit", "WIEiT"),
-                ("wimir", "WIMiR"),
-                ("wggios", "WGGiOŚ"),
-                ("wggis", "WGGiIŚ"),
-                ("wimic", "WIMiC"),
-                ("wo", "WOdlewnictwa"),
-                ("wmn", "WMN"),
-                ("wwnig", "WWNiG"),
-                ("wz", "WZ"),
-                ("weip", "WEiP"),
-                ("wfiis", "WFiIS")]
+from wtforms.validators import DataRequired, Length, Email, Optional
 
 
 class Select2Field(SelectField):
@@ -52,8 +14,8 @@ class ExtendedRegisterForm(RegisterForm):
                                                  Length(max=255)])
     last_name = StringField('Nazwisko', validators=[DataRequired(message='Your first name is required.'),
                                                     Length(max=255)])
-    faculty = Select2Field('Wydział', choices=faculty_list)
-    dorm = Select2Field('Akademik', choices=dorm_list)
+    faculty = Select2Field('Wydział', choices=[(None, "Studiuję poza AGH")], validators=[Optional()])
+    dorm = Select2Field('Akademik', choices=[(None, "Mieszkam poza MS AGH")], validators=[Optional()])
     password_confirm = PasswordField(
         get_form_field_label("retype_password"),
         validators=[
@@ -69,8 +31,8 @@ class ExtendedConfirmRegisterForm(ConfirmRegisterForm):
                                                  Length(max=255)])
     last_name = StringField('Nazwisko', validators=[DataRequired(message='Your first name is required.'),
                                                     Length(max=255)])
-    faculty = Select2Field('Wydział', choices=faculty_list)
-    dorm = Select2Field('Akademik', choices=dorm_list)
+    faculty = Select2Field('Wydział', choices=[(None, "Studiuję poza AGH")], validators=[Optional()])
+    dorm = Select2Field('Akademik', choices=[(None, "Mieszkam poza MS AGH")], validators=[Optional()])
     password = PasswordField(
         get_form_field_label("password"),
         validators=[

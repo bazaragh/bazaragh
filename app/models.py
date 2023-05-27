@@ -45,8 +45,8 @@ class Order(db.Model):
     __table_args__ = {'extend_existing': True}
 
 
-class UserScore(db.Model):
-    __tablename__ = 'user_score'
+class OfferScore(db.Model):
+    __tablename__ = 'offer_score'
     __table_args__ = {'extend_existing': True}
 
 

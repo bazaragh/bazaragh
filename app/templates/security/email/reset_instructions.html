@@ -57,7 +57,7 @@
   </head>
 
   <body bgcolor="#F5F8FA" style="width: 100%; margin: auto 0; padding:0;
-  font-family: 'Ubuntu', sans-serif; font-size:18px; color:#33475B;
+    font-family: 'Ubuntu', sans-serif; font-size:18px; color:#33475B;
     word-break:break-word">
     <div id="email">
       <table role="presentation" width="100%">
@@ -70,15 +70,19 @@
           cellspacing="10px" style="padding: 30px 30px 30px 60px;">
           <tr>
             <td>
-              <h3>{{ _fsdomain('Witaj %(name)s!!!', name=user.first_name) }}</h3>
-              <p>Twoje hasło zostało pomyślnie zmienione!</p>
+              <h2>{{ _fsdomain('Witaj %(name)s!!!', name=user.first_name) }}</h2>
+              <p>Wygląda na to, że zapomniałeś/aś hasła...</p>
+              <p>Kliknij <a href="{{ reset_link }}" target="_blank">tutaj</a> lub
+                  wklej do przeglądarki poniższy link, by zresetować hasło.</p>
+              <p>{{ reset_link }}</p>
+
               <h4>Pozdrawiamy</h4>
               <h3>Zespół BazarAGH.pl</h3>
             </td>
           </tr>
         </table>
         <table role="presentation" bgcolor="#EAF0F6"
-          width="100%">
+          width="100%" style="margin-top: 50px;">
           <tr>
             <td align="center" style="padding: 30px 30px;">
               <a href="https://bazaragh.pl/"><h3>Bazar AGH</h3></a>
