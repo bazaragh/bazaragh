@@ -92,13 +92,12 @@
         <p>data wystawienia: {{ offer.created_at.date() }}</p>
         <h3 id="price">{{ "%.2f zł"|format(offer.price) if offer.price else
             "Za darmo" }}</h3>
-        <button class="custom-button">dodaj do ulubionych</button>
-        {% if not current_user.is_authenticated or current_user.id != author.id%}
-        <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" >
-            <button class="custom-button">
-                napisz do sprzedającego
-            </button>
-        </a>
+        {% if not current_user.is_authenticated or current_user.id != author.id %}
+            {% if not is_favourite %}
+                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" class="custom-button">dodaj do ulubionych</a>
+            {% else %}
+                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}" class="custom-button">usuń z ulubionych</a>
+            {% endif %}
         {% endif %}
     </div>
 

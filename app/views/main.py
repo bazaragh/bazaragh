@@ -1,11 +1,12 @@
 import json
 
 from flask import Blueprint, render_template
+from flask_login import current_user
 from sqlalchemy import text
 from werkzeug.exceptions import abort
 
 from app.app import db
-from app.models import Category, Offer, User
+from app.models import Category, Favourite, Offer, User
 
 from app.utils.offer import get_offer_images_href_paths
 from app.utils.user import get_user_profile_picture_filename_or_default, get_user_profile_picture_href_path
@@ -47,11 +48,16 @@ def offer_get(offer_id):
     images = json.loads(offer.images)
     images = get_offer_images_href_paths(offer.id, images)
     author = db.session.query(User).filter_by(id=offer.author).one_or_none()
+    is_favourite = True
+    if current_user.is_authenticated and current_user.id != author.id:
+        is_favourite = db.session.query(Favourite).filter_by(offer=offer_id, user=current_user.id).one_or_none() is not None
+
     return render_template('offer/offer.jinja',
                         offer=offer,
                         categories=categories,
                         images=images,
-                        author=author)
+                        author=author,
+                        is_favourite=is_favourite)
 
 
 @bp.route('/category/<string:category_name>', methods=['GET'], defaults={'page': 1})

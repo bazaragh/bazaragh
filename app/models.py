@@ -69,3 +69,7 @@ class Faculty(db.Model):
 
     def __repr__(self):
         return f"Wydział {self.name}"
+
+class Favourite(db.Model):
+    __tablename__ = 'favourite'
+    __table_args__ = {'extend_existing': True}
