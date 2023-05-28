@@ -1,0 +1,93 @@
+@import 'utilities.css';
+
+section.profile-container {
+    width: 60%;
+    margin-inline: auto;
+    margin-block: 32px;
+    min-height: 48vh;
+}
+
+.name-photo-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap:40px;
+    margin-bottom: 32px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+}
+
+h1.profile-name {
+    margin-bottom: 32px;
+}
+
+.personal-data-record-wrapper {
+    display: flex;
+    gap: 16px;
+}
+
+.personal-data-field-name {
+    font-weight: 600;
+}
+
+button.custom-button{
+    margin-block: 8px;
+    margin-right: 8px;
+}
+
+.offer-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.offer-container h3{
+    padding-block: 16px;
+    padding-left: 16px;
+}
+
+.offer-container img{
+    max-width: 150px;
+}
+
+.offers-wraper{
+    margin-bottom: 16px;
+}
+
+.single-offer-wrapper{
+    border: 2px solid var(--black);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-block: 8px;
+    background-color: white;
+}
+
+@media (max-width: 700px) {
+    section.profile-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 600px) {
+    section.profile-container {
+        width: 80%;
+    }
+
+    .profile-photo {
+        min-width: 150px;
+    }
+}

@@ -1,8 +1,26 @@
 name: CI
 on: [ push ]
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Execute tests
+        run: |
+          pip install -r requirements.txt
+          touch config.local.py
+          echo 'DB_HOST = "${{ secrets.DB_HOST }}"' >> config.local.py
+          echo 'DB_NAME = "${{ secrets.DB_NAME }}"' >> config.local.py
+          echo 'DB_PORT = ${{ secrets.DB_PORT }}' >> config.local.py
+          echo 'DB_USER = "${{ secrets.DB_USER }}"' >> config.local.py
+          echo 'DB_PASSWORD = "${{ secrets.DB_PASSWORD }}"' >> config.local.py
+          pytest
   deploy:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - uses: fifsky/ssh-action@master
         with:
