@@ -12,6 +12,16 @@
 }}">
 {% endblock %}
 
+{% block script %}
+<script>
+    function onError(imgElement){
+        imgElement.onerror=null;
+        imgElement.src="{{ url_for('static', filename='default_img.png') }}";
+        imgElement.style.cssText += 'object-position: 100% -20px;';
+    }
+</script>
+{% endblock %}
+
 {% block content %}
 
 {{ search_bar() }}
@@ -23,7 +33,7 @@
         <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" 
             class="publication shadow-on-hover shadow">
             <div class="img-container">
-                <img alt="{{ offer.title }}" src="{{ url_for('static', filename=offer.images[0]) }}">
+                <img alt="{{ offer.title }}" src="{{ url_for('static', filename=offer.images[0]) }}" onerror='onError(this)'>
             </div>
             <div class="publication-details">
                 <div class="name-container">

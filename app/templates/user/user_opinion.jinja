@@ -8,8 +8,15 @@
 
 {% block main_content %}
 <main>
-    <h3>Powiedz nam co o nas myślisz!</h3>
-    <form>
+    <h2>Powiedz nam co o nas myślisz!</h3>
+    <br>
+    <p>Twoja opinia jest dla nas ważna! Jeśli jest coś co moglibyśmy ulepszyć bylibyśmy ogromnie wdzięczni za feedback!</p>
+    <br>
+    <form method="POST" action="{{ url_for('bp_user.opinion_get') }}">
+        {{ form.hidden_tag() }}
+        {{ render_field_errors(form.csrf_token) }}
+        {{ render_field_with_errors(form.contents) }}
+        {{ render_field(form.submit, class='custom-button') }}
     </form>
 </main>
 {% endblock %}
