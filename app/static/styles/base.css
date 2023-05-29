@@ -97,6 +97,7 @@ body {
 main {
     width: 100%;
     background-color: var(--white);
+    min-height: calc(100vh - 300px);
 }
 
 footer {
@@ -191,6 +192,10 @@ footer h2 {
     margin-bottom: 0px !important;
     width: 70%;
     margin-inline: auto;
+}
+
+.badge {
+    background: var(--secondary);
 }
 
 
