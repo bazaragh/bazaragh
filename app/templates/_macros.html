@@ -48,19 +48,29 @@
 {%- endmacro %}
 
 {% macro carousel(images) %}
+    <script>
+        function onError(imgElement){
+            imgElement.onerror=null;
+            imgElement.src="{{ url_for('static', filename='default_img.png') }}";
+            imgElement.style.cssText += 'object-position: 100% -0px; object-fit: cover';
+        }
+    </script>
     <div id="carouselExampleIndicators" class="photos-container box shadow carousel slide" data-ride="carousel">
+        {% if images|length > 1 %}
         <ol class="carousel-indicators">
             {% for image in images %}
             <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if  loop.index0==0 %} class="active" {% endif %}></li>
             {% endfor %}
         </ol>
+        {% endif %}
         <div class="carousel-inner">
             {% for image in images %}
             <<div {% if  loop.index0==0 %} class="active carousel-item"{% else %} class="carousel-item" {% endif %}>
-                <img class="d-block w-100" src="{{ url_for('static', filename=image) }}" alt="slide">
+                <img class="d-block w-100" src="{{ url_for('static', filename=image) }}" alt="slide"  onerror='onError(this)'>
             </div>
             {% endfor %}
         </div>
+        {% if images|length > 1 %}
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -69,5 +79,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+        {% endif %}
     </div>
 {%- endmacro %}

@@ -90,6 +90,11 @@ a.chat-topic-wrapper:hover{
     font-size: var(--fs-p);
 }
 
+img{
+    max-width: min(300px, 60%);
+    margin: auto;
+}
+
 /** input ***/
 
 .input-panel {

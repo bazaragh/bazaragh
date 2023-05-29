@@ -184,6 +184,11 @@ footer h2 {
     color: var(--white);
 }
 
+footer>p {
+    max-width: 900px;
+    margin-inline: auto;
+}
+
 .alert-wrapper {
     position: fixed;
     top: 70px;
@@ -203,6 +208,10 @@ footer h2 {
     ul.nav-ul {
         gap: 32px;
         padding-inline: 64px;
+    }
+
+    footer>p {
+        max-width: 80%;
     }
 }
 

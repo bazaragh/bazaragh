@@ -8,7 +8,6 @@
 {% block content %}
     <main class="profile-container">
         <section class="side-chat shadow">
-            <h3 class="chat-header">Wiadomości</h3>
             {% for t in threads %}
                 <a id="thread-{{ t['user_id'] }}" href="{{ url_for('bp_chat.user_chat_list', user_id=t['user_id']) }}"
                    class="chat-topic-wrapper shadow">
@@ -18,8 +17,8 @@
             {% endfor %}
         </section>
         <section class="main-content">
-            <h2>Konwersacja z {{ recipent_name }}</h2>
             {% if messages is not none %}
+            <h2>Konwersacja z {{ recipent_name }}</h2>
                 <div id="messages">
                     {% for m in messages %}
                         <div class="{{ 'msg my-msg' if m['author'] == current_user.id else 'msg' }}">
@@ -92,6 +91,8 @@
                         if (e.key === 'Enter') sendMessage();
                     })
                 </script>
+            {% else %}
+                <img src="https://cdn-icons-png.flaticon.com/512/2665/2665038.png" alt="">
             {% endif %}
         </section>
     </main>
