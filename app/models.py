@@ -50,6 +50,11 @@ class OfferScore(db.Model):
     __table_args__ = {'extend_existing': True}
 
 
+class UserScore(db.Model):
+    __tablename__ = 'user_score'
+    __table_args__ = {'extend_existing': True}
+
+
 class Message(db.Model):
     __tablename__ = 'message'
     __table_args__ = {'extend_existing': True}
