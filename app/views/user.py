@@ -49,24 +49,16 @@ def offers_get():
 @auth_required()
 def opinion_get():
     form = OpinionForm()
-    logged_in = 'gość'
-
-    if current_user.is_authenticated:
-        form.email.data = current_user.email
-        form.email.render_kw['readonly'] = True
-        logged_in = 'użytkownik zalogowany'
-    else:
-        form.email.render_kw['readonly'] = False
 
     if form.validate_on_submit():
-        content = f"Wiadomość od {form.email.data} ({logged_in})\n" \
+        content = f"Wiadomość od {current_user.email}\n" \
                   f"Treść zgłoszenia:\n" \
                   f"{form.contents.data}"
         message = EmailMessage(subject="Wiadomość z formularza kontaktowego",
                                body=content,
                                from_email=current_app.config['MAIL_DEFAULT_SENDER'],
                                to=[current_app.config['MAIL_USERNAME']],
-                               reply_to=[form.email.data])
+                               reply_to=[current_user.email])
         message.send()
         flash("Wiadomość została wysłana", "success")
 
