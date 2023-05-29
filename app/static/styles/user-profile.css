@@ -24,6 +24,7 @@ main.profile-container {
 
 section.main-content {
     width: 60%;
+    max-width: 700px;
     min-height: calc(100vh - 64px - 210px);
 }
 
@@ -108,6 +109,22 @@ a.dropdown-item-custom-user:hover {
 .profile-photo img {
     width: 100%;
     height: 100%;
+}
+
+.custom-button{
+    margin-top: 32px;
+}
+
+.label-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#contents{
+    margin-top: 16px;
+    padding: 16px;
+    width: 100%;
+    min-height: 150px;
 }
 
 @media screen and (max-width: 900px) {
@@ -201,6 +218,16 @@ a.dropdown-item-custom-user:hover {
 
     section.settings-field {
         padding-block: 24px;
+    }
+
+    #contents{
+        margin-top: 8px;
+        padding: 8px;
+        min-height: 120px;
+    }
+
+    .custom-button{
+        margin-top: 16px;
     }
 }
 

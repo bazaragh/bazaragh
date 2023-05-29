@@ -8,6 +8,16 @@
     }}">
 {% endblock %}
 
+{% block script %}
+<script>
+    function onError(imgElement){
+        imgElement.onerror=null;
+        imgElement.src="{{ url_for('static', filename='default_img.png') }}";
+        imgElement.style.cssText += 'object-position: 100% -20px;';
+    }
+</script>
+{% endblock %}
+
 {% block content %}
 
 {{ search_bar() }}
@@ -21,7 +31,7 @@
                 category_name=category.name) }}">
                 <button class="shadow-on-hover">
                     <img alt="{{ category.name }}" src="{{ url_for('static',
-                        filename=category.icon ) }}">
+                        filename=category.icon ) }}" >
                 </button>
                 <p>{{ category.name }}</p>
             </a>
@@ -37,7 +47,7 @@
             class="publication shadow-on-hover shadow">
             <div class="img-container">
                 <img alt="{{ offer.title }}" src="{{ url_for('static',
-                    filename=images[offer.id][0]) }}">
+                    filename=images[offer.id][0]) }}" onerror='onError(this)'>
             </div>
             <div class="publication-details">
                 <div class="name-container">
