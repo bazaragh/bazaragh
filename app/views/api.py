@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, jsonify, request, abort
+from flask import Blueprint, jsonify, request, abort, make_response
 from flask_login import current_user
 from flask_security import auth_required
 
@@ -35,10 +35,15 @@ def api_faculties(default: str = None):
 @auth_required()
 def api_message():
     fs_uniquifier = request.get_json()['recipient']
-    content = request.get_json()['content']
+    content = request.get_json()['content'].strip()
     recipient = db.session.query(User).filter_by(fs_uniquifier=fs_uniquifier).one_or_none()
     if recipient is None:
         abort(404)
+
+    if len(content) == 0:
+        abort(make_response(jsonify(result="error",
+                                    description="Cannot send empty message"), 400))
+
     message = Message(sender=current_user.id,
                       recipient=recipient.id,
                       post_date=datetime.now(),
@@ -46,7 +51,7 @@ def api_message():
     db.session.add(message)
     db.session.commit()
     socketio.emit(fs_uniquifier, {"from": current_user.id, "content": content})
-    return jsonify({"result": "success"})
+    return jsonify(result="success")
 
 
 @bp.route("/messages/unread", methods=["GET"])

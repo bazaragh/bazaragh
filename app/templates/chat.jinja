@@ -118,7 +118,9 @@
                                 'recipient': '{{ recipient }}',
                                 'content': $('#message-box').val()
                             })
-                        }).then((data) => {
+                        }).then(res => {
+                            if (!res.ok) return;
+
                             let input = $('#message-box');
                             let content = input.val();
                             $('#messages').append(`<div class="msg my-msg"><div>${content}</div></div>`);
@@ -130,9 +132,7 @@
                             thread.remove();
                             thread.children('small').text(content.substring(0, 32));
                             threadList.prepend(thread);
-                        }).catch((e) => {
-                            console.error(e.statusText);
-                        })
+                        }).catch(e => { console.error(e.message); })
                     }
 
                     function subscribe() {
