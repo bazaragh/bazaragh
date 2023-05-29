@@ -5,18 +5,24 @@ main.profile-container{
 }
 
 section.main-content{
-    max-width: calc(100vw - clamp(340px, 24%, 400px) - 50px);
-    width: 100%;
+    max-width: max(76%, 400px);
+    width: 76%;
     display: flex;
     flex-direction: column;
+    padding-top: 32px;
 }
+
+section.main-content>h2{
+    margin-bottom: 24px;
+}
+
 
 section.main-content a {
     width: 100%;
 }
 
 section.side-chat{
-    width: clamp(340px, 24%, 400px);
+    width: clamp(200px, 24%, 400px);
     padding-inline: 0px;
     padding-top: 32px;
     background-color: white;
@@ -51,7 +57,7 @@ a.chat-topic-wrapper:hover{
 }
 
 #messages {
-    max-height: 40vh;
+    max-height: 50vh;
     overflow-y: scroll;
 }
 
@@ -67,7 +73,6 @@ a.chat-topic-wrapper:hover{
     -webkit-box-shadow: 0px 0px 4px -4px var(--secondary);
     -moz-box-shadow: 0px 0px 4px -4px var(--secondary);
     box-shadow: 0px 0px 4px -4px var(--secondary);
-    overflow-wrap: break-word;
 }
 
 .my-msg {
@@ -77,8 +82,12 @@ a.chat-topic-wrapper:hover{
 .my-msg>div {
     background: var(--main);
     color: white;
+}
+
+.msg>div, .my-msg>div{
     overflow-wrap: break-word;
     max-inline-size: 70%;
+    font-size: var(--fs-p);
 }
 
 /** input ***/
@@ -125,4 +134,24 @@ input#message-box:focus {
 .send:hover {
     transform: scale(110%);
     transition: scale 250ms ease-in-out;
+}
+
+@media screen and (max-width: 850px) {
+    section.main-content{
+        max-width: calc(100% - 200px);
+        width: calc(100% - 200px);
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    section.main-content{
+        max-width: 100%;
+        width: 100%;
+    }
+
+    section.side-chat{
+        display: none;
+    }
 }

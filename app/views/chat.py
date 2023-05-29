@@ -35,8 +35,10 @@ def user_chat_list(user_id: int):
     recipient = db.session.query(User).filter_by(id=user_id).one_or_none()
     if recipient is None:
         abort(404)
+    recipent_name = recipient.first_name + " " + recipient.last_name
     return render_template('chat.jinja',
                            recipient_id=user_id,
                            recipient=recipient.fs_uniquifier,
+                           recipent_name=recipent_name,
                            threads=threads,
                            messages=messages)
