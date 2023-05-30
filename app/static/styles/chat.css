@@ -61,6 +61,19 @@ a.chat-topic-wrapper:hover{
     overflow-y: scroll;
 }
 
+#messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+#messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: #064635;
+  border-radius: 5px;
+}
+
 .msg>div {
     background: white;
     padding-block: 1rem;
