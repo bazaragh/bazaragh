@@ -18,7 +18,7 @@ def api_dormitories(default: str = None):
     results = [{"id": d.id,
                 "text": f"{d.id} {d.name}" if not d.id == 'None' else d.name,
                 "selected": True if default == d.id else False} for d in dorms]
-    return jsonify({"results": results})
+    return {"results": results}
 
 
 @bp.route("/faculties")
@@ -28,7 +28,7 @@ def api_faculties(default: str = None):
     results = [{"id": f.id,
                 "text": f"W{f.id}" if not f.id == 'None' else f.name,
                 "selected": True if default == f.id else False} for f in faculties]
-    return jsonify({"results": results})
+    return {"results": results}
 
 
 @bp.route("/message", methods=["POST"])
@@ -51,7 +51,7 @@ def api_message():
     db.session.add(message)
     db.session.commit()
     socketio.emit(fs_uniquifier, {"from": current_user.id, "content": content})
-    return jsonify(result="success")
+    return {"result": "success"}
 
 
 @bp.route("/messages/unread", methods=["GET"])
@@ -59,4 +59,4 @@ def api_message():
 def api_unread_messages():
     messages = db.session.query(Message).filter_by(recipient=current_user.id,
                                                    read_date=None).all()
-    return jsonify({"unread": len(messages)})
+    return {"unread": len(messages)}
