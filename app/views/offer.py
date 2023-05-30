@@ -7,7 +7,7 @@ from flask_security import auth_required
 
 from app.app import db
 from app.forms.offer import AddEditOfferForm, DeleteOfferForm
-from app.models import Offer
+from app.models import Favourite, Offer
 from app.utils.files import get_file_name_from_href_path
 from app.utils.offer import *
 
@@ -105,3 +105,30 @@ def delete(offer_id):
         return redirect(url_for('bp_user.offers_get'))
 
     return render_template('offer/offer_delete.jinja', form=form, offer=offer)
+
+@bp.route('/add-favourite/<int:offer_id>', methods=['GET', 'POST'])
+@auth_required()
+def add_favourite(offer_id):
+    offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
+    if offer is None:
+        abort(404)
+    if offer.author != current_user.id:
+        favourite = db.session.query(Favourite).filter_by(offer=offer_id, user=current_user.id).one_or_none()
+        if favourite is None:
+            favourite = Favourite(offer=offer_id, user=current_user.id)
+            db.session.add(favourite)
+            db.session.commit()
+    return redirect(url_for('bp_main.offer_get', offer_id=offer_id))
+
+@bp.route('/delete-favourite/<int:offer_id>', methods=['GET', 'POST'])
+@auth_required()
+def delete_favourite(offer_id):
+    offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
+    if offer is None:
+        abort(404)
+    if offer.author != current_user.id:
+        favourite = db.session.query(Favourite).filter_by(offer=offer_id, user=current_user.id).one_or_none()
+        if favourite is not None:
+            db.session.delete(favourite)
+            db.session.commit()
+    return redirect(url_for('bp_main.offer_get', offer_id=offer_id))

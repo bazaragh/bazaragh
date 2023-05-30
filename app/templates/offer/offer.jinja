@@ -1,14 +1,79 @@
 {% extends "base.jinja" %}
-{% from "_macros.html" import search_bar,  carousel%}
+{% from "_macros.html" import search_bar, carousel, rating_tool%}
+
+{% set offerRatingName, authorRatingName = 'offer', 'author' %}
 
 {% block style %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')}}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/search_bar.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')
+    }}">
+<link rel="stylesheet" href="{{ url_for('static',
+    filename='styles/search_bar.css')
+    }}">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/offer.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/search_bar.css')}}">
 {% endblock %}
 
 {% block script %}
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+<script defer>
+
+    function fetchRatingAndSetInputs(url, name) {
+        fetch(url)
+            .then((response) => {
+                return response.json()
+            }).then((data) => {
+                const stars = data['rating'];
+                for(let i = 1; i <= 5; i ++) {
+                    const selector = `#star-${ i }-${ name }`;
+                    const input = document.querySelector(selector);
+                    input.checked = i <= stars;
+                }
+            });
+    }
+
+    fetchRatingAndSetInputs('{{url_for('bp_api.get_user_offer_rating', offer_id=offer.id)}}', '{{ offerRatingName }}');
+    fetchRatingAndSetInputs('{{url_for('bp_api.get_user_author_rating', author_id=offer.author)}}', '{{ authorRatingName }}');
+
+    function updateRating(url, rating) {
+        fetch(url, {
+                        'method': 'POST',
+                        'headers': {
+                            'Content-Type': 'application/json'
+                        },
+                        'body': JSON.stringify({
+                            'rating': rating,
+                        })
+                    })
+            .catch((e) => {})
+    }
+
+    const updateOfferRatingUrl = '{{ url_for('bp_api.set_user_offer_rating', offer_id=offer.id) }}';
+    const updateAuthorRatingUrl = '{{ url_for('bp_api.set_user_author_rating', author_id=offer.author) }}';
+
+    function updateOfferRating(star_id) {
+        updateRating(updateOfferRatingUrl, star_id)
+
+    }
+    function updateAuthorRating(star_id) {
+        updateRating(updateAuthorRatingUrl, star_id)
+    }
+
+</script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
@@ -27,12 +92,12 @@
         <p>data wystawienia: {{ offer.created_at.date() }}</p>
         <h3 id="price">{{ "%.2f zł"|format(offer.price) if offer.price else
             "Za darmo" }}</h3>
-        {% if not current_user.is_authenticated or current_user.id != author.id%}
-        <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" >
-            <button class="custom-button">
-                napisz do sprzedającego
-            </button>
-        </a>
+        {% if not current_user.is_authenticated or current_user.id != author.id %}
+            {% if not is_favourite %}
+                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" class="custom-button">Dodaj do ulubionych</a>
+            {% else %}
+                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}" class="custom-button">Usuń z ulubionych</a>
+            {% endif %}
         {% endif %}
     </div>
 
@@ -61,8 +126,21 @@
         <div class="salesman-details">
             <h3>Sprzedajesz Ty!</h3>
         </div>
-        <div class="button-wrapper">
         {% endif %}
     </div>
+    {% if current_user.is_authenticated and current_user.id != author.id %}
+    <div class="box shadow description-container ">
+        <h3>Twoja opinia jest dla nas ważna!</h3>
+        <br>
+        <div class="rating-wrapper">
+            <h4>Oceń produkt</h4>
+            {{ rating_tool(offerRatingName, 'updateOfferRating') }}
+        </div>
+        <div class="rating-wrapper">
+            <h4>Oceń sprzedającego</h4>
+            {{ rating_tool(authorRatingName, 'updateAuthorRating') }}
+        </div>
+    </div>
+    {% endif %}
 </section>
 {% endblock %}
