@@ -40,11 +40,6 @@ class Category(db.Model):
         return self.name
 
 
-class Order(db.Model):
-    __tablename__ = 'order'
-    __table_args__ = {'extend_existing': True}
-
-
 class OfferScore(db.Model):
     __tablename__ = 'offer_score'
     __table_args__ = {'extend_existing': True}
@@ -74,6 +69,7 @@ class Faculty(db.Model):
 
     def __repr__(self):
         return f"Wydział {self.name}"
+
 
 class Favourite(db.Model):
     __tablename__ = 'favourite'
