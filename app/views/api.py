@@ -5,7 +5,7 @@ from flask_login import current_user
 from flask_security import auth_required
 
 from app.app import db, socketio
-from app.models import Dormitory, Faculty, User, Message
+from app.models import Dormitory, Faculty, Offer, OfferScore, User, Message, UserScore
 
 bp = Blueprint("bp_api", __name__, url_prefix="/api")
 
@@ -55,3 +55,75 @@ def api_unread_messages():
     messages = db.session.query(Message).filter_by(recipient=current_user.id,
                                                    read_date=None).all()
     return jsonify({"unread": len(messages)})
+
+
+@bp.route('/offer/<int:offer_id>/rating', methods=['POST'])
+@auth_required()
+def set_user_offer_rating(offer_id):
+    offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
+    if offer is None:
+        abort(404)
+    
+    is_new = False
+    offer_score = db.session.query(OfferScore).filter_by(
+        offer=offer_id, 
+        seller=offer.author, 
+        customer=current_user.id).one_or_none()
+    if offer_score is None:
+        is_new = True
+        offer_score = OfferScore(
+            offer=offer_id, 
+            seller=offer.author, 
+            customer=current_user.id)
+        
+    offer_score.score = request.get_json()['rating']
+    if is_new:
+        db.session.add(offer_score)
+    db.session.commit()
+    return {"result": "success"}
+
+@bp.route('/offer/<int:offer_id>/rating', methods=['GET'])
+def get_user_offer_rating(offer_id):
+    rating = 0
+    if not current_user.is_authenticated:
+        return {"rating": 0}
+    offer_score = db.session.query(OfferScore).filter_by(
+        offer=offer_id, 
+        customer=current_user.id).one_or_none()
+    if offer_score is not None:
+        rating = offer_score.score
+        
+    return {"rating": rating}
+
+@bp.route('/offer/<int:author_id>/author-rating', methods=['POST'])
+@auth_required()
+def set_user_author_rating(author_id):
+    is_new = False
+    user_score = db.session.query(UserScore).filter_by(
+        seller=author_id, 
+        customer=current_user.id).one_or_none()
+    if user_score is None:
+        is_new = True
+        user_score = UserScore(
+            seller=author_id, 
+            customer=current_user.id)
+        
+    user_score.score = request.get_json()['rating']
+    if is_new:
+        db.session.add(user_score)
+    db.session.commit()
+    return {"result": "success"}
+
+@bp.route('/offer/<int:author_id>/author-rating', methods=['GET'])
+def get_user_author_rating(author_id):
+    rating = 0
+    if not current_user.is_authenticated:
+        return {"rating": 0}
+    
+    user_score = db.session.query(UserScore).filter_by(
+        seller=author_id, 
+        customer=current_user.id).one_or_none()
+    if user_score is not None:
+        rating = user_score.score
+        
+    return {"rating": rating}

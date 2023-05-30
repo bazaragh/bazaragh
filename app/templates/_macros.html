@@ -82,3 +82,14 @@
         {% endif %}
     </div>
 {%- endmacro %}
+
+{% macro rating_tool(name, on_click_func_name) %}
+<div class="rating-tool">
+    <form action="">
+        {% for i in range(5, 0, -1) %}
+            <input onclick='{{on_click_func_name}}({{ i }})' class="star star-{{ i }}" id="star-{{ i }}-{{name}}" type="radio" name="star" />
+            <label class="star star-{{ i }}" for="star-{{ i }}-{{name}}"></label>
+        {% endfor %}
+    </form>
+</div>
+{%- endmacro %}
