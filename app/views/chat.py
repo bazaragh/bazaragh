@@ -25,7 +25,7 @@ def chat_list():
 @auth_required()
 def user_chat_list(user_id: int):
     threads = generate_threads()
-    messages = sorted(fetch_messages(user_id), key=lambda m: m['post_date'])
+    messages = sorted(fetch_messages(user_id), key=lambda msg: msg['post_date'])
     unread = db.session.query(Message).filter_by(sender=user_id,
                                                  recipient=current_user.id,
                                                  read_date=None).all()
@@ -35,8 +35,10 @@ def user_chat_list(user_id: int):
     recipient = db.session.query(User).filter_by(id=user_id).one_or_none()
     if recipient is None:
         abort(404)
+    recipent_name = f"{recipient.first_name} {recipient.last_name}"
     return render_template('chat.jinja',
                            recipient_id=user_id,
                            recipient=recipient.fs_uniquifier,
+                           recipent_name=recipent_name,
                            threads=threads,
                            messages=messages)
