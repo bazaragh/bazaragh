@@ -126,9 +126,9 @@
         <div class="salesman-details">
             <h3>Sprzedajesz Ty!</h3>
         </div>
-        <div class="button-wrapper">
         {% endif %}
     </div>
+    {% if current_user.is_authenticated and current_user.id != author.id %}
     <div class="box shadow description-container ">
         <h3>Twoja opinia jest dla nas ważna!</h3>
         <br>
@@ -141,5 +141,6 @@
             {{ rating_tool(authorRatingName, 'updateAuthorRating') }}
         </div>
     </div>
+    {% endif %}
 </section>
 {% endblock %}
