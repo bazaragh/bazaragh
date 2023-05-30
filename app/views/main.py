@@ -48,7 +48,7 @@ def offer_get(offer_id):
     images = json.loads(offer.images)
     images = get_offer_images_href_paths(offer.id, images)
     author = db.session.query(User).filter_by(id=offer.author).one_or_none()
-    is_favourite = True
+    is_favourite = False
     if current_user.is_authenticated and current_user.id != author.id:
         is_favourite = db.session.query(Favourite).filter_by(offer=offer_id, user=current_user.id).one_or_none() is not None
 

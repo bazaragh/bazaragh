@@ -94,9 +94,9 @@
             "Za darmo" }}</h3>
         {% if not current_user.is_authenticated or current_user.id != author.id %}
             {% if not is_favourite %}
-                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" class="custom-button">dodaj do ulubionych</a>
+                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" class="custom-button">Dodaj do ulubionych</a>
             {% else %}
-                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}" class="custom-button">usuń z ulubionych</a>
+                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}" class="custom-button">Usuń z ulubionych</a>
             {% endif %}
         {% endif %}
     </div>
