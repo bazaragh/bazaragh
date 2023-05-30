@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, jsonify, request, abort
+from flask import Blueprint, jsonify, request, abort, make_response
 from flask_login import current_user
 from flask_security import auth_required
 
@@ -18,7 +18,7 @@ def api_dormitories(default: str = None):
     results = [{"id": d.id,
                 "text": f"{d.id} {d.name}" if not d.id == 'None' else d.name,
                 "selected": True if default == d.id else False} for d in dorms]
-    return jsonify({"results": results})
+    return {"results": results}
 
 
 @bp.route("/faculties")
@@ -28,17 +28,22 @@ def api_faculties(default: str = None):
     results = [{"id": f.id,
                 "text": f"W{f.id}" if not f.id == 'None' else f.name,
                 "selected": True if default == f.id else False} for f in faculties]
-    return jsonify({"results": results})
+    return {"results": results}
 
 
 @bp.route("/message", methods=["POST"])
 @auth_required()
 def api_message():
     fs_uniquifier = request.get_json()['recipient']
-    content = request.get_json()['content']
+    content = request.get_json()['content'].strip()
     recipient = db.session.query(User).filter_by(fs_uniquifier=fs_uniquifier).one_or_none()
     if recipient is None:
         abort(404)
+
+    if len(content) == 0:
+        abort(make_response(jsonify(result="error",
+                                    description="Cannot send empty message"), 400))
+
     message = Message(sender=current_user.id,
                       recipient=recipient.id,
                       post_date=datetime.now(),
@@ -46,7 +51,7 @@ def api_message():
     db.session.add(message)
     db.session.commit()
     socketio.emit(fs_uniquifier, {"from": current_user.id, "content": content})
-    return jsonify({"result": "success"})
+    return {"result": "success"}
 
 
 @bp.route("/messages/unread", methods=["GET"])
@@ -54,7 +59,7 @@ def api_message():
 def api_unread_messages():
     messages = db.session.query(Message).filter_by(recipient=current_user.id,
                                                    read_date=None).all()
-    return jsonify({"unread": len(messages)})
+    return {"unread": len(messages)}
 
 
 @bp.route('/offer/<int:offer_id>/rating', methods=['POST'])
