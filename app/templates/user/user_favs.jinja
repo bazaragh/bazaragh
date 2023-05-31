@@ -2,8 +2,8 @@
 {% from "_macros.html" import render_field_with_errors, render_field_errors, render_field %}
 
 {% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/publications.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
 {% endblock %}
 
 {% block script %}
@@ -17,7 +17,8 @@
 {% endblock %}
 
 {% block main_content %}
-<section class="publications-wrapper">
+<h1>Polubione oferty</h1>
+<main class="publications-wrapper">
     <div class="publications-container">
         {% for offer in offers %}
         <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" 
@@ -36,5 +37,5 @@
         </a>
         {% endfor %}
     </div>
-</section>
+</main>
 {% endblock %}
