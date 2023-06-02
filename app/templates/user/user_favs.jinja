@@ -2,12 +2,40 @@
 {% from "_macros.html" import render_field_with_errors, render_field_errors, render_field %}
 
 {% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/publications.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/user-profile.css') }}">
+{% endblock %}
 
+{% block script %}
+<script>
+    function onError(imgElement){
+        imgElement.onerror=null;
+        imgElement.src="{{ url_for('static', filename='default_img.png') }}";
+        imgElement.style.cssText += 'object-position: 100% -20px;';
+    }
+</script>
 {% endblock %}
 
 {% block main_content %}
-<main>
-    <h2>Polubione oferty</h2>
+<h1>Polubione oferty</h1>
+<main class="publications-wrapper">
+    <div class="publications-container">
+        {% for offer in offers %}
+        <a href="{{ url_for('bp_main.offer_get', offer_id=offer.id) }}" 
+            class="publication shadow-on-hover shadow">
+            <div class="img-container">
+                <img alt="{{ offer.title }}" src="{{ url_for('static', filename=offer.images[0]) }}" onerror='onError(this)'>
+            </div>
+            <div class="publication-details">
+                <div class="name-container">
+                    <p class="publication-name">{{ offer.title }}</p>
+                </div>
+                <p class="publication-date">{{ offer.created_at.date() }}</p>
+                <p class="publication-price">{{ "%.2f zł"|format(offer.price) if
+                    offer.price else "Za darmo" }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 </main>
 {% endblock %}

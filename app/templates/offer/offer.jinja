@@ -94,9 +94,13 @@
             "Za darmo" }}</h3>
         {% if not current_user.is_authenticated or current_user.id != author.id %}
             {% if not is_favourite %}
-                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" class="custom-button">Dodaj do ulubionych</a>
+                <a href="{{url_for('bp_offer.add_favourite', offer_id=offer.id)}}" >
+                    <button class="custom-button">Dodaj do ulubionych</button>
+                </a>
             {% else %}
-                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}" class="custom-button">Usuń z ulubionych</a>
+                <a href="{{url_for('bp_offer.delete_favourite', offer_id=offer.id)}}">
+                    <button class="custom-button">Usuń z ulubionych</button>
+                </a>
             {% endif %}
         {% endif %}
     </div>
@@ -106,41 +110,42 @@
         <p>{{ offer.description or "Brak opisu" }}</p>
     </div>
 
-    <div class="box shadow description-container salesman-container">
         
         {% if not current_user.is_authenticated or current_user.id != author.id%}
-        <div class="salesman-details">
-            <h3>Sprzedający</h3>
-            <br>
-            <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty}}</p>
+        <div class="box shadow description-container salesman-container">
+            <div class="salesman-details">
+                <h3>Sprzedający</h3>
+                <br>
+                <p>{{ author.first_name }} {{ author.last_name }}, {{ author.faculty}}</p>
+            </div>
+            <div class="button-wrapper">
+                <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" class="custom-button">
+                    napisz do sprzedającego
+                </a>
+                <a class="custom-button" href="{{url_for('bp_main.user_get', user_id=author.id)}}">
+                    pokaż profil sprzedającego
+                </a>
+            </div>
         </div>
-        <div class="button-wrapper">
-            <a href="{{url_for('bp_chat.user_chat_list', user_id=author.id)}}" class="custom-button">
-                napisz do sprzedającego
-            </a>
-            <a class="custom-button" href="{{url_for('bp_main.user_get', user_id=author.id)}}">
-                pokaż profil sprzedającego
-            </a>
+        <div class="box shadow description-container ">
+            <h3>Twoja opinia jest dla nas ważna!</h3>
+            <br>
+            <div class="rating-wrapper">
+                <h4>Oceń produkt</h4>
+                {{ rating_tool(offerRatingName, 'updateOfferRating') }}
+            </div>
+            <div class="rating-wrapper">
+                <h4>Oceń sprzedającego</h4>
+                {{ rating_tool(authorRatingName, 'updateAuthorRating') }}
+            </div>
         </div>
         {% else %}
-        <div class="salesman-details">
-            <h3>Sprzedajesz Ty!</h3>
+        <div class="box shadow description-container salesman-container">
+            <div class="salesman-details">
+                <h3>Sprzedajesz Ty!</h3>
+            </div>
+            <div class="button-wrapper">
         </div>
         {% endif %}
-    </div>
-    {% if current_user.is_authenticated and current_user.id != author.id %}
-    <div class="box shadow description-container ">
-        <h3>Twoja opinia jest dla nas ważna!</h3>
-        <br>
-        <div class="rating-wrapper">
-            <h4>Oceń produkt</h4>
-            {{ rating_tool(offerRatingName, 'updateOfferRating') }}
-        </div>
-        <div class="rating-wrapper">
-            <h4>Oceń sprzedającego</h4>
-            {{ rating_tool(authorRatingName, 'updateAuthorRating') }}
-        </div>
-    </div>
-    {% endif %}
 </section>
 {% endblock %}
