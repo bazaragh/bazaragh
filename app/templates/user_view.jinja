@@ -20,11 +20,11 @@
     </div>
     <div class="personal-data-record-wrapper">
         <p class="personal-data-field-name">Akademik:</p>
-        <p>{{ user.dorm }}</p>
+        <p>{{ user.dorm if user.dorm != 'None' else 'Nie mieszka na miasteczku studenckim AGH' }}</p>
     </div>
     <div class="personal-data-record-wrapper">
         <p class="personal-data-field-name">Wydział:</p>
-        <p>{{ user.faculty }}</p>
+        <p>{{ user.faculty if user.faculty != 'None' else 'Nie studiuje/pracuje na AGH'  }}</p>
     </div>
     <a href="{{url_for('bp_chat.user_chat_list', user_id=user.id)}}" >
         <button class="custom-button">napisz do sprzedającego</button>
