@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, render_template, current_app, flash, redirect, url_for
 from flask_login import current_user
 from flask_mailman import EmailMessage
@@ -7,7 +8,8 @@ from app.app import db
 from app.forms.opinion import OpinionForm
 from app.forms.security import DeleteAccountForm, ChangeEmailForm
 from app.forms.user import AddUserProfilePicture
-from app.models import Offer
+from app.models import Favourite, Offer
+from app.utils.offer import get_offer_images_href_paths
 from app.utils.user import get_user_profile_picture_filename_or_default, get_user_profile_picture_href_path
 
 bp = Blueprint("bp_user", __name__, url_prefix='/user')
@@ -23,8 +25,10 @@ def profile_get():
         "Akademik": current_user.dorm,
         "Email": current_user.email,
     }
-    profile_picture_filename = get_user_profile_picture_filename_or_default(current_user.id)
-    profile_picture = get_user_profile_picture_href_path(profile_picture_filename)
+    profile_picture_filename = get_user_profile_picture_filename_or_default(
+        current_user.id)
+    profile_picture = get_user_profile_picture_href_path(
+        profile_picture_filename)
     return render_template('user/user_profile.jinja', personal_data=user_data, profile_picture=profile_picture)
 
 
@@ -70,4 +74,11 @@ def opinion_get():
 @bp.route('/favourites')
 @auth_required()
 def favs_get():
-    return render_template('user/user_favs.jinja')
+    user_id = current_user.id
+    offers = db.session.query(Offer) \
+                       .join(Favourite, Offer.id == Favourite.offer) \
+                       .filter(Favourite.user == user_id).all()
+    for offer in offers:
+        offer.images = get_offer_images_href_paths(
+            offer.id, json.loads(offer.images))
+    return render_template('user/user_favs.jinja', offers=offers)
