@@ -49,6 +49,11 @@ section.main-containers-wrapper {
     height: 336px;
 }
 
+pre{
+    font-family: 'Ubuntu', sans-serif;
+    padding-top: 16px;
+}
+
 #title,
 #price {
     font-size: 25px;
@@ -66,7 +71,6 @@ h3#price {
 
 .offer-name-wrapper {
     width: 100%;
-    height: 50px;
     overflow: hidden;
     margin-top: 10px;
 }
@@ -222,10 +226,6 @@ a.custom-button:hover{
     .main-details-container button {
         margin-top: 16px;
         margin-bottom: 8px;
-    }
-
-    .offer-name-wrapper {
-        height: 25px;
     }
 
     .box {
