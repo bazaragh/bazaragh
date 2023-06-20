@@ -1,5 +1,8 @@
 # Bazar AGH
 
+[![CI](https://github.com/sokoloowski/pzio/actions/workflows/CI.yml/badge.svg)](https://github.com/sokoloowski/pzio/actions/workflows/CI.yml)
+[![codecov](https://codecov.io/gh/sokoloowski/pzio/branch/master/graph/badge.svg?token=D21TUCS1RT)](https://codecov.io/gh/sokoloowski/pzio)
+
 ## Prerequisites
 
 - Python 3.10
