@@ -12,3 +12,5 @@ app/static/profile-pictures/*
 !**/.gitkeep
 
 pzio.session.sql
+
+.coverage
