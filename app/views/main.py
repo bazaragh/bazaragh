@@ -86,10 +86,12 @@ def user_get(user_id):
 @bp.route('/user/<int:user_id>/offers', methods=['GET'])
 def user_get_offers(user_id):
     user = db.session.query(User).filter_by(id=user_id).one_or_none()
+    if user is None:
+        abort(404)
+    
     offers = db.session.query(Offer).filter_by(author=user.id).all()
     for offer in offers:
         offer.images = get_offer_images_href_paths(offer.id, json.loads(offer.images))
-    if user is None:
-        abort(404)
+    
     return render_template('user_offers_view.jinja',
                         user=user, offers=offers)
