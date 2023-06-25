@@ -1,5 +1,7 @@
 import pytest
+import os
 from flask import template_rendered
+from flask.helpers import get_root_path
 
 from app.app import create_app
 from app.app import db
@@ -49,7 +51,7 @@ def captured_templates(app):
 @pytest.fixture(autouse=True)
 def reload_database_data(app):
     yield
-    with open("pzio.sql", encoding='UTF-8') as file:
+    with open(os.path.join(get_root_path("app"), "tests", "pzio.sql"), encoding='UTF-8') as file:
         query = text(file.read())
         with app.app_context():
             db.session.execute(query)
