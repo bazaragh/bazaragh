@@ -1,6 +1,10 @@
 import pytest
-from app.app import create_app
 from flask import template_rendered
+
+from app.app import create_app
+from app.app import db
+
+from sqlalchemy import text
 
 
 @pytest.fixture(scope="session")
@@ -27,6 +31,7 @@ def client(app):
 def runner(app):
     return app.test_cli_runner()
 
+
 @pytest.fixture
 def captured_templates(app):
     recorded = []
@@ -39,3 +44,12 @@ def captured_templates(app):
         yield recorded
     finally:
         template_rendered.disconnect(record, app)
+
+
+@pytest.fixture(autouse=True)
+def reload_database_data(app):
+    yield
+    with open("pzio.sql", encoding='UTF-8') as file:
+        query = text(file.read())
+        with app.app_context():
+            db.session.execute(query)
