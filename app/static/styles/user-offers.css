@@ -14,7 +14,7 @@
 
 .offer-title {
   width: 50%;
-  overflow: hiddden;
+  overflow: hidden;
   padding-inline: 10px;
   display: flex;
   align-content: center;
@@ -57,6 +57,19 @@
   max-height: max(200px, 60vh);
   min-width: calc(560px + 64px);
   padding-right: 16px;
+}
+
+.user-offers-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.user-offers-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.user-offers-wrapper::-webkit-scrollbar-thumb {
+  background: #064635;
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 900px) {

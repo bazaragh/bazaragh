@@ -1,7 +1,7 @@
 @import 'constants.css';
 main.profile-container{
     width: 100%;
-    min-height: calc(100vh-50px);
+    min-height: calc(100vh - 50px);
 }
 
 section.main-content{
