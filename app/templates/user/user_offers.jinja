@@ -11,6 +11,9 @@
 <main>
     <h1>Moje ogłoszenia</h1>
     <div class="user-offers-wrapper">
+        {% if offers == [] %}
+            <p>Nie wystawiłeś jeszcze żadnej oferty</p>
+        {% endif %}
         {% for offer in offers %}
         <div class="single-offer-wrapper shadow">
             <div class="offer-title">
