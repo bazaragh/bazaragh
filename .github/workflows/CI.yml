@@ -7,16 +7,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11.3'
       - name: Execute tests
         run: |
           pip install -r requirements.txt
           touch config.local.py
+          echo 'SECRET_KEY = "${{ secrets.SECRET_KEY }}"' >> config.local.py
           echo 'DB_HOST = "${{ secrets.DB_HOST }}"' >> config.local.py
           echo 'DB_NAME = "${{ secrets.DB_NAME }}"' >> config.local.py
           echo 'DB_PORT = ${{ secrets.DB_PORT }}' >> config.local.py
           echo 'DB_USER = "${{ secrets.DB_USER }}"' >> config.local.py
           echo 'DB_PASSWORD = "${{ secrets.DB_PASSWORD }}"' >> config.local.py
+          echo 'SECURITY_PASSWORD_SALT = "${{ secrets.SECURITY_PASSWORD_SALT }}"' >> config.local.py
           coverage run -m pytest
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
