@@ -27,27 +27,27 @@ def test_api_message(client, mocker):
     with client.session_transaction() as session:
         response = client.post(
             "login", data={"email": "admin@bazaragh.pl", "password": "test"})
-        with client:
-            mock_socketio_emit = mocker.patch("app.views.api.socketio.emit")
-            recipient = 'c6a04d0809b7498fb7b8bcb6369e2218'
-            content = 'test'
-            data = {'recipient': recipient,
-                    'content': content}
-            response = client.post(
-                "/api/message", data=json.dumps(data), content_type='application/json')
+    with client:
+        mock_socketio_emit = mocker.patch("app.views.api.socketio.emit")
+        recipient = 'c6a04d0809b7498fb7b8bcb6369e2218'
+        content = 'test'
+        data = {'recipient': recipient,
+                'content': content}
+        response = client.post(
+            "/api/message", data=json.dumps(data), content_type='application/json')
 
-            assert response.is_json
-            assert "result" in response.json.keys()
-            assert response.json["result"] == 'success'
+        assert response.is_json
+        assert "result" in response.json.keys()
+        assert response.json["result"] == 'success'
 
-            from app.models import Message
-            message = db.session.query(Message).order_by(
-                Message.post_date.desc()).first()
+        from app.models import Message
+        message = db.session.query(Message).order_by(
+            Message.post_date.desc()).first()
 
-            assert message is not None
-            assert message.content == content
-            mock_socketio_emit.asssert_called_once_with(
-                recipient, {"from": 1, "content": content})
+        assert message is not None
+        assert message.content == content
+        mock_socketio_emit.asssert_called_once_with(
+            recipient, {"from": 1, "content": content})
 
 
 def test_api_message_empty_message(client, mocker):

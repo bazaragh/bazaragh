@@ -236,3 +236,37 @@ def test_offer_add_favourite(client, mocker):
         favourite = db.session.query(Favourite).filter_by(
             offer=offer_id, user=1).one_or_none()
         assert favourite is not None
+
+def test_offer_delete_favourite_not_found(client):
+    with client.session_transaction() as session:
+        response = client.post(
+            "login", data={"email": "admin@bazaragh.pl", "password": "test"})
+    with client:
+        response = client.get('/user/offer/delete-favourite/1111111111')
+        assert response.status_code == 404
+
+
+def test_offer_delete_favourite(client, mocker):
+    with client.session_transaction() as session:
+        response = client.post(
+            "login", data={"email": "admin@bazaragh.pl", "password": "test"})
+    with client:
+        from app.models import Favourite
+        offer_id = 84
+
+        response = client.post(
+            f"/user/offer/add-favourite/{offer_id}", follow_redirects=True)
+        favourite = db.session.query(Favourite).filter_by(
+            offer=offer_id, user=1).one_or_none()
+        assert favourite is not None
+
+        response = client.post(f'/user/offer/delete-favourite/{offer_id}')
+
+        favourite = db.session.query(Favourite).filter_by(
+            offer=offer_id, user=1).one_or_none()
+        assert favourite is None
+
+        response = client.post(f'/user/offer/delete-favourite/{offer_id}')
+        favourite = db.session.query(Favourite).filter_by(
+            offer=offer_id, user=1).one_or_none()
+        assert favourite is None
