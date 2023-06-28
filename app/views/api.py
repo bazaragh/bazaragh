@@ -92,6 +92,10 @@ def get_user_offer_rating(offer_id):
     rating = 0
     if not current_user.is_authenticated:
         return {"rating": 0}
+    
+    offer = db.session.query(Offer).filter_by(id=offer_id).one_or_none()
+    if offer is None:
+        abort(404)
     offer_score = db.session.query(OfferScore).filter_by(
         offer=offer_id, 
         customer=current_user.id).one_or_none()
@@ -104,6 +108,9 @@ def get_user_offer_rating(offer_id):
 @auth_required()
 def set_user_author_rating(author_id):
     is_new = False
+    author = db.session.query(User).filter_by(id=author_id).one_or_none()
+    if author is None:
+        abort(404)
     user_score = db.session.query(UserScore).filter_by(
         seller=author_id, 
         customer=current_user.id).one_or_none()
@@ -124,7 +131,9 @@ def get_user_author_rating(author_id):
     rating = 0
     if not current_user.is_authenticated:
         return {"rating": 0}
-    
+    author = db.session.query(User).filter_by(id=author_id).one_or_none()
+    if author is None:
+        abort(404)
     user_score = db.session.query(UserScore).filter_by(
         seller=author_id, 
         customer=current_user.id).one_or_none()

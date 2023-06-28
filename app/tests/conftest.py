@@ -15,6 +15,7 @@ def app():
     app.testing = True
     app.config.update({
         "ENV": "test",
+        "WTF_CSRF_ENABLED": False,
     })
 
     # other setup can go here
