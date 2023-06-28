@@ -13,9 +13,9 @@ from sqlalchemy import text
 def app():
     app = create_app()
     app.testing = True
-    app.config['WTF_CSRF_ENABLED'] = False
     app.config.update({
         "ENV": "test",
+        "WTF_CSRF_ENABLED": False,
     })
 
     # other setup can go here
