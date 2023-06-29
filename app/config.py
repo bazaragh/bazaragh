@@ -1,3 +1,5 @@
+import os
+
 # KEEP ALL SECRETS IN ../config.local.py !!!
 SECRET_KEY = "CHANGE_ME"  # does not matter, remember to change it if app is working in the production environment!!!
 APP_NAME = "Bazar AGH"
@@ -31,3 +33,7 @@ SECURITY_POST_REGISTER_VIEW = 'security.login'
 SECURITY_CHANGEABLE = True
 SECURITY_CONFIRMABLE = True
 SECURITY_RECOVERABLE = True
+
+STATIC_DIRECTORY_ABSSOLUTE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+OFFERS_IMAGES_DIR = 'offers'
+PROFILE_IMAGES_DIR = 'profile-pictures'
