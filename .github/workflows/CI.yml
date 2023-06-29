@@ -8,6 +8,14 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11.3'
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: ${{ secrets.DB_PORT }}
+          container port: ${{ secrets.DB_PORT }}
+          collation server: 'utf8_polish_ci'
+          mysql database: ${{ secrets.DB_NAME }}
+          mysql user: ${{ secrets.DB_USER }}
+          mysql password: ${{ secrets.DB_PASSWORD }}
       - name: Execute tests
         run: |
           pip install -r requirements.txt
