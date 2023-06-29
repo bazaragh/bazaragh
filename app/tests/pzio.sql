@@ -462,7 +462,7 @@ LOCK TABLES `roles_users` WRITE;
 /*!40000 ALTER TABLE `roles_users`
     DISABLE KEYS */;
 INSERT INTO `roles_users`
-VALUES (1, 1);
+VALUES (1, 1), (8, 2);
 /*!40000 ALTER TABLE `roles_users`
     ENABLE KEYS */;
 UNLOCK TABLES;
