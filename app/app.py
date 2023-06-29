@@ -13,6 +13,7 @@ from flask_security.models import fsqla
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 
+from app.config import STATIC_DIRECTORY_ABSSOLUTE_PATH, OFFERS_IMAGES_DIR, PROFILE_IMAGES_DIR
 from app.engine.exceptions import exception_handler
 from app.forms.security import ExtendedRegisterForm, ExtendedConfirmRegisterForm
 
@@ -22,10 +23,6 @@ mail = Mail()
 db = SQLAlchemy()
 security = Security()
 socketio = SocketIO()
-
-STATIC_DIRECTORY_ABSSOLUTE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
-OFFERS_IMAGES_DIR = 'offers'
-PROFILE_IMAGES_DIR = 'profile-pictures'
 
 ABSOLUTE_OFFERS_IMAGES_PATH = os.path.join(STATIC_DIRECTORY_ABSSOLUTE_PATH, OFFERS_IMAGES_DIR)
 ABSOLUTE_PROFILE_IMAGES_PATH = os.path.join(STATIC_DIRECTORY_ABSSOLUTE_PATH, PROFILE_IMAGES_DIR)
